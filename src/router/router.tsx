@@ -8,10 +8,10 @@ import { PATH } from '@/constants/routerLinks';
 import { PageNotFound } from '@/pages/PageNotFound';
 import { store } from '@/store/store';
 
-const HomePage = lazy(() => import('@/pages/Home'));
-const BankCardPage = lazy(() => import('@/pages/BankCard'));
+const HomePage = lazy(() => import('@/pages/StartPage'));
+const BankCardPage = lazy(() => import('@/pages/LoginPage'));
 const ContactPage = lazy(() => import('@/pages/Contact'));
-const TimeLinePage = lazy(() => import('@/pages/Timeline'));
+const TimeLinePage = lazy(() => import('@/pages/SignUpPage'));
 
 export const router = createBrowserRouter([
   {

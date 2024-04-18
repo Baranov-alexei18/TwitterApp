@@ -1,12 +1,14 @@
-import { Main } from '../Main';
+import { Outlet } from 'react-router-dom';
 
-export const App = () => {
-  const s = 'Hello';
+import { GlobalStyles } from '@/assets/style/global';
 
-  return (
-    <div>
-      {s}
-      <Main />
-    </div>
-  );
-};
+import { ErrorBoundary } from '../ErrorBoundary';
+
+export const App = () => (
+  <>
+    <GlobalStyles />
+    <ErrorBoundary>
+      <Outlet />
+    </ErrorBoundary>
+  </>
+);

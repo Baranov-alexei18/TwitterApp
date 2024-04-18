@@ -1,7 +1,12 @@
 import { ReactNode } from 'react';
 
 export type ButtonProps = {
-  handleClick: () => void;
+  background?: string;
+  borderRadius?: string;
+  width?: string;
+  height?: string;
+  borderColor?: string;
+  color?: string;
+  fontSize?: string;
   children: ReactNode;
-  disabled?: boolean;
 };
