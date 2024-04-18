@@ -22,7 +22,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       return (
         <div>
           <Loader />
-          <h1>Something went wrong, try again later</h1>
+          <h3>Something went wrong, try again later</h3>
         </div>
       );
     }
