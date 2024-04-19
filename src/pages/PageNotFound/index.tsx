@@ -13,7 +13,7 @@ export const PageNotFound = () => {
   return (
     <div>
       <h1>Page not found</h1>
-      <Button handleClick={handleReturnHome}>Return to Home</Button>
+      <Button onClick={handleReturnHome}>Return to Home</Button>
     </div>
   );
 };

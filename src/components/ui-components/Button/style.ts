@@ -11,8 +11,8 @@ export const StyledButton = styled.button<ButtonProps>`
   cursor: pointer;
   background-color: ${(props) => props.background || 'transparent'};
   border-radius: ${(props) => props.borderRadius || '0px'};
-  width: ${(props) => props.width || 'auto'};
-  height: ${(props) => props.height || 'auto'};
+  width: ${(props) => props.width || '100%'};
+  height: ${(props) => props.height || '70px'};
   border: 1px solid ${(props) => props.borderColor || props.background || 'transparent'};
   font-size: ${(props) => props.fontSize || COLOR.dark};
   color: ${(props) => props.color || COLOR.dark};
