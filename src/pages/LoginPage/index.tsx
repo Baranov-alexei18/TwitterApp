@@ -1,4 +1,5 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Container } from '@/assets/style/global';
 import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/assets/style/variables';
@@ -20,13 +21,19 @@ const LoginPage = () => {
     LOGIN,
     SIGN_UP,
   } = LOGIN_PAGE;
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data:unknown) => {
+    console.log(data);
+  };
   return (
     <Container>
-      <StyledLoginForm>
+      <StyledLoginForm onSubmit={handleSubmit(onSubmit)}>
         <img src={TwitterLogo} alt="twitter" title="twitter" />
         <Title weight="900" size="42px">{TITLE}</Title>
-        <Input height="70" placeholder={PHONE} value="123" />
-        <Input height="70" placeholder={PASSWORD} value="123" />
+        <Input height="70" placeholder={PHONE} {...register('phone')} />
+        <Input height="70" type="password" placeholder={PASSWORD} {...register('password')} />
         <Button
           width="100%"
           height="62px"

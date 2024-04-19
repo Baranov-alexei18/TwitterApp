@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import BackTwitter from '@/assets/img/backTwitter.png';
 import { Container } from '@/assets/style/global';
@@ -25,6 +26,12 @@ const HomePage = () => {
     ACCOUNT,
   } = START_PAGE;
 
+  const navigate = useNavigate();
+
+  const toSignUp = () => {
+    navigate(PATH.SIGN_UP_PAGE);
+  };
+
   return (
     <>
       <Container>
@@ -50,7 +57,7 @@ const HomePage = () => {
             borderRadius={BORDER_RADIUS.xl}
             fontSize={FONT_SIZE.xl}
             borderColor={COLOR.lightGrey}
-            onClick={() => console.log(123)}
+            onClick={toSignUp}
           >
             {SIGN_UP_EMAIL}
           </Button>
