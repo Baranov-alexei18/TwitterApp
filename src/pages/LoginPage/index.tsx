@@ -11,7 +11,7 @@ import { Title } from '@/components/ui-components/Title';
 import { LOGIN_PAGE } from '@/constants';
 import { PATH } from '@/constants/routerLinks';
 
-import { StyledLoginForm } from './style';
+import { StyledLoginForm, WrapperLink } from './style';
 
 const LoginPage = () => {
   const {
@@ -32,11 +32,9 @@ const LoginPage = () => {
       <StyledLoginForm onSubmit={handleSubmit(onSubmit)}>
         <img src={TwitterLogo} alt="twitter" title="twitter" />
         <Title weight="900" size="42px">{TITLE}</Title>
-        <Input height="70" placeholder={PHONE} {...register('phone')} />
-        <Input height="70" type="password" placeholder={PASSWORD} {...register('password')} />
+        <Input placeholder={PHONE} {...register('phone')} />
+        <Input type="password" placeholder={PASSWORD} {...register('password')} />
         <Button
-          width="100%"
-          height="62px"
           background={COLOR.primary}
           color={COLOR.light}
           borderRadius={BORDER_RADIUS.xl}
@@ -45,9 +43,11 @@ const LoginPage = () => {
         >
           {LOGIN}
         </Button>
-        <LinkApp to={PATH.SIGN_UP_PAGE} marginLeft="70%">
-          {SIGN_UP }
-        </LinkApp>
+        <WrapperLink>
+          <LinkApp to={PATH.SIGN_UP_PAGE}>
+            {SIGN_UP }
+          </LinkApp>
+        </WrapperLink>
       </StyledLoginForm>
     </Container>
   );

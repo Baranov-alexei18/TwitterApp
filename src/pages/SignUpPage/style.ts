@@ -7,6 +7,7 @@ export const StyledSignUpForm = styled.form`
   margin: 60px auto;
 
   @media screen and (max-width: 576px) {
+    text-align: center;
     width: calc(100% - 20px);
     padding: 10px;
   }

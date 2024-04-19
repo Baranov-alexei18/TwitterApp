@@ -31,14 +31,24 @@ const SignUpPage = () => {
 
   const [year, setYear] = useState<number>();
   const [month, setMonth] = useState<number>();
-  const { register, handleSubmit } = useForm();
+  const [day, setDay] = useState<number>();
+
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const arrayYears = useMemo(() => getYears(), []);
   const arrayMonth = useMemo(() => getMonths(year), [year]);
   const arrayDays = useMemo(() => getDays(year, month), [year, month]);
 
-  const onSubmit = (data:unknown) => {
-    console.log(data);
+  const onSubmit = (data: object) => {
+    const newUser = {
+      ...data,
+      date_created: new Date(
+        year ?? new Date().getFullYear(),
+        month ?? new Date().getMonth(),
+        day ?? new Date().getDate(),
+      ),
+    };
+    console.log(newUser);
   };
 
   return (
@@ -49,12 +59,34 @@ const SignUpPage = () => {
         </ImageDiv>
         <Title weight="700" size="30px">{TITLE}</Title>
         <Input
+          name="Name"
           placeholder={NAME}
-          {...register('name')}
+          register={register}
+          error={!!errors.Name}
+          onChange={() => errors.Name && console.log('Error in Name field')}
         />
-        <Input placeholder={PHONE} {...register('phone')} />
-        <Input placeholder={EMAIL} {...register('email')} />
-        <Input type="password" placeholder={PASSWORD} {...register('password')} />
+        <Input
+          name="Phone"
+          placeholder={PHONE}
+          register={register}
+          error={!!errors.Phone}
+          onChange={() => errors.Phone && console.log('Error in Phone field')}
+        />
+        <Input
+          name="Email"
+          placeholder={EMAIL}
+          register={register}
+          error={!!errors.Email}
+          onChange={() => errors.Email && console.log('Error in Email field')}
+        />
+        <Input
+          type="password"
+          name="Password"
+          placeholder={PASSWORD}
+          register={register}
+          error={!!errors.Password}
+          onChange={() => errors.Password && console.log('Error in Password field')}
+        />
         <LinkApp to={PATH.LOG_IN_PAGE}>{TO_LOGIN}</LinkApp>
         <Title weight="700" size={FONT_SIZE.md}>{DATE_BIRTH}</Title>
         <ContentText
@@ -76,15 +108,16 @@ const SignUpPage = () => {
           />
           <Select
             options={arrayDays}
+            onChange={(e) => setDay(parseFloat(e.target.value))}
             placeholder="Day"
           />
         </SelectWrapper>
         <Button
+          type="submit"
           background={COLOR.primary}
           color={COLOR.light}
           borderRadius={BORDER_RADIUS.xl}
           fontSize={FONT_SIZE.xl}
-          onClick={() => console.log(123)}
         >
           {NEXT}
         </Button>
