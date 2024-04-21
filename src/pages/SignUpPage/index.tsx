@@ -13,7 +13,11 @@ import { Select } from '@/components/ui-components/Select';
 import { Title } from '@/components/ui-components/Title';
 import { SIGN_UP_PAGE } from '@/constants';
 import { PATH } from '@/constants/routerLinks';
+import { maskForPhone } from '@/utils/mask/maskForPhone';
 
+import {
+  EmailValidate, NameValidate, PasswordValidate, PhoneValidate,
+} from './options';
 import { ImageDiv, SelectWrapper, StyledSignUpForm } from './style';
 
 const SignUpPage = () => {
@@ -33,13 +37,14 @@ const SignUpPage = () => {
   const [month, setMonth] = useState<number>();
   const [day, setDay] = useState<number>();
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { control, handleSubmit } = useForm();
 
   const arrayYears = useMemo(() => getYears(), []);
   const arrayMonth = useMemo(() => getMonths(year), [year]);
   const arrayDays = useMemo(() => getDays(year, month), [year, month]);
 
   const onSubmit = (data: object) => {
+    console.log(data);
     const newUser = {
       ...data,
       date_created: new Date(
@@ -59,33 +64,31 @@ const SignUpPage = () => {
         </ImageDiv>
         <Title weight="700" size="30px">{TITLE}</Title>
         <Input
-          name="Name"
+          control={control}
+          name="name"
+          type="text"
           placeholder={NAME}
-          register={register}
-          error={!!errors.Name}
-          onChange={() => errors.Name && console.log('Error in Name field')}
+          rules={NameValidate}
         />
         <Input
+          control={control}
           name="Phone"
           placeholder={PHONE}
-          register={register}
-          error={!!errors.Phone}
-          onChange={() => errors.Phone && console.log('Error in Phone field')}
+          rules={PhoneValidate}
+          mask={maskForPhone}
         />
         <Input
+          control={control}
           name="Email"
           placeholder={EMAIL}
-          register={register}
-          error={!!errors.Email}
-          onChange={() => errors.Email && console.log('Error in Email field')}
+          rules={EmailValidate}
         />
         <Input
+          control={control}
+          name="password"
+          rules={PasswordValidate}
           type="password"
-          name="Password"
           placeholder={PASSWORD}
-          register={register}
-          error={!!errors.Password}
-          onChange={() => errors.Password && console.log('Error in Password field')}
         />
         <LinkApp to={PATH.LOG_IN_PAGE}>{TO_LOGIN}</LinkApp>
         <Title weight="700" size={FONT_SIZE.md}>{DATE_BIRTH}</Title>

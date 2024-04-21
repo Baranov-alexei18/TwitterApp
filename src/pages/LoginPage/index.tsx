@@ -22,7 +22,7 @@ const LoginPage = () => {
     SIGN_UP,
   } = LOGIN_PAGE;
 
-  const { register, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm();
 
   const onSubmit = (data:unknown) => {
     console.log(data);
@@ -32,8 +32,17 @@ const LoginPage = () => {
       <StyledLoginForm onSubmit={handleSubmit(onSubmit)}>
         <img src={TwitterLogo} alt="twitter" title="twitter" />
         <Title weight="900" size="42px">{TITLE}</Title>
-        <Input placeholder={PHONE} {...register('phone')} />
-        <Input type="password" placeholder={PASSWORD} {...register('password')} />
+        <Input
+          control={control}
+          name="phone"
+          placeholder={PHONE}
+        />
+        <Input
+          control={control}
+          name="password"
+          type="password"
+          placeholder={PASSWORD}
+        />
         <Button
           background={COLOR.primary}
           color={COLOR.light}

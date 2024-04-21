@@ -1,11 +1,8 @@
-import { InputHTMLAttributes } from 'react';
+import { UseControllerProps } from 'react-hook-form';
 
-export type InputProps = {
-  value: string | number;
-} & InputHTMLAttributes<HTMLInputElement>;
-
-export type InputType<T> = {
-  target: {
-    value: T;
-  };
-};
+export type InputType = {
+  name: string;
+  type: string;
+  placeholder: string;
+  mask: (value: string, code:string) => string;
+} & UseControllerProps;

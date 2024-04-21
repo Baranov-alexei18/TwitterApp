@@ -4,6 +4,7 @@ export const COLOR = {
   primary: '#1DA1F2',
   lightGrey: '#C4C4C4',
   darkGrey: '#909090',
+  error: '#FF0000',
 };
 
 export const FONT_SIZE = {
