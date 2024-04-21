@@ -14,6 +14,7 @@ export const Input: FC<Partial<InputType>> = ({
   name,
   rules,
   placeholder,
+  disabled,
   type,
   mask,
 }) => {
@@ -54,6 +55,7 @@ export const Input: FC<Partial<InputType>> = ({
         value={value}
         onChange={handleChange}
         onBlur={onBlur}
+        disabled={disabled}
       />
 
       {type === 'password' && (

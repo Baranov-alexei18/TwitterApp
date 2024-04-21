@@ -9,10 +9,12 @@ import { Button } from '@/components/ui-components/Button';
 import { ContentText } from '@/components/ui-components/ContentText';
 import { Input } from '@/components/ui-components/Input';
 import { LinkApp } from '@/components/ui-components/Link';
+import { Loader } from '@/components/ui-components/Loader';
 import { Select } from '@/components/ui-components/Select';
 import { Title } from '@/components/ui-components/Title';
 import { SIGN_UP_PAGE } from '@/constants';
 import { PATH } from '@/constants/routerLinks';
+import { createAccount } from '@/services/firebase/auth';
 import { maskForPhone } from '@/utils/mask/maskForPhone';
 
 import {
@@ -36,6 +38,7 @@ const SignUpPage = () => {
   const [year, setYear] = useState<number>();
   const [month, setMonth] = useState<number>();
   const [day, setDay] = useState<number>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const { control, handleSubmit } = useForm();
 
@@ -43,17 +46,24 @@ const SignUpPage = () => {
   const arrayMonth = useMemo(() => getMonths(year), [year]);
   const arrayDays = useMemo(() => getDays(year, month), [year, month]);
 
-  const onSubmit = (data: object) => {
-    console.log(data);
-    const newUser = {
-      ...data,
-      date_created: new Date(
-        year ?? new Date().getFullYear(),
-        month ?? new Date().getMonth(),
-        day ?? new Date().getDate(),
-      ),
-    };
-    console.log(newUser);
+  const onSubmit = async (data: object) => {
+    setIsLoading(true);
+    try {
+      const newUser = {
+        ...data,
+        date_created: new Date(
+          year ?? new Date().getFullYear(),
+          month ?? new Date().getMonth(),
+          day ?? new Date().getDate(),
+        ),
+      };
+      console.log(newUser);
+      await createAccount(newUser);
+    } catch (error) {
+      console.error('Error creating account:', error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -69,19 +79,22 @@ const SignUpPage = () => {
           type="text"
           placeholder={NAME}
           rules={NameValidate}
+          disabled={isLoading}
         />
         <Input
           control={control}
-          name="Phone"
+          name="phone"
           placeholder={PHONE}
           rules={PhoneValidate}
           mask={maskForPhone}
+          disabled={isLoading}
         />
         <Input
           control={control}
-          name="Email"
+          name="email"
           placeholder={EMAIL}
           rules={EmailValidate}
+          disabled={isLoading}
         />
         <Input
           control={control}
@@ -89,6 +102,7 @@ const SignUpPage = () => {
           rules={PasswordValidate}
           type="password"
           placeholder={PASSWORD}
+          disabled={isLoading}
         />
         <LinkApp to={PATH.LOG_IN_PAGE}>{TO_LOGIN}</LinkApp>
         <Title weight="700" size={FONT_SIZE.md}>{DATE_BIRTH}</Title>
@@ -122,7 +136,7 @@ const SignUpPage = () => {
           borderRadius={BORDER_RADIUS.xl}
           fontSize={FONT_SIZE.xl}
         >
-          {NEXT}
+          {isLoading ? <Loader /> : NEXT }
         </Button>
       </StyledSignUpForm>
     </Container>

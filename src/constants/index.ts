@@ -20,7 +20,7 @@ export const START_PAGE = {
 export const LOGIN_PAGE = {
   TITLE: 'Log in to Twitter',
   PASSWORD: 'Password',
-  PHONE: 'Phone number, email address',
+  EMAIL: 'Phone number, email address',
   LOGIN: 'Log in',
   SIGN_UP: 'Sign up to Twitter',
 };
