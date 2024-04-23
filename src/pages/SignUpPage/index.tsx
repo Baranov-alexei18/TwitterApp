@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Container } from '@/assets/style/global';
 import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/assets/style/variables';
@@ -14,13 +15,14 @@ import { Select } from '@/components/ui-components/Select';
 import { Title } from '@/components/ui-components/Title';
 import { SIGN_UP_PAGE } from '@/constants';
 import { PATH } from '@/constants/routerLinks';
-import { createAccount } from '@/services/firebase/auth';
+import { createAccountWithEmail } from '@/services/auth/createUserWithEmail';
 import { maskForPhone } from '@/utils/mask/maskForPhone';
 
 import {
   EmailValidate, NameValidate, PasswordValidate, PhoneValidate,
 } from './options';
 import { ImageDiv, SelectWrapper, StyledSignUpForm } from './style';
+import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
   const {
@@ -46,6 +48,10 @@ const SignUpPage = () => {
   const arrayMonth = useMemo(() => getMonths(year), [year]);
   const arrayDays = useMemo(() => getDays(year, month), [year, month]);
 
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const onSubmit = async (data: object) => {
     setIsLoading(true);
     try {
@@ -57,8 +63,8 @@ const SignUpPage = () => {
           day ?? new Date().getDate(),
         ),
       };
-      console.log(newUser);
-      await createAccount(newUser);
+      await createAccountWithEmail(newUser, dispatch);
+      navigate('/feed');
     } catch (error) {
       console.error('Error creating account:', error);
     } finally {
@@ -136,8 +142,9 @@ const SignUpPage = () => {
           borderRadius={BORDER_RADIUS.xl}
           fontSize={FONT_SIZE.xl}
         >
-          {isLoading ? <Loader /> : NEXT }
+          {isLoading ? <Loader /> : NEXT}
         </Button>
+        {user?.data?.uid || '123'}
       </StyledSignUpForm>
     </Container>
   );

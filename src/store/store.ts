@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 
 import modalReducer from './sliceModal';
 import themeReducer from './sliceTheme';
+import userReducer from './sliceUser';
 
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
     modal: modalReducer,
+    user: userReducer,
   },
 });
 

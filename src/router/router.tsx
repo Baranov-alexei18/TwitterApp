@@ -8,10 +8,10 @@ import { PATH } from '@/constants/routerLinks';
 import { PageNotFound } from '@/pages/PageNotFound';
 import { store } from '@/store/store';
 
-const HomePage = lazy(() => import('@/pages/StartPage'));
+const StartPage = lazy(() => import('@/pages/StartPage'));
 const BankCardPage = lazy(() => import('@/pages/LoginPage'));
-const ContactPage = lazy(() => import('@/pages/Contact'));
 const TimeLinePage = lazy(() => import('@/pages/SignUpPage'));
+const HomePage = lazy(() => import('@/pages/HomePage'));
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
         path: PATH.START_PAGE,
         element: (
           <Suspense fallback={<Loader />}>
-            <HomePage />
+            <StartPage />
           </Suspense>
         ),
       },
@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
         path: PATH.HOME_PAGE,
         element: (
           <Suspense fallback={<Loader />}>
-            <ContactPage />
+            <HomePage />
           </Suspense>
         ),
       },

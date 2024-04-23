@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { StyledButton } from './style';
 import { ButtonProps } from './type';
 
-export const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
+export const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = memo(({
   background,
   borderRadius,
   borderColor,
@@ -11,7 +11,7 @@ export const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButto
   fontSize,
   children,
   ...rest
-}) => (
+}:ButtonProps) => (
   <StyledButton
     background={background}
     borderRadius={borderRadius}
@@ -22,4 +22,4 @@ export const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButto
   >
     {children}
   </StyledButton>
-);
+));

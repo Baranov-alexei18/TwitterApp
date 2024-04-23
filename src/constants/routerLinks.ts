@@ -15,17 +15,17 @@ export const ROUTER_LINKS = [
   {
     id: 2,
     path: PATH.SIGN_UP_PAGE,
-    name: 'Timeline',
+    name: 'SignUp',
   },
   {
     id: 3,
     path: PATH.LOG_IN_PAGE,
-    name: 'Bank card',
+    name: 'Login',
   },
   {
     id: 4,
     path: PATH.HOME_PAGE,
-    name: 'Contact',
+    name: 'Home',
   },
 ];
 

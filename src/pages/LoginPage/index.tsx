@@ -11,7 +11,8 @@ import { Loader } from '@/components/ui-components/Loader';
 import { Title } from '@/components/ui-components/Title';
 import { LOGIN_PAGE } from '@/constants';
 import { PATH } from '@/constants/routerLinks';
-import { LoginToAccount } from '@/services/firebase/auth';
+import { LoginToAccount } from '@/services/auth/loginToAccount';
+import { UserTypes } from '@/types/user';
 
 import { StyledLoginForm, WrapperLink } from './style';
 
@@ -27,7 +28,7 @@ const LoginPage = () => {
   const { control, handleSubmit } = useForm();
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = async (data: object) => {
+  const onSubmit = async (data: Partial<UserTypes>) => {
     setIsLoading(true);
     try {
       await LoginToAccount(data);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import BackTwitter from '@/assets/img/backTwitter.png';
@@ -13,6 +14,7 @@ import { LinkApp } from '@/components/ui-components/Link';
 import { Title } from '@/components/ui-components/Title';
 import { START_PAGE } from '@/constants';
 import { PATH } from '@/constants/routerLinks';
+import { createAccountWithGoogle } from '@/services/auth/createUserWithGoogle';
 
 import { Content, Image } from './style';
 
@@ -27,9 +29,18 @@ const HomePage = () => {
   } = START_PAGE;
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const toSignUp = () => {
     navigate(PATH.SIGN_UP_PAGE);
+  };
+
+  const createWithGoogle = async () => {
+    try {
+      await createAccountWithGoogle(dispatch);
+      navigate(PATH.HOME_PAGE);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -46,7 +57,7 @@ const HomePage = () => {
             borderRadius={BORDER_RADIUS.xl}
             fontSize={FONT_SIZE.xl}
             borderColor={COLOR.lightGrey}
-            onClick={() => console.log(123)}
+            onClick={createWithGoogle}
           >
             <img src={GoogleLogo} alt="google" title="google" height="50" width="41" />
             <span>{SIGN_UP_GOOGLE}</span>
