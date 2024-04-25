@@ -4,7 +4,7 @@ import { COLOR } from '@/theme/variables';
 
 import { ButtonProps } from './types';
 
-export const StyledButton = styled.button<ButtonProps>`
+export const StyledButton = styled.button<Partial<ButtonProps>>`
   display: flex;
   align-items: center;
   justify-content: center;

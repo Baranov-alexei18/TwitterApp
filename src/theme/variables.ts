@@ -5,6 +5,7 @@ export const COLOR = {
   lightGrey: '#C4C4C4',
   darkGrey: '#909090',
   error: '#FF0000',
+  success: '#8AE564',
 };
 
 export const FONT_SIZE = {

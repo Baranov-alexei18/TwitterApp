@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
@@ -12,32 +11,33 @@ import { LinkApp } from '@/components/ui-components/Link';
 import { Loader } from '@/components/ui-components/Loader';
 import { Select } from '@/components/ui-components/Select';
 import { Title } from '@/components/ui-components/Title';
-import { SIGN_UP_PAGE } from '@/constants';
+import { Toast } from '@/components/ui-components/Toast';
+import { INPUT_FORM_NAMES, SIGN_UP_FORM } from '@/constants/pages/forms';
 import { PATH } from '@/constants/routerLinks';
+import { useToast } from '@/hooks/useToast';
 import { createAccountWithEmail } from '@/services/auth/createUserWithEmail';
 import { Container } from '@/theme/global';
 import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
 import { UserTypes } from '@/types/user';
+import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
 import { maskForPhone } from '@/utils/mask/maskForPhone';
 
 import {
   EmailValidate, NameValidate, PasswordValidate, PhoneValidate,
 } from './options';
-import { ImageDiv, SelectWrapper, StyledSignUpForm } from './style';
+import { ImageDiv, SelectWrapper, StyledSignUpForm } from './styles';
 
 const SignUpPage = () => {
   const {
     TITLE,
-    PHONE,
-    PASSWORD,
-    EMAIL,
     NEXT,
     DATE_BIRTH,
-    NAME,
     TO_LOGIN,
     DESCRIPTION,
-  } = SIGN_UP_PAGE;
-
+  } = SIGN_UP_FORM;
+  const {
+    PASSWORD, NAME, PHONE, EMAIL,
+  } = INPUT_FORM_NAMES;
   const [year, setYear] = useState<number>();
   const [month, setMonth] = useState<number>();
   const [day, setDay] = useState<number>();
@@ -49,7 +49,9 @@ const SignUpPage = () => {
   const arrayMonth = useMemo(() => getMonths(year), [year]);
   const arrayDays = useMemo(() => getDays(year, month), [year, month]);
 
-  const dispatch = useDispatch();
+  const {
+    showToast, visible, text, type,
+  } = useToast();
   const navigate = useNavigate();
 
   const onSubmit = async (data: Partial<UserTypes>) => {
@@ -63,10 +65,15 @@ const SignUpPage = () => {
           day ?? new Date().getDate(),
         ),
       };
-      await createAccountWithEmail(newUser as UserTypes, dispatch);
-      navigate(PATH.HOME_PAGE);
-    } catch (error) {
-      console.error('Error creating account:', error);
+      const userData = await createAccountWithEmail(newUser as UserTypes);
+
+      if (userData) {
+        navigate(PATH.LOG_IN_PAGE);
+      }
+    } catch (error: any) {
+      if (error.code === 'auth/email-already-in-use') {
+        showToast('This email already exists', 'error');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -78,40 +85,40 @@ const SignUpPage = () => {
         <ImageDiv>
           <img src={TwitterLogo} alt="twitter" title="twitter" />
         </ImageDiv>
-        <Title weight="700" size="30px">{TITLE}</Title>
+        <Title row="sm">{TITLE}</Title>
         <Input
           control={control}
-          name="name"
+          name={NAME}
           type="text"
-          placeholder={NAME}
           rules={NameValidate}
+          placeholder={capitalizeFirstLetter(NAME)}
           disabled={isLoading}
         />
         <Input
           control={control}
-          name="phone"
-          placeholder={PHONE}
+          name={PHONE}
           rules={PhoneValidate}
+          placeholder={capitalizeFirstLetter(PHONE)}
           mask={maskForPhone}
           disabled={isLoading}
         />
         <Input
           control={control}
-          name="email"
-          placeholder={EMAIL}
+          name={EMAIL}
           rules={EmailValidate}
+          placeholder={capitalizeFirstLetter(EMAIL)}
           disabled={isLoading}
         />
         <Input
           control={control}
-          name="password"
+          name={PASSWORD}
+          type={PASSWORD}
           rules={PasswordValidate}
-          type="password"
-          placeholder={PASSWORD}
+          placeholder={capitalizeFirstLetter(PASSWORD)}
           disabled={isLoading}
         />
         <LinkApp to={PATH.LOG_IN_PAGE}>{TO_LOGIN}</LinkApp>
-        <Title weight="700" size={FONT_SIZE.md}>{DATE_BIRTH}</Title>
+        <Title row="xs">{DATE_BIRTH}</Title>
         <ContentText
           size={FONT_SIZE.sm}
           color={COLOR.darkGrey}
@@ -145,6 +152,7 @@ const SignUpPage = () => {
           {isLoading ? <Loader /> : NEXT}
         </Button>
       </StyledSignUpForm>
+      {visible && <Toast text={text} type={type} dataTestId="toast" />}
     </Container>
   );
 };

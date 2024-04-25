@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyledLink } from './style';
+import { StyledLink } from './styles';
 import { LinkProps } from './types';
 
 export const LinkApp: React.FC<LinkProps> = ({

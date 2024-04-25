@@ -2,7 +2,7 @@ import React from 'react';
 
 import Search from '@/assets/image/icons/search.svg';
 
-import { Container, Input } from './style';
+import { Container, Input } from './styles';
 
 export const ElasticSearch = () => (
   <Container>

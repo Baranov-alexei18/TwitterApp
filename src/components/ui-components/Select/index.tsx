@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyledSelect } from './style';
+import { StyledSelect } from './styles';
 import { SelectProps } from './types';
 
 export const Select: React.FC<Partial<SelectProps>> = ({

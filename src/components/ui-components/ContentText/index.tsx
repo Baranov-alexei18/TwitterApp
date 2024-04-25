@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyledContent } from './style';
+import { StyledContent } from './styles';
 import { ContentProps } from './types';
 
 export const ContentText: React.FC<ContentProps> = ({

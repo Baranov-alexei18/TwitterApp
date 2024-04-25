@@ -7,7 +7,7 @@ import { UserState } from '@/types/user';
 
 import {
   Container, MainContent,
-} from './style';
+} from './styles';
 
 const HomePage = () => {
   const user = useSelector((state: UserState) => state.user);

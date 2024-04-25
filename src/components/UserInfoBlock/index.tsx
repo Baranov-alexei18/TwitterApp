@@ -6,11 +6,12 @@ import { UserState } from '@/types/user';
 
 import {
   EllipsisWrapper, InfoContainer, UserIcon, UserInfo,
-} from './style';
+} from './styles';
 
 export const UserInfoBlock = () => {
   const user = useSelector((state: UserState) => state.user?.data);
-
+  console.log('user');
+  console.log(user);
   if (!user) {
     return null;
   }

@@ -12,6 +12,7 @@ export const UserIcon = styled.img`
   width: 45px;
   height: 45px;
   margin-right: 10px;
+  border-radius: 50%;
 `;
 
 export const UserInfo = styled.div`

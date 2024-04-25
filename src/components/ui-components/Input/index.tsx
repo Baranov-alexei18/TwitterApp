@@ -6,7 +6,7 @@ import OpenEye from '@/assets/image/icons/open-eye.svg';
 
 import {
   StyledInput, WrapperErrorMessage, WrapperIcon, WrapperInput,
-} from './style';
+} from './styles';
 import { InputType } from './types';
 
 export const Input: FC<Partial<InputType>> = ({

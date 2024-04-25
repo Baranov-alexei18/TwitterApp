@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 
-import { StyledButton } from './style';
+import { StyledButton } from './styles';
 import { ButtonProps } from './types';
 
-export const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = memo(({
+export const Button = memo(({
   background,
   borderRadius,
   borderColor,
@@ -11,7 +11,7 @@ export const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButto
   fontSize,
   children,
   ...rest
-}:ButtonProps) => (
+}:Partial<ButtonProps> & React.ButtonHTMLAttributes<HTMLButtonElement>) => (
   <StyledButton
     background={background}
     borderRadius={borderRadius}

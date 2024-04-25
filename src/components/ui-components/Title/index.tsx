@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 
-import { StyledTitle } from './style';
+import { ConfigTitle } from './config';
+import { StyledTitle } from './styles';
 import { TitleType } from './types';
 
-export const Title: FC<TitleType> = ({ weight = 'normal', size = '16px', children }) => (
-  <StyledTitle weight={weight} size={size}>
+export const Title: FC<TitleType> = ({ row, children }) => (
+  <StyledTitle {...ConfigTitle[row]}>
     {children}
   </StyledTitle>
 );
