@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { Container } from '@/assets/style/global';
+import { SearchBar } from '@/components/SearchBar';
+import { Sidebar } from '@/components/Sidebar';
+import { UserState } from '@/types/user';
+
+import {
+  Container, MainContent,
+} from './style';
 
 const HomePage = () => {
-  const [count, setCount] = useState(0);
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state: UserState) => state.user);
 
   console.log(user);
 
   return (
     <Container>
-      homePage
-      {' '}
-      {count}
+      <Sidebar />
+      <MainContent>
+        ...Loading
+      </MainContent>
+      <SearchBar />
     </Container>
   );
 };
