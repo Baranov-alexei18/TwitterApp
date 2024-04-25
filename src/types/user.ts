@@ -6,7 +6,13 @@ export type UserTypes = {
   displayName?: string,
   phone?: string | null,
   date_birthday?: Date | null,
-  date_created: Date,
+  date_created?: Date,
   photoURL?: string | null,
   tweets?: unknown[],
+};
+
+export type UserState = {
+  user: {
+    data:UserTypes
+  };
 };

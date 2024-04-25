@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import { StyledButton } from './style';
-import { ButtonProps } from './type';
+import { ButtonProps } from './types';
 
 export const Button: React.FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = memo(({
   background,

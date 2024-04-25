@@ -1,4 +1,4 @@
-import { Option } from '../ui-components/Select/type';
+import { Option } from '../ui-components/Select/types';
 
 export const getYears = (): Option[] => {
   const currentYear = new Date().getFullYear();

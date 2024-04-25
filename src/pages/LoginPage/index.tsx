@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { Container } from '@/assets/style/global';
-import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/assets/style/variables';
-import TwitterLogo from '@/assets/svg/twitter-logo.svg';
+import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
 import { Button } from '@/components/ui-components/Button';
 import { Input } from '@/components/ui-components/Input';
 import { LinkApp } from '@/components/ui-components/Link';
@@ -12,6 +12,8 @@ import { Title } from '@/components/ui-components/Title';
 import { LOGIN_PAGE } from '@/constants';
 import { PATH } from '@/constants/routerLinks';
 import { LoginToAccount } from '@/services/auth/loginToAccount';
+import { Container } from '@/theme/global';
+import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
 import { UserTypes } from '@/types/user';
 
 import { StyledLoginForm, WrapperLink } from './style';
@@ -27,11 +29,14 @@ const LoginPage = () => {
 
   const { control, handleSubmit } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = async (data: Partial<UserTypes>) => {
     setIsLoading(true);
     try {
-      await LoginToAccount(data);
+      await LoginToAccount(data, dispatch);
+      navigate(PATH.HOME_PAGE);
     } catch (error) {
       throw new Error(error as string);
     } finally {
@@ -42,7 +47,7 @@ const LoginPage = () => {
   return (
     <Container>
       <StyledLoginForm onSubmit={handleSubmit(onSubmit)}>
-        <img src={TwitterLogo} alt="twitter" title="twitter" />
+        <img src={TwitterLogo} alt="twitter-logo" title="twitter" />
         <Title weight="900" size="42px">{TITLE}</Title>
         <Input
           control={control}
@@ -60,7 +65,6 @@ const LoginPage = () => {
           color={COLOR.light}
           borderRadius={BORDER_RADIUS.xl}
           fontSize={FONT_SIZE.xl}
-          onClick={() => console.log(123)}
         >
           {isLoading ? <Loader /> : LOGIN}
         </Button>

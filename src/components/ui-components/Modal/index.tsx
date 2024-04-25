@@ -1,7 +1,7 @@
 import React, { MutableRefObject, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-import { ModalProps } from '@/components/ui-components/Modal/type';
+import { ModalProps } from '@/components/ui-components/Modal/types';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 
 export const ModalBase: React.FC<ModalProps> = React.memo(

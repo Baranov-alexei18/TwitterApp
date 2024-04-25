@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { COLOR, FONT_SIZE } from '@/assets/style/variables';
+import { COLOR, FONT_SIZE } from '@/theme/variables';
 
-import { ContentProps } from './type';
+import { ContentProps } from './types';
 
 export const StyledContent = styled.div<ContentProps>`
   color: ${(props) => props.color || COLOR.dark};

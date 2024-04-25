@@ -1,10 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-import { Container } from '@/assets/style/global';
-import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/assets/style/variables';
-import TwitterLogo from '@/assets/svg/twitter-logo.svg';
+import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
 import { getDays, getMonths, getYears } from '@/components/helpers/getDate';
 import { Button } from '@/components/ui-components/Button';
 import { ContentText } from '@/components/ui-components/ContentText';
@@ -16,13 +15,15 @@ import { Title } from '@/components/ui-components/Title';
 import { SIGN_UP_PAGE } from '@/constants';
 import { PATH } from '@/constants/routerLinks';
 import { createAccountWithEmail } from '@/services/auth/createUserWithEmail';
+import { Container } from '@/theme/global';
+import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
+import { UserTypes } from '@/types/user';
 import { maskForPhone } from '@/utils/mask/maskForPhone';
 
 import {
   EmailValidate, NameValidate, PasswordValidate, PhoneValidate,
 } from './options';
 import { ImageDiv, SelectWrapper, StyledSignUpForm } from './style';
-import { useNavigate } from 'react-router-dom';
 
 const SignUpPage = () => {
   const {
@@ -48,11 +49,10 @@ const SignUpPage = () => {
   const arrayMonth = useMemo(() => getMonths(year), [year]);
   const arrayDays = useMemo(() => getDays(year, month), [year, month]);
 
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onSubmit = async (data: object) => {
+  const onSubmit = async (data: Partial<UserTypes>) => {
     setIsLoading(true);
     try {
       const newUser = {
@@ -63,8 +63,8 @@ const SignUpPage = () => {
           day ?? new Date().getDate(),
         ),
       };
-      await createAccountWithEmail(newUser, dispatch);
-      navigate('/feed');
+      await createAccountWithEmail(newUser as UserTypes, dispatch);
+      navigate(PATH.HOME_PAGE);
     } catch (error) {
       console.error('Error creating account:', error);
     } finally {
@@ -144,7 +144,6 @@ const SignUpPage = () => {
         >
           {isLoading ? <Loader /> : NEXT}
         </Button>
-        {user?.data?.uid || '123'}
       </StyledSignUpForm>
     </Container>
   );

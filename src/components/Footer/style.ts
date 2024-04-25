@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { FONT_SIZE } from '@/assets/style/variables';
+import { FONT_SIZE } from '@/theme/variables';
 
 export const StyledFooter = styled.footer`
   display: flex;

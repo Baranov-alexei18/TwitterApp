@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { COLOR } from '@/assets/style/variables';
+import { COLOR } from '@/theme/variables';
 
-import { ButtonProps } from './type';
+import { ButtonProps } from './types';
 
 export const StyledButton = styled.button<ButtonProps>`
   display: flex;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/assets/style/variables';
+import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
 
-import { SelectProps } from './type';
+import { SelectProps } from './types';
 
 export const StyledSelect = styled.select<Partial<SelectProps>>`
   display: flex;

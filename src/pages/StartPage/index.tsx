@@ -2,11 +2,9 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import BackTwitter from '@/assets/img/backTwitter.png';
-import { Container } from '@/assets/style/global';
-import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/assets/style/variables';
-import GoogleLogo from '@/assets/svg/google-logo.svg';
-import TwitterLogo from '@/assets/svg/twitter-logo.svg';
+import BackTwitter from '@/assets/image/backTwitter.png';
+import GoogleLogo from '@/assets/image/icons/google-logo.svg';
+import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui-components/Button';
 import { ContentText } from '@/components/ui-components/ContentText';
@@ -15,6 +13,8 @@ import { Title } from '@/components/ui-components/Title';
 import { START_PAGE } from '@/constants';
 import { PATH } from '@/constants/routerLinks';
 import { createAccountWithGoogle } from '@/services/auth/createUserWithGoogle';
+import { Container } from '@/theme/global';
+import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
 
 import { Content, Image } from './style';
 

@@ -1,13 +1,13 @@
 import React, { FC, useState } from 'react';
 import { useController } from 'react-hook-form';
 
-import CloseEye from '@/assets/svg/close-eye.svg';
-import OpenEye from '@/assets/svg/open-eye.svg';
+import CloseEye from '@/assets/image/icons/close-eye.svg';
+import OpenEye from '@/assets/image/icons/open-eye.svg';
 
 import {
   StyledInput, WrapperErrorMessage, WrapperIcon, WrapperInput,
 } from './style';
-import { InputType } from './type';
+import { InputType } from './types';
 
 export const Input: FC<Partial<InputType>> = ({
   control,

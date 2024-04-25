@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { TitleType } from './type';
+import { TitleType } from './types';
 
 export const StyledTitle = styled.p<TitleType>`
   font-weight: ${(props) => props.weight};

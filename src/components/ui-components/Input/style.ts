@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/assets/style/variables';
+import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
 
 export const StyledInput = styled.input<{error:boolean}>`
   box-sizing: border-box;
