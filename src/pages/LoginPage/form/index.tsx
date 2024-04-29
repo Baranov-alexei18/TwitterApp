@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
 import { Button } from '@/components/ui-components/Button';
+import { ButtonStyled2 } from '@/components/ui-components/Button/config';
 import { Input } from '@/components/ui-components/Input';
 import { Loader } from '@/components/ui-components/Loader';
 import { Title } from '@/components/ui-components/Title';
@@ -14,20 +15,14 @@ import { PATH } from '@/constants/routerLinks';
 import { useToast } from '@/hooks/useToast';
 import { LoginToAccount } from '@/services/auth/loginToAccount';
 import { setUser } from '@/store/sliceUser';
-import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
 import { UserTypes } from '@/types/user';
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
 
 import { StyledLoginForm } from '../styles';
 
 export const LoginPageForm = () => {
-  const {
-    TITLE,
-    LOGIN,
-  } = LOGIN_FORM;
-  const {
-    PASSWORD, EMAIL,
-  } = INPUT_FORM_NAMES;
+  const { TITLE, LOGIN } = LOGIN_FORM;
+  const { PASSWORD, EMAIL } = INPUT_FORM_NAMES;
 
   const [isLoading, setIsLoading] = useState(false);
   const { control, handleSubmit } = useForm();
@@ -71,12 +66,7 @@ export const LoginPageForm = () => {
         type={PASSWORD}
         placeholder={capitalizeFirstLetter(PASSWORD)}
       />
-      <Button
-        background={COLOR.primary}
-        color={COLOR.light}
-        borderRadius={BORDER_RADIUS.xl}
-        fontSize={FONT_SIZE.xl}
-      >
+      <Button {...ButtonStyled2}>
         {isLoading ? <Loader /> : LOGIN}
       </Button>
       {visible && <Toast text={text} type={type} dataTestId="toast" />}

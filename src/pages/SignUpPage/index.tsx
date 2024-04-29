@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
 import { getDays, getMonths, getYears } from '@/components/helpers/getDate';
 import { Button } from '@/components/ui-components/Button';
+import { ButtonStyled2 } from '@/components/ui-components/Button/config';
 import { ContentText } from '@/components/ui-components/ContentText';
 import { Input } from '@/components/ui-components/Input';
 import { LinkApp } from '@/components/ui-components/Link';
@@ -14,6 +15,7 @@ import { Title } from '@/components/ui-components/Title';
 import { Toast } from '@/components/ui-components/Toast';
 import { INPUT_FORM_NAMES, SIGN_UP_FORM } from '@/constants/pages/forms';
 import { PATH } from '@/constants/routerLinks';
+import { useAuthToken } from '@/hooks/useAuthToken';
 import { useToast } from '@/hooks/useToast';
 import { createAccountWithEmail } from '@/services/auth/createUserWithEmail';
 import { Container } from '@/theme/global';
@@ -70,7 +72,7 @@ const SignUpPage = () => {
       if (userData) {
         navigate(PATH.LOG_IN_PAGE);
       }
-    } catch (error: any) {
+    } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         showToast('This email already exists', 'error');
       }
@@ -144,10 +146,7 @@ const SignUpPage = () => {
         </SelectWrapper>
         <Button
           type="submit"
-          background={COLOR.primary}
-          color={COLOR.light}
-          borderRadius={BORDER_RADIUS.xl}
-          fontSize={FONT_SIZE.xl}
+          {...ButtonStyled2}
         >
           {isLoading ? <Loader /> : NEXT}
         </Button>

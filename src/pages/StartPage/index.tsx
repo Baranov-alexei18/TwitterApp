@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import BackTwitter from '@/assets/image/backTwitter.png';
 import GoogleLogo from '@/assets/image/icons/google-logo.svg';
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
 import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui-components/Button';
+import { ButtonStyled1 } from '@/components/ui-components/Button/config';
 import { ContentText } from '@/components/ui-components/ContentText';
 import { LinkApp } from '@/components/ui-components/Link';
 import { Title } from '@/components/ui-components/Title';
+import { LOCALSTORAGE_TOKEN } from '@/constants';
 import { START_PAGE } from '@/constants/pages/startPage';
 import { PATH } from '@/constants/routerLinks';
+import { useAuthToken } from '@/hooks/useAuthToken';
 import { createAccountWithGoogle } from '@/services/auth/createUserWithGoogle';
 import { getUserDataFromFirestore } from '@/services/firestore/getUserDataFromFirestore';
 import { setUser } from '@/store/sliceUser';
@@ -32,6 +35,7 @@ const StartPage = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const toSignUp = () => {
     navigate(PATH.SIGN_UP_PAGE);
   };
@@ -59,22 +63,14 @@ const StartPage = () => {
           <Title row="lg">{TITLE}</Title>
           <Title row="md">{SUBTITLE}</Title>
           <Button
-            width="400px"
-            height="62px"
-            borderRadius={BORDER_RADIUS.xl}
-            fontSize={FONT_SIZE.xl}
-            borderColor={COLOR.lightGrey}
+            {...ButtonStyled1}
             onClick={createWithGoogle}
           >
             <img src={GoogleLogo} alt="google" title="google" width="41" />
             <span>{SIGN_UP_GOOGLE}</span>
           </Button>
           <Button
-            width="400px"
-            height="62px"
-            borderRadius={BORDER_RADIUS.xl}
-            fontSize={FONT_SIZE.xl}
-            borderColor={COLOR.lightGrey}
+            {...ButtonStyled1}
             onClick={toSignUp}
           >
             {SIGN_UP_EMAIL}
