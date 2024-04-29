@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
@@ -12,6 +12,7 @@ import { clearUser } from '@/store/sliceUser';
 import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
 
 import { Button } from '../ui-components/Button';
+import { ButtonStyled3 } from '../ui-components/Button/config';
 import UserInfoBlock from '../UserInfoBlock';
 
 import {
@@ -20,12 +21,12 @@ import {
 
 export const Sidebar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const exitFromAccount = async () => {
     try {
       await signOut(auth);
-
       localStorage.removeItem(LOCALSTORAGE_TOKEN);
       dispatch(clearUser());
       navigate(PATH.LOG_IN_PAGE);
@@ -37,30 +38,23 @@ export const Sidebar = () => {
   return (
     <SidebarContainer>
       <Icon src={TwitterLogo} alt="twitter-logo" title="twitter" />
-      { SidebarLinks.map(({
+      {SidebarLinks.map(({
         icon, title, alt, link,
       }) => (
-        <NavLink to={link} key={title}>
+        <NavLink to={link} key={title} isActive={link === location.pathname}>
           <IconRoute src={icon} alt={`${alt}-icon`} title={alt} />
           {title}
         </NavLink>
       ))}
       <Button
-        background={COLOR.primary}
-        color={COLOR.light}
-        borderRadius={BORDER_RADIUS.xl}
-        height="45px"
-        fontSize={FONT_SIZE.xl}
+        {...ButtonStyled3}
       >
         Tweet
       </Button>
       <UserInfoBlock />
       <Button
+        {...ButtonStyled3}
         background={COLOR.lightGrey}
-        color={COLOR.light}
-        borderRadius={BORDER_RADIUS.xl}
-        height="45px"
-        fontSize={FONT_SIZE.xl}
         onClick={exitFromAccount}
       >
         Log out

@@ -8,5 +8,7 @@ export type ButtonProps = {
   borderColor: string;
   color: string;
   fontSize: string;
+  marginBottom: string;
+  padding: string;
   children: ReactNode;
 };

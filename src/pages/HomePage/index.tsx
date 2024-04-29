@@ -1,5 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import {
+  BrowserRouter as Router, Outlet,
+} from 'react-router-dom';
 
 import { SearchBar } from '@/components/SearchBar';
 import { Sidebar } from '@/components/Sidebar';
@@ -12,13 +15,11 @@ import {
 const HomePage = () => {
   const user = useSelector((state: UserState) => state.user);
 
-  console.log(user);
-
   return (
     <Container>
       <Sidebar />
       <MainContent>
-        ...Loading
+        <Outlet />
       </MainContent>
       <SearchBar />
     </Container>

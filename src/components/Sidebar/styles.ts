@@ -25,12 +25,12 @@ export const IconRoute = styled.img`
   margin-right: 10px;
 `;
 
-export const NavLink = styled(Link)`
+export const NavLink = styled(Link)<{isActive: boolean}>`
   display: flex;
   align-items: center;
-  color: black;
   text-decoration: none;
   margin-bottom: 20px;
+  color:${({ isActive }) => (isActive ? COLOR.primary : COLOR.dark)};
 
   &:hover {
     color: ${COLOR.primary};

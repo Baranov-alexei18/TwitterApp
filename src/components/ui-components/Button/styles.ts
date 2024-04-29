@@ -12,12 +12,13 @@ export const StyledButton = styled.button<Partial<ButtonProps>>`
   background-color: ${(props) => props.background || 'transparent'};
   border-radius: ${(props) => props.borderRadius || '0px'};
   width: ${(props) => props.width || '100%'};
-  height: ${(props) => props.height || '62px'};
+  height: ${(props) => props.height || 'auto'};
   border: 1px solid ${(props) => props.borderColor || props.background || 'transparent'};
   font-size: ${(props) => props.fontSize || COLOR.dark};
   color: ${(props) => props.color || COLOR.dark};
-  margin-bottom: 20px;
-  
+  margin-bottom: ${(props) => props.marginBottom || '0'};
+  padding: ${(props) => props.padding || '0'};
+
   &:hover {
     border: 1px solid ${COLOR.dark}
   }

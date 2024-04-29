@@ -27,5 +27,4 @@ export const Container = styled.div`
 
 export const MainContent = styled.div`
   flex: 2.5;
-  padding: 20px;
 `;
