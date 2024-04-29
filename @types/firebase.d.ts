@@ -1,0 +1,10 @@
+import firebase from 'firebase/app';
+
+import 'firebase/auth';
+import 'firebase/firestore';
+
+declare global {
+  interface Window {
+    firebase: firebase.app.App;
+  }
+}

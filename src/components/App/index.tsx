@@ -1,14 +1,21 @@
+import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
 
-import { GlobalStyles } from '@/assets/style/global';
+import { useAuthToken } from '@/hooks/useAuthToken';
+import { GlobalStyles } from '@/theme/global';
 
 import { ErrorBoundary } from '../ErrorBoundary';
 
-export const App = () => (
-  <>
-    <GlobalStyles />
-    <ErrorBoundary>
-      <Outlet />
-    </ErrorBoundary>
-  </>
-);
+export const App = () => {
+  const isModal = useSelector((state: { modal: { isOpen: boolean } }) => state.modal.isOpen);
+  useAuthToken();
+
+  return (
+    <>
+      <GlobalStyles modal={isModal} />
+      <ErrorBoundary>
+        <Outlet />
+      </ErrorBoundary>
+    </>
+  );
+};

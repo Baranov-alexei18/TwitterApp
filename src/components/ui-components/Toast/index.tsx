@@ -1,13 +1,12 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-type ToastProps = {
-  text: string;
-  color: string;
-  dataTestId: string;
-};
+import { StyledToast } from './styles';
+import { ToastProps } from './types';
 
-export const Toast: FC<ToastProps> = ({ text, color, dataTestId }) => {
+export const Toast = memo((
+  { text = '', type = 'success', dataTestId = 'toast' }:Partial<ToastProps>,
+) => {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
@@ -19,10 +18,10 @@ export const Toast: FC<ToastProps> = ({ text, color, dataTestId }) => {
 
   return visible
     ? createPortal(
-      <div data-testid={dataTestId} style={{ backgroundColor: color }}>
-        <p className="toast-text">{text}</p>
-      </div>,
-        document.getElementById('modal') as Element,
+      <StyledToast type={type} data-testid={dataTestId}>
+        <p>{text}</p>
+      </StyledToast>,
+      document.body,
     )
     : null;
-};
+});

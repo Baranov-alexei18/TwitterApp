@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { START_PAGE } from '@/constants';
+import { START_PAGE } from '@/constants/pages/startPage';
 
-import { StyledFooter } from './style';
+import { StyledFooter } from './styles';
 
 export const Footer = () => (
   <StyledFooter>

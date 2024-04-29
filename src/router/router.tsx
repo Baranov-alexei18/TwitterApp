@@ -5,13 +5,16 @@ import { createBrowserRouter } from 'react-router-dom';
 import { App } from '@/components/App';
 import { Loader } from '@/components/ui-components/Loader';
 import { PATH } from '@/constants/routerLinks';
+import { DefaultPage } from '@/pages/HomePage/DefaultPage';
+import { Feed } from '@/pages/HomePage/Feed';
+import { Profile } from '@/pages/HomePage/Profile';
 import { PageNotFound } from '@/pages/PageNotFound';
 import { store } from '@/store/store';
 
-const HomePage = lazy(() => import('@/pages/StartPage'));
+const StartPage = lazy(() => import('@/pages/StartPage'));
 const BankCardPage = lazy(() => import('@/pages/LoginPage'));
-const ContactPage = lazy(() => import('@/pages/Contact'));
 const TimeLinePage = lazy(() => import('@/pages/SignUpPage'));
+const HomePage = lazy(() => import('@/pages/HomePage'));
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +29,7 @@ export const router = createBrowserRouter([
         path: PATH.START_PAGE,
         element: (
           <Suspense fallback={<Loader />}>
-            <HomePage />
+            <StartPage />
           </Suspense>
         ),
       },
@@ -47,12 +50,26 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: PATH.HOME_PAGE,
+        path: `${PATH.HOME_PAGE}/*`,
         element: (
           <Suspense fallback={<Loader />}>
-            <ContactPage />
+            <HomePage />
           </Suspense>
         ),
+        children: [
+          {
+            path: '',
+            element: <Feed />,
+          },
+          {
+            path: 'profile',
+            element: <Profile />,
+          },
+          {
+            path: 'default',
+            element: <DefaultPage />,
+          },
+        ],
       },
       {
         path: PATH.NOT_FOUND,
