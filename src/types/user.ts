@@ -1,3 +1,5 @@
+import { Timestamp } from 'firebase/firestore';
+
 export type UserTypes = {
   uid: string,
   email?: string,
@@ -5,10 +7,11 @@ export type UserTypes = {
   name?: string,
   displayName?: string,
   phone?: string | null,
-  date_birthday?: Date | null,
-  date_created?: Date,
+  date_birthday?: Timestamp | null,
+  date_created?: Timestamp,
+  description: string,
   photoURL?: string | null,
-  tweets?: unknown[],
+  tweets?: string[],
 };
 
 export type UserState = {

@@ -27,3 +27,11 @@ export const BREAKPOINTS = {
   lg: 992,
   xl: 1200,
 };
+
+export const Z_INDEX = {
+  xs: 1,
+  sm: 10,
+  md: 100,
+  xl: 1000,
+  xxl: 10000,
+};
