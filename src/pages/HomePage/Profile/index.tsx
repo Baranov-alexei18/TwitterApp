@@ -3,9 +3,12 @@ import { useSelector } from 'react-redux';
 
 import { TweetForm } from '@/components/TweetForm';
 import { Loader } from '@/components/ui-components/Loader';
+import { Title } from '@/components/ui-components/Title';
 import { ViewTweets } from '@/components/ViewTweets';
 import { getUserTweets } from '@/services/firestore/getUserTweets';
 import { UserState } from '@/types/user';
+
+import { SectionTab } from '../styles';
 
 import { HeaderProfile } from './Header';
 
@@ -30,8 +33,10 @@ export const Profile = () => {
     <div>
       <HeaderProfile />
       <TweetForm />
+      <SectionTab>
+        <Title row="xs"> Tweets </Title>
+      </SectionTab>
       {tweetsUser.length !== 0 && <ViewTweets data={tweetsUser} />}
-      <p>This is the Profile page content.</p>
     </div>
   );
 };

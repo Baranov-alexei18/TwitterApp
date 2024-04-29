@@ -1,20 +1,20 @@
 import React, { ChangeEventHandler, FC, useState } from 'react';
 
 import PictureIcon from '@/assets/image/icons/picture.svg';
+import { MAX_CHARACTERS_TEXTAREA } from '@/constants';
 
 import { Button } from '../Button';
 import { ButtonStyled4 } from '../Button/config';
+import { Loader } from '../Loader';
 
 import {
   ButtonsWrapper,
   ImageUploadButton,
   MaxLengthText, SubmitButton, TextAreaStyle, TextAreaWrapper, UploadButton,
 } from './styles';
-import { FileType, TextAreaTypes } from './types';
+import { TextAreaTypes } from './types';
 
-const MAX_CHARACTERS_TEXTAREA = 400;
-
-export const TextArea: FC<TextAreaTypes> = ({ onSubmit, ...rest }) => {
+export const TextArea: FC<TextAreaTypes> = ({ loader, onSubmit, ...rest }) => {
   const [text, setText] = useState('');
   const [photo, setPhoto] = useState<File | null>(null);
   const [isOverLimit, setIsOverLimit] = useState(false);
@@ -34,11 +34,14 @@ export const TextArea: FC<TextAreaTypes> = ({ onSubmit, ...rest }) => {
   };
 
   const handleSubmit = () => {
+    if (!text.length) return;
+
     if (!photo) {
       onSubmit({ text });
     } else {
       onSubmit({ text, photo });
     }
+
     setText('');
     setPhoto(null);
   };
@@ -64,6 +67,7 @@ export const TextArea: FC<TextAreaTypes> = ({ onSubmit, ...rest }) => {
         <Button
           {...ButtonStyled4}
           onClick={handleSubmit}
+          disabled={loader}
         >
           Tweet
         </Button>

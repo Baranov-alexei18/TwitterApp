@@ -7,21 +7,22 @@ import { setUser } from '@/store/sliceUser';
 import { UserState } from '@/types/user';
 
 import { TextArea } from '../ui-components/TextArea';
-import { FileType } from '../ui-components/TextArea/types';
 
 import { Container, UserIcon } from './styles';
 
 export const TweetForm = () => {
   const user = useSelector((state: UserState) => state.user.data);
-
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const handleTweetSubmit = async (dateTweet: { text: string; photo?: File }) => {
+    setLoading(true);
     try {
       const tweet = await setTweetToFirestore({ ...dateTweet, tweets: user.tweets, id: user.uid });
+      setLoading(false);
       dispatch(setUser({ ...user, tweets: [...user.tweets!, tweet] }));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -31,6 +32,7 @@ export const TweetForm = () => {
       <TextArea
         onSubmit={handleTweetSubmit}
         placeholder="What's happening?"
+        loader={loading}
       />
     </Container>
   );

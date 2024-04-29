@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BREAKPOINTS } from '@/theme/variables';
+import { BREAKPOINTS, COLOR } from '@/theme/variables';
 
 export const Container = styled.div`
   display: flex;
@@ -27,4 +27,11 @@ export const Container = styled.div`
 
 export const MainContent = styled.div`
   flex: 2.5;
+`;
+
+export const SectionTab = styled.div`
+  width: 100px;
+  padding-left: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid ${COLOR.lightGrey}
 `;

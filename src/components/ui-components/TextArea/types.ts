@@ -9,5 +9,6 @@ export type FileType = {
 
 export type TextAreaTypes = {
     placeholder: string;
-    onSubmit: (data: { text: string, photo?: File}) => void;
+    onSubmit: (data: { text: string, photo?: File }) => void;
+    loader?: boolean;
 };

@@ -62,10 +62,12 @@ export const TweetImage = styled.img`
 export const TweetLikes = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
-export const LikeCount = styled.span`
+export const LikeCount = styled.span<{active: boolean}>`
   margin-left: 5px;
+  color: ${(props) => (!props.active ? COLOR.dark : COLOR.likeColor)}
 `;
 
 export const MoreOptionsIcon = styled.img`

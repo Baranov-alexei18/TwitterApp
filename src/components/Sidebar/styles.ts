@@ -8,7 +8,7 @@ export const SidebarContainer = styled.div`
   flex-direction: column;
   flex: 1;
   color: #fff;
-  height: 70%;
+  height: 100vh;
   padding: 20px;
   border-right: 1px solid ${COLOR.lightGrey};
 `;

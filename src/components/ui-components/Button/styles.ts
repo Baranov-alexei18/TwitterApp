@@ -20,6 +20,10 @@ export const StyledButton = styled.button<Partial<ButtonProps>>`
   padding: ${(props) => props.padding || '0'};
 
   &:hover {
-    border: 1px solid ${COLOR.dark}
+    border: 1px solid ${COLOR.dark};
+  }
+
+  &:disabled {
+    opacity: 0.5;
   }
 `;
