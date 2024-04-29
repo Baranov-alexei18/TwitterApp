@@ -11,3 +11,10 @@ export type TweetType = {
   user_id: string,
   user: UserTypes,
 };
+
+export type TweetToFirestoreType = {
+  id: string,
+  text: string,
+  photo?: File,
+  tweets?: string[],
+};

@@ -4,8 +4,9 @@ import {
 } from 'firebase/storage';
 
 import { firestore, storage } from '@/firebase/firebaseConfig';
+import { TweetToFirestoreType } from '@/components/ViewTweets/types';
 
-export const setTweetToFirestore = async (data) => {
+export const setTweetToFirestore = async (data:TweetToFirestoreType) => {
   try {
     let photoURL;
 
@@ -31,7 +32,7 @@ export const setTweetToFirestore = async (data) => {
 
     await setDoc(updatedTweetRef, { tweet_id: id }, { merge: true });
 
-    await setDoc(updatedUserRef, { tweets: [id, ...data.tweets] }, { merge: true });
+    await setDoc(updatedUserRef, { tweets: [id, ...data.tweets!] }, { merge: true });
 
     return id;
   } catch (error) {

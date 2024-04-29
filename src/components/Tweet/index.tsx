@@ -5,18 +5,11 @@ import DefaultIconUser from '@/assets/image/defaultUserImage.png';
 import ActivelikeIcon from '@/assets/image/icons/active-like.svg';
 import DotsIcon from '@/assets/image/icons/dots.svg';
 import likeIcon from '@/assets/image/icons/like.svg';
-import { deleteTweet } from '@/services/firestore/deleteTweet';
 import { deleteLikesToTweet, setLikesToTweet } from '@/services/firestore/setLikesToTweet';
-import { modalClose, modalOpen } from '@/store/sliceModal';
-import { setUser } from '@/store/sliceUser';
-import { COLOR } from '@/theme/variables';
+import { modalOpen } from '@/store/sliceModal';
 import { UserState } from '@/types/user';
 import { formatDate, formatTimestampToDate } from '@/utils/date';
 
-import { Button } from '../ui-components/Button';
-import { ButtonStyled4 } from '../ui-components/Button/config';
-import { ModalBase } from '../ui-components/Modal/ModalBase';
-import { ModalConfirm } from '../ui-components/Modal/ModalConfirm';
 import { TweetType } from '../ViewTweets/types';
 
 import {
@@ -35,7 +28,6 @@ import {
   UserEmail,
   UserName,
   UserNames,
-  WrapperButton,
 } from './styles';
 import { TweetProps } from './types';
 
@@ -52,13 +44,13 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
   const handleTooltipOpen = () => {
     setIsTooltipOpen(!isTooltipOpen);
   };
-  console.log(likes);
-  console.log(tweet_id, likes.find((item) => item === userNow.uid));
+
   const handleOpenModal = (tweet: TweetType) => {
     dispatch(modalOpen());
     onHandleTweet(tweet);
     setIsTooltipOpen(false);
   };
+
   const setLike = (id: string, userId: string) => {
     if (!activeLike) {
       setLikesToTweet(id, userId);
@@ -69,6 +61,7 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
     }
     setActiveLike(!activeLike);
   };
+
   return (
     <TweetContainer>
       <TweetIcon src={user.photoURL || DefaultIconUser} alt="Avatar" />
@@ -96,7 +89,7 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
             src={activeLike ? ActivelikeIcon : likeIcon}
             height="20px"
             alt="Like"
-            onClick={() => setLike(tweet_id, user.uid)}
+            onClick={() => setLike(tweet_id, userNow.uid)}
             aria-hidden
           />
           <LikeCount active={activeLike}>{countLikes || ''}</LikeCount>

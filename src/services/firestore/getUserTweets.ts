@@ -1,11 +1,6 @@
-import {
-  collection, doc, getDoc, setDoc,
-} from 'firebase/firestore';
-import {
-  getDownloadURL, getStorage, ref, uploadBytes,
-} from 'firebase/storage';
+import { doc, getDoc } from 'firebase/firestore';
 
-import { firestore, storage } from '@/firebase/firebaseConfig';
+import { firestore } from '@/firebase/firebaseConfig';
 
 export const getUserTweets = async (data: string[]) => {
   try {
@@ -24,7 +19,7 @@ export const getUserTweets = async (data: string[]) => {
 
           return { ...tweetData, user: userData };
         }
-        console.log(`Документ с идентификатором ${id} не найден.`);
+
         return null;
       }
     }));

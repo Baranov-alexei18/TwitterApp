@@ -5,7 +5,9 @@ import { THEME } from '@/constants/theme';
 import { setTheme } from '@/store/sliceTheme';
 import { AppDispatch, RootState } from '@/store/store';
 
-export const SwitchApp: React.FC<{ dataTestId: string }> = ({ dataTestId }) => {
+import { SwitchButton, SwitchWrapper } from './styles';
+
+export const SwitchTheme: React.FC<{ dataTestId: string }> = ({ dataTestId }) => {
   const themes = useSelector((state: RootState) => state.theme.theme);
   const dispatch = useDispatch<AppDispatch>();
 
@@ -14,15 +16,8 @@ export const SwitchApp: React.FC<{ dataTestId: string }> = ({ dataTestId }) => {
   };
 
   return (
-    <div>
-      <button
-        data-testid={dataTestId}
-        type="button"
-        aria-label="Switch-theme"
-        onClick={changeTheme}
-      >
-        <div />
-      </button>
-    </div>
+    <SwitchWrapper data-testid={dataTestId} onClick={changeTheme} theme={themes}>
+      <SwitchButton theme={themes} />
+    </SwitchWrapper>
   );
 };
