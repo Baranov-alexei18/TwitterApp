@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import DefaultIconUser from '@/assets/image/defaultUserImage.png';
@@ -7,9 +7,13 @@ import likeIcon from '@/assets/image/icons/like.svg';
 import { deleteTweet } from '@/services/firestore/deleteTweet';
 import { modalClose, modalOpen } from '@/store/sliceModal';
 import { setUser } from '@/store/sliceUser';
+import { COLOR } from '@/theme/variables';
 import { UserState } from '@/types/user';
 import { formatDate, formatTimestampToDate } from '@/utils/date';
 
+import { Button } from '../ui-components/Button';
+import { ButtonStyled4 } from '../ui-components/Button/config';
+import { ModalBase } from '../ui-components/Modal/ModalBase';
 import { ModalConfirm } from '../ui-components/Modal/ModalConfirm';
 import { TweetType } from '../ViewTweets/types';
 
@@ -29,9 +33,11 @@ import {
   UserEmail,
   UserName,
   UserNames,
+  WrapperButton,
 } from './styles';
+import { TweetProps } from './types';
 
-export const Tweet = ({ data }: { data: TweetType }) => {
+export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
   const {
     user, text, image, likes, tweet_id,
   } = data;
@@ -44,26 +50,10 @@ export const Tweet = ({ data }: { data: TweetType }) => {
     setIsTooltipOpen(!isTooltipOpen);
   };
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (tweet: TweetType) => {
     dispatch(modalOpen());
+    onHandleTweet(tweet);
     setIsTooltipOpen(false);
-  };
-
-  const handleModalClose = () => {
-    dispatch(modalClose());
-  };
-
-  const handleDeletePost = (id: string) => {
-    // deleteTweet(user, tweet_id);
-    console.log('tweets');
-    console.log(id);
-    console.log(user.tweets);
-    console.log(user.tweets!.filter((tweetId) => tweetId !== id));
-    // dispatch(setUser({ ...user, tweets: user.tweets!.filter((tweetId) => tweetId !== tweet_id) }));
-    dispatch(modalClose());
-  };
-
-  const handleEditPost = () => {
   };
 
   return (
@@ -77,16 +67,10 @@ export const Tweet = ({ data }: { data: TweetType }) => {
             <TweetDate>{formatDate(formatTimestampToDate(data.date_created)!)}</TweetDate>
             {isTooltipOpen && (
             <ToolTip>
-              <ToolTipOption onClick={() => handleOpenModal()}>Delete</ToolTipOption>
+              <ToolTipOption onClick={() => handleOpenModal(data)}>Delete</ToolTipOption>
             </ToolTip>
             )}
-            <ModalConfirm
-              isOpen={isModal}
-              onConfirm={() => handleDeletePost(tweet_id)}
-              onCloseModal={handleModalClose}
-            >
-              Remove this tweet?
-            </ModalConfirm>
+
           </UserNames>
           {user.uid === userNow.uid && (
             <MoreOptionsIcon src={DotsIcon} onClick={handleTooltipOpen} />
@@ -101,4 +85,4 @@ export const Tweet = ({ data }: { data: TweetType }) => {
       </TweetUserInfo>
     </TweetContainer>
   );
-};
+});
