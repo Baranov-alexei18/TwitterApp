@@ -5,3 +5,10 @@ export type ModalProps = {
   isOpen: boolean;
   onCloseModal: () => void;
 };
+
+export type ModalConfirmProps = {
+  isOpen: boolean;
+  children: ReactNode;
+  onConfirm: () => void;
+  onCloseModal: () => void;
+};
