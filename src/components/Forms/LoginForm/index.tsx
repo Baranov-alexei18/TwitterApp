@@ -18,7 +18,7 @@ import { setUser } from '@/store/sliceUser';
 import { UserTypes } from '@/types/user';
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
 
-import { StyledLoginForm } from '../styles';
+import { StyledLoginForm } from '../../../pages/LoginPage/styles';
 
 export const LoginPageForm = () => {
   const { TITLE, LOGIN } = LOGIN_FORM;

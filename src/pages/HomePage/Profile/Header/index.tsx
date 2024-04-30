@@ -10,7 +10,7 @@ import { modalClose, modalOpen } from '@/store/sliceModal';
 import { COLOR } from '@/theme/variables';
 import { UserState } from '@/types/user';
 
-import { FormUpdateUser } from '../Form';
+import { FormUpdateUser } from '../../../../components/Forms/UpdateForm';
 
 import {
   Container, Description, Icon, Image,
