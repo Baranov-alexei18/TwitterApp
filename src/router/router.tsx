@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
             element: <Feed />,
           },
           {
-            path: ':tweetId',
+            path: 'tweet/:tweetId',
             element: <Feed />,
           },
           {

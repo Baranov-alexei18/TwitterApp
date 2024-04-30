@@ -4,11 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteTweet } from '@/services/firestore/deleteTweet';
 import { modalClose } from '@/store/sliceModal';
 import { setUser } from '@/store/sliceUser';
+import { Container } from '@/theme/global';
 import { UserState } from '@/types/user';
 
 import { Tweet } from '../Tweet';
-import { Loader } from '../ui-components/Loader';
 import { ModalConfirm } from '../ui-components/Modal/ModalConfirm';
+import { Title } from '../ui-components/Title';
 
 import { TweetType } from './types';
 
@@ -39,17 +40,24 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
     setActiveTweetId(dataTweet);
   };
 
+  if (!data.length) {
+    return (
+      <Container>
+        <Title row="xs">No tweets</Title>
+      </Container>
+    );
+  }
   return (
     <>
-      {data.length === 0
-        ? <Loader />
-        : data.map((item: TweetType) => (
+      {
+        data.map((item: TweetType) => (
           <Tweet
             key={item.tweet_id}
             data={item}
             onHandleTweet={handleTweet}
           />
-        ))}
+        ))
+      }
       <ModalConfirm
         isOpen={isModal}
         onConfirm={() => handleDeletePost(activeTweetId!)}

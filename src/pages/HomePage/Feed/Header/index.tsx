@@ -1,24 +1,28 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 
-import DefaultIconUser from '@/assets/image/defaultUserImage.png';
-import HeaderBackground from '@/assets/image/headerBackground.png';
+import ArrowLeft from '@/assets/image/icons/left.svg';
 import { SwitchTheme } from '@/components/ui-components/Switcher';
 import { Title } from '@/components/ui-components/Title';
+import { PATH } from '@/constants/routerLinks';
 import { UserState } from '@/types/user';
 
-import {
-  Container, Description, Icon, Image,
-  SubTitleHeader, TitleHeader,
-  UserInfo,
-} from './styles';
+import { Container, IconBack } from './styles';
 
 export const HeaderProfile = () => {
-  const user = useSelector((state: UserState) => state.user.data);
+  const { tweetId } = useParams();
 
   return (
     <Container>
-      <Title row="xs"> Home </Title>
+      <Title row="xs">
+        {tweetId && (
+          <Link to={PATH.HOME_PAGE}>
+            <IconBack src={ArrowLeft} alt="back arrow" />
+          </Link>
+        )}
+        Home
+      </Title>
       <SwitchTheme dataTestId="theme-id" />
     </Container>
   );

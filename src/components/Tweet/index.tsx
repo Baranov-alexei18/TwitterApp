@@ -1,10 +1,12 @@
-import React, { memo, useState } from 'react';
+import React, { memo, MouseEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import DefaultIconUser from '@/assets/image/defaultUserImage.png';
 import ActivelikeIcon from '@/assets/image/icons/active-like.svg';
 import DotsIcon from '@/assets/image/icons/dots.svg';
 import likeIcon from '@/assets/image/icons/like.svg';
+import { PATH } from '@/constants/routerLinks';
 import { deleteLikesToTweet, setLikesToTweet } from '@/services/firestore/setLikesToTweet';
 import { modalOpen } from '@/store/sliceModal';
 import { UserState } from '@/types/user';
@@ -39,19 +41,23 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [countLikes, setCountLikes] = useState(likes.length);
   const [activeLike, setActiveLike] = useState(() => !!likes.find((item) => item === userNow.uid));
+  const location = useLocation();
   const dispatch = useDispatch();
 
-  const handleTooltipOpen = () => {
+  const handleTooltipOpen = (e: MouseEvent<HTMLImageElement>) => {
+    e!.stopPropagation();
     setIsTooltipOpen(!isTooltipOpen);
   };
 
-  const handleOpenModal = (tweet: TweetType) => {
+  const handleOpenModal = (e: MouseEvent<HTMLImageElement>, tweet: TweetType) => {
+    e!.stopPropagation();
     dispatch(modalOpen());
     onHandleTweet(tweet);
     setIsTooltipOpen(false);
   };
 
-  const setLike = (id: string, userId: string) => {
+  const setLike = (e: MouseEvent<HTMLImageElement>, id: string, userId: string) => {
+    e!.stopPropagation();
     if (!activeLike) {
       setLikesToTweet(id, userId);
       setCountLikes((prev) => prev + 1);
@@ -61,9 +67,11 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
     }
     setActiveLike(!activeLike);
   };
-
+  const handletoTweet = () => {
+    window.location.href = `${PATH.HOME_PAGE}/tweet/${tweet_id}`;
+  };
   return (
-    <TweetContainer>
+    <TweetContainer onClick={() => handletoTweet()}>
       <TweetIcon src={user.photoURL || DefaultIconUser} alt="Avatar" />
       <TweetUserInfo>
         <HeaderTweets>
@@ -73,7 +81,12 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
             <TweetDate>{formatDate(formatTimestampToDate(data.date_created)!)}</TweetDate>
             {isTooltipOpen && (
             <ToolTip>
-              <ToolTipOption onClick={() => handleOpenModal(data)}>Delete</ToolTipOption>
+              <ToolTipOption onClick={
+                  (e: MouseEvent<HTMLImageElement>) => handleOpenModal(e, data)
+                }
+              >
+                Delete
+              </ToolTipOption>
             </ToolTip>
             )}
 
@@ -89,7 +102,7 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
             src={activeLike ? ActivelikeIcon : likeIcon}
             height="20px"
             alt="Like"
-            onClick={() => setLike(tweet_id, userNow.uid)}
+            onClick={(e) => setLike(e, tweet_id, userNow.uid)}
             aria-hidden
           />
           <LikeCount active={activeLike}>{countLikes || ''}</LikeCount>
