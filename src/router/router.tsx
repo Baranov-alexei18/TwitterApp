@@ -62,6 +62,10 @@ export const router = createBrowserRouter([
             element: <Feed />,
           },
           {
+            path: ':tweetId',
+            element: <Feed />,
+          },
+          {
             path: 'profile',
             element: <Profile />,
           },
