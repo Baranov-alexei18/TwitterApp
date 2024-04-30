@@ -1,5 +1,6 @@
-import { COLOR } from '@/theme/variables';
 import styled from 'styled-components';
+
+import { COLOR } from '@/theme/variables';
 
 export const FormUpdateWrapper = styled.form`
   display: flex;

@@ -17,10 +17,7 @@ const changeUserPassword = async (newPassword: string): Promise<void> => {
 export const changePassword = async (email: string, oldPassword: string, newPassword: string) => {
   try {
     await reauthenticateUser(email, oldPassword);
-
     await changeUserPassword(newPassword);
-
-    console.log('Пароль успешно изменен');
   } catch (error) {
     console.error('Ошибка при изменении пароля:', error);
     throw error; // Можно обработать ошибку дальше или просто выбросить её
