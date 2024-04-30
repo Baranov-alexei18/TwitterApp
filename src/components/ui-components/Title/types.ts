@@ -1,15 +1,15 @@
 import { ReactNode } from 'react';
 
-type TextStyle = {
+export type TitleStyled = {
     weight: string;
     size: string;
 };
 
 export type TitleType = {
-    xs: TextStyle;
-    sm: TextStyle;
-    md: TextStyle;
-    lg: TextStyle;
+    xs: TitleStyled;
+    sm: TitleStyled;
+    md: TitleStyled;
+    lg: TitleStyled;
 };
 
 export type TitleProps = {
