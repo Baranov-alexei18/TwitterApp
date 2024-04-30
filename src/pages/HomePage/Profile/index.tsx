@@ -5,6 +5,7 @@ import { TweetForm } from '@/components/TweetForm';
 import { Loader } from '@/components/ui-components/Loader';
 import { Title } from '@/components/ui-components/Title';
 import { ViewTweets } from '@/components/ViewTweets';
+import { TweetType } from '@/components/ViewTweets/types';
 import { getUserTweets } from '@/services/firestore/getUserTweets';
 import { UserState } from '@/types/user';
 
@@ -14,16 +15,18 @@ import { HeaderProfile } from './Header';
 
 export const Profile = () => {
   const user = useSelector((state: UserState) => state.user.data);
-  const [tweetsUser, setTweetsUser] = useState([]);
+  const [tweetsUser, setTweetsUser] = useState<TweetType[] | TweetType>([]);
 
   useEffect(() => {
     const getTweets = async () => {
-      const tweets = await getUserTweets(user.tweets!);
-      const tweetsSort = tweets.sort((a, b) => b.date_created - a.date_created);
+      const tweets = await getUserTweets(user?.tweets ?? []);
+      const tweetsSort = tweets.sort(
+        (a, b) => b!.date_created!.seconds - a!.date_created!.seconds,
+      ) as TweetType[];
       setTweetsUser(tweetsSort);
     };
     getTweets();
-  }, [user && user.tweets?.length]);
+  }, [user?.tweets?.length, user?.name, user?.photoURL]);
 
   if (!user) {
     return <Loader />;
@@ -36,7 +39,7 @@ export const Profile = () => {
       <SectionTab>
         <Title row="xs"> Tweets </Title>
       </SectionTab>
-      {tweetsUser.length !== 0 && <ViewTweets data={tweetsUser} />}
+      {tweetsUser && <ViewTweets data={tweetsUser as TweetType[]} />}
     </div>
   );
 };

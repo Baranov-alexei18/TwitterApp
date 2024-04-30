@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 
 import { ConfigTitle } from './config';
 import { StyledTitle } from './styles';
-import { TitleType } from './types';
+import { TitleProps } from './types';
 
-export const Title: FC<TitleType> = ({ row, children }) => (
-  <StyledTitle {...ConfigTitle[row]}>
+export const Title: FC<TitleProps> = ({ row, children }) => (
+  <StyledTitle {...ConfigTitle[row as unknown as keyof typeof ConfigTitle]}>
     {children}
   </StyledTitle>
 );

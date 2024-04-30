@@ -1,6 +1,8 @@
 import React, { memo, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+import { TIME_TOAST } from '@/constants';
+
 import { StyledToast } from './styles';
 import { ToastProps } from './types';
 
@@ -12,7 +14,7 @@ export const Toast = memo((
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(false);
-    }, 3000);
+    }, TIME_TOAST);
     return () => clearTimeout(timer);
   }, []);
 

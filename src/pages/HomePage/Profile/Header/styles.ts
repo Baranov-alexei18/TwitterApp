@@ -8,7 +8,11 @@ export const Container = styled.div`
 
 export const UserInfo = styled.div`
   position: relative;
-  margin: 0 0 12px 12px;
+  margin: 0 12px 0 12px;
+`;
+export const UserUpdate = styled.div`
+  display: flex;
+  justify-content: end;
 `;
 
 export const TitleHeader = styled.div`
@@ -31,7 +35,7 @@ export const Image = styled.img`
 
 export const Icon = styled.img`
   position: absolute;
-  top: -70px;
+  top: -60px;
   width: 100px;
   height: 100px;
   border-radius: 50%;

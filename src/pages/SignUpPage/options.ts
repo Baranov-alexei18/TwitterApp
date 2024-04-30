@@ -1,4 +1,4 @@
-const MaxLengthValidate = (num: number) => ({
+export const MaxLengthValidate = (num: number) => ({
   maxLength: {
     value: num,
     message: `This field support no more ${num} symbols`,

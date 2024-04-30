@@ -19,7 +19,6 @@ export const createAccountWithGoogle = async () => {
       await setUserToFirestore({ ...user } as UserTypes);
       return user;
     }).catch((error) => {
-      console.log(error);
       GoogleAuthProvider.credentialFromError(error);
     });
   return res;

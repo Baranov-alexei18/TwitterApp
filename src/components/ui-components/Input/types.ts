@@ -5,5 +5,6 @@ export type InputType = {
   type: string;
   placeholder: string;
   disabled: boolean;
+  defaultValue: string;
   mask: (value: string, code:string) => string;
 } & UseControllerProps;

@@ -1,6 +1,8 @@
 import { doc, getDoc } from 'firebase/firestore';
 
+import { TweetType } from '@/components/ViewTweets/types';
 import { firestore } from '@/firebase/firebaseConfig';
+import { UserTypes } from '@/types/user';
 
 export const getUserTweets = async (data: string[]) => {
   try {
@@ -9,13 +11,13 @@ export const getUserTweets = async (data: string[]) => {
       const tweetDocSnap = await getDoc(tweetDocRef);
 
       if (tweetDocSnap.exists()) {
-        const tweetData = tweetDocSnap.data();
+        const tweetData = tweetDocSnap.data() as TweetType;
 
         const userDocRef = doc(firestore, 'users', tweetData.user_id);
         const userDocSnap = await getDoc(userDocRef);
 
         if (userDocSnap.exists()) {
-          const userData = userDocSnap.data();
+          const userData = userDocSnap.data() as UserTypes;
 
           return { ...tweetData, user: userData };
         }

@@ -10,8 +10,7 @@ import {
 
 export const UserInfoBlock = () => {
   const user = useSelector((state: UserState) => state.user?.data);
-  console.log('user');
-  console.log(user);
+
   if (!user) {
     return null;
   }

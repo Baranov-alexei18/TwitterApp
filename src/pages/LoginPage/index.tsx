@@ -4,7 +4,7 @@ import { LinkApp } from '@/components/ui-components/Link';
 import { LOGIN_FORM } from '@/constants/pages/forms';
 import { PATH } from '@/constants/routerLinks';
 
-import { LoginPageForm } from './form';
+import { LoginPageForm } from './Form';
 import { ContainerWrapper, WrapperLink } from './styles';
 
 const LoginPage = () => {

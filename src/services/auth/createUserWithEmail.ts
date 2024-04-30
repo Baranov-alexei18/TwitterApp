@@ -11,7 +11,6 @@ const createAccountWithEmail = async (data: UserTypes) => {
   const { user } = await createUserWithEmailAndPassword(auth, email!, password!);
 
   await setUserToFirestore({ ...user, ...data } as UserTypes);
-  console.log('Пользователь успешно зарегистрирован и данные сохранены в Firestore');
 
   return user;
 };

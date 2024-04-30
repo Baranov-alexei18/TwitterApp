@@ -24,4 +24,5 @@ export const INPUT_FORM_NAMES = {
   NAME: 'name',
   PHONE: 'phone',
   EMAIL: 'email',
+  DESC: 'description',
 };

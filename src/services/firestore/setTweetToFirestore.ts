@@ -3,8 +3,8 @@ import {
   getDownloadURL, ref, uploadBytes,
 } from 'firebase/storage';
 
-import { firestore, storage } from '@/firebase/firebaseConfig';
 import { TweetToFirestoreType } from '@/components/ViewTweets/types';
+import { firestore, storage } from '@/firebase/firebaseConfig';
 
 export const setTweetToFirestore = async (data:TweetToFirestoreType) => {
   try {
