@@ -67,9 +67,11 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
     }
     setActiveLike(!activeLike);
   };
+
   const handletoTweet = () => {
     window.location.href = `${PATH.HOME_PAGE}/tweet/${tweet_id}`;
   };
+
   return (
     <TweetContainer onClick={() => handletoTweet()}>
       <TweetIcon src={user.photoURL || DefaultIconUser} alt="Avatar" />

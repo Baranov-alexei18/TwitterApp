@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
+import { PATH } from '@/constants/routerLinks';
 import { deleteTweet } from '@/services/firestore/deleteTweet';
 import { modalClose } from '@/store/sliceModal';
 import { setUser } from '@/store/sliceUser';
@@ -15,23 +17,27 @@ import { TweetType } from './types';
 
 export const ViewTweets = ({ data }: { data: TweetType[] }) => {
   const [activeTweetId, setActiveTweetId] = useState<TweetType | null>(null);
-  const userNow = useSelector((state: UserState) => state.user.data);
   const [isModal, setIsModal] = useState(false);
   const dispatch = useDispatch();
+  const { tweetId } = useParams();
 
   const handleModalClose = () => {
     dispatch(modalClose());
     setIsModal(false);
   };
 
-  const handleDeletePost = (dataTweet:TweetType) => {
+  const handleDeletePost = async (dataTweet:TweetType) => {
     const { user, tweet_id } = dataTweet;
-    deleteTweet(user, tweet_id);
+    await deleteTweet(user, tweet_id);
     dispatch(setUser({
       ...user,
-      tweets: user.tweets!.filter((tweetId: string) => tweetId !== tweet_id),
+      tweets: user.tweets!.filter((tweetIds: string) => tweetIds !== tweet_id),
     }));
+    if (tweetId) {
+      window.location.href = `${PATH.HOME_PAGE}`;
+    }
     dispatch(modalClose());
+    setIsModal(false);
     setActiveTweetId(null);
   };
 

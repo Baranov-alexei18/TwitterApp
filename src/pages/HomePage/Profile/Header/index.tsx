@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import DefaultIconUser from '@/assets/image/defaultUserImage.png';
@@ -21,14 +21,13 @@ import {
 
 export const HeaderProfile = () => {
   const user = useSelector((state: UserState) => state.user.data);
-  const isModals = useSelector((state: { modal: { isOpen: boolean } }) => state.modal.isOpen);
-  const dispatch = useDispatch();
+  const [isModal, setIsModal] = useState(false);
 
   const handleModalOpen = () => {
-    dispatch(modalOpen());
+    setIsModal(true);
   };
   const handleModalClose = () => {
-    dispatch(modalClose());
+    setIsModal(false);
   };
 
   return (
@@ -70,10 +69,10 @@ export const HeaderProfile = () => {
         </SubTitleHeader>
       </UserInfo>
       <ModalBase
-        isOpen={isModals}
+        isOpen={isModal}
         onCloseModal={handleModalClose}
       >
-        <FormUpdateUser />
+        <FormUpdateUser closeModal={() => handleModalClose()} />
       </ModalBase>
     </Container>
   );

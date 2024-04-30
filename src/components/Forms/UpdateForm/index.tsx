@@ -18,7 +18,6 @@ import { firestore } from '@/firebase/firebaseConfig';
 import { useToast } from '@/hooks/useToast';
 import { changePassword } from '@/services/firestore/changePassword';
 import { updateUser } from '@/services/firestore/updateUser';
-import { modalClose } from '@/store/sliceModal';
 import { setUser } from '@/store/sliceUser';
 import { UserState, UserUpdateType } from '@/types/user';
 
@@ -34,7 +33,7 @@ import {
   UserInfoUpdate,
 } from './styles';
 
-export const FormUpdateUser = () => {
+export const FormUpdateUser = ({ closeModal }: {closeModal:()=>void}) => {
   const {
     uid, name, description, photoURL, email,
   } = useSelector((state: UserState) => state.user.data);
@@ -84,7 +83,7 @@ export const FormUpdateUser = () => {
 
       showToast('Update success', 'success');
 
-      dispatch(modalClose());
+      closeModal();
     } catch (error) {
       showToast('Incorrect old password', 'error');
       throw new Error(error as string);
