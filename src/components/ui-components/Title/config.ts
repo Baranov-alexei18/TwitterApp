@@ -1,4 +1,6 @@
-export const ConfigTitle = {
+import { TitleType } from './types';
+
+export const ConfigTitle:TitleType = {
   xs: {
     weight: '700',
     size: '18px',

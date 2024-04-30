@@ -1,13 +1,18 @@
 import { ReactNode } from 'react';
 
-export type TitleType = {
-    row: string;
-    children: ReactNode
+type TextStyle = {
+    weight: string;
+    size: string;
 };
 
-export type TitleStyle = {
-    [s: string]:{
-        weight: string;
-        size: string;
-    }
-}
+export type TitleType = {
+    xs: TextStyle;
+    sm: TextStyle;
+    md: TextStyle;
+    lg: TextStyle;
+};
+
+export type TitleProps = {
+    row: string;
+    children: ReactNode;
+};

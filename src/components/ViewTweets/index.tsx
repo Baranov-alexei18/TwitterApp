@@ -15,11 +15,12 @@ import { TweetType } from './types';
 export const ViewTweets = ({ data }: { data: TweetType[] }) => {
   const [activeTweetId, setActiveTweetId] = useState<TweetType | null>(null);
   const userNow = useSelector((state: UserState) => state.user.data);
-  const isModal = useSelector((state: { modal: { isOpen: boolean } }) => state.modal.isOpen);
+  const [isModal, setIsModal] = useState(false);
   const dispatch = useDispatch();
 
   const handleModalClose = () => {
     dispatch(modalClose());
+    setIsModal(false);
   };
 
   const handleDeletePost = (dataTweet:TweetType) => {
@@ -34,6 +35,7 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
   };
 
   const handleTweet = (dataTweet:TweetType) => {
+    setIsModal(true);
     setActiveTweetId(dataTweet);
   };
 

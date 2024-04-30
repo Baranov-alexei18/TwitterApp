@@ -29,7 +29,6 @@ export const TextArea: FC<TextAreaTypes> = ({ loader, onSubmit, ...rest }) => {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const selectedPhoto = event.target.files?.[0];
-    console.log(selectedPhoto);
     setPhoto(selectedPhoto!);
   };
 

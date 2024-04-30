@@ -1,19 +1,35 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import DefaultIconUser from '@/assets/image/defaultUserImage.png';
 import HeaderBackground from '@/assets/image/headerBackground.png';
-import { Title } from '@/components/ui-components/Title';
+import { Button } from '@/components/ui-components/Button';
+import { ButtonStyled4 } from '@/components/ui-components/Button/config';
+import { ModalBase } from '@/components/ui-components/Modal/ModalBase';
+import { modalClose, modalOpen } from '@/store/sliceModal';
+import { COLOR } from '@/theme/variables';
 import { UserState } from '@/types/user';
+
+import { FormUpdateUser } from '../Form';
 
 import {
   Container, Description, Icon, Image,
   SubTitleHeader, TitleHeader,
   UserInfo,
+  UserUpdate,
 } from './styles';
 
 export const HeaderProfile = () => {
   const user = useSelector((state: UserState) => state.user.data);
+  const isModals = useSelector((state: { modal: { isOpen: boolean } }) => state.modal.isOpen);
+  const dispatch = useDispatch();
+
+  const handleModalOpen = () => {
+    dispatch(modalOpen());
+  };
+  const handleModalClose = () => {
+    dispatch(modalClose());
+  };
 
   return (
     <Container>
@@ -27,8 +43,18 @@ export const HeaderProfile = () => {
       <Image src={HeaderBackground} alt="User Avatar" />
       <UserInfo>
         <Icon src={user.photoURL ?? DefaultIconUser} alt="Icon" />
+        <UserUpdate>
+          <Button
+            {...ButtonStyled4}
+            background="inherit"
+            color="inherit"
+            borderColor={COLOR.lightGrey}
+            onClick={handleModalOpen}
+          >
+            Edit profile
+          </Button>
+        </UserUpdate>
       </UserInfo>
-
       <UserInfo>
         <TitleHeader>{user.name}</TitleHeader>
         <SubTitleHeader>
@@ -36,13 +62,19 @@ export const HeaderProfile = () => {
         </SubTitleHeader>
         <Description>{user.description}</Description>
         <SubTitleHeader>
-          <b>67</b>
+          <b>0</b>
           {' Following '}
-          <b>47</b>
+          <b>0</b>
           {' '}
           Followers
         </SubTitleHeader>
       </UserInfo>
+      <ModalBase
+        isOpen={isModals}
+        onCloseModal={handleModalClose}
+      >
+        <FormUpdateUser />
+      </ModalBase>
     </Container>
   );
 };

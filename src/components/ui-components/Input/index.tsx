@@ -16,6 +16,7 @@ export const Input: FC<Partial<InputType>> = ({
   placeholder,
   disabled,
   type,
+  defaultValue,
   mask,
 }) => {
   const {
@@ -26,8 +27,8 @@ export const Input: FC<Partial<InputType>> = ({
   } = useController({
     control,
     rules,
+    defaultValue,
     name: name || '',
-    defaultValue: '',
   });
 
   const [showPassword, setShowPassword] = useState(false);
