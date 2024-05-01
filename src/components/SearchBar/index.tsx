@@ -11,15 +11,17 @@ import { SearchBarWrapper } from './styles';
 
 export const SearchBar = () => {
   const [dataRes, setDataRes] = useState<{ users: UserTypes[], tweets: TweetType[] } | null>(null);
-
-  const getSearchData = (data: {users:UserTypes[], tweets: TweetType[]}) => {
+  const [showResult, setShowResult] = useState(false);
+  const getSearchData = (data: {users:UserTypes[], tweets: TweetType[], show: boolean}) => {
     setDataRes(data);
+    console.log(data);
+    setShowResult(data.show);
   };
 
   return (
     <SearchBarWrapper>
       <ElasticSearch onChange={getSearchData} />
-      {dataRes && <SearchResults tweets={dataRes.tweets} users={dataRes.users} />}
+      {dataRes && showResult && <SearchResults tweets={dataRes.tweets} users={dataRes.users} />}
     </SearchBarWrapper>
   );
 };

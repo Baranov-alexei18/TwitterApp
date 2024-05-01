@@ -3,6 +3,7 @@ import React from 'react';
 import { Container } from '@/theme/global';
 import { UserTypes } from '@/types/user';
 
+import { Title } from '../ui-components/Title';
 import { TweetType } from '../ViewTweets/types';
 
 import SearchItem from './SearchItem';
@@ -22,6 +23,7 @@ export const SearchResults = ({ users, tweets }: { users: UserTypes[], tweets: T
   }
   return (
     <ResultsContainer>
+      <Title row="xs">You might like </Title>
       <ResultGroup>
         {!!tweets.length && (
         <>
