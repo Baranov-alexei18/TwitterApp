@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import DefaultUserIcon from '@/assets/image/defaultUserImage.png';
 import { setTweetToFirestore } from '@/services/firestore/setTweetToFirestore';
+import { modalClose } from '@/store/sliceModal';
 import { setUser } from '@/store/sliceUser';
 import { UserState } from '@/types/user';
 
@@ -21,6 +22,7 @@ export const TweetForm = () => {
       const tweet = await setTweetToFirestore({ ...dateTweet, tweets: user.tweets, id: user.uid });
       setLoading(false);
       dispatch(setUser({ ...user, tweets: [...user.tweets!, tweet] }));
+      dispatch(modalClose());
     } catch (error) {
       console.error(error);
     }
