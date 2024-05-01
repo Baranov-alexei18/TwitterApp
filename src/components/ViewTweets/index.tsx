@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { PATH } from '@/constants/routerLinks';
 import { deleteTweet } from '@/services/firestore/deleteTweet';
@@ -19,6 +19,7 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
   const [activeTweetId, setActiveTweetId] = useState<TweetType | null>(null);
   const [isModal, setIsModal] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { tweetId } = useParams();
 
   const handleModalClose = () => {
@@ -34,7 +35,7 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
       tweets: user.tweets!.filter((tweetIds: string) => tweetIds !== tweet_id),
     }));
     if (tweetId) {
-      window.location.href = `${PATH.HOME_PAGE}`;
+      navigate(PATH.HOME_PAGE);
     }
     dispatch(modalClose());
     setIsModal(false);

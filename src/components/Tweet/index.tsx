@@ -1,6 +1,6 @@
 import React, { memo, MouseEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import DefaultIconUser from '@/assets/image/defaultUserImage.png';
 import ActivelikeIcon from '@/assets/image/icons/active-like.svg';
@@ -41,7 +41,7 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [countLikes, setCountLikes] = useState(likes.length);
   const [activeLike, setActiveLike] = useState(() => !!likes.find((item) => item === userNow.uid));
-  const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleTooltipOpen = (e: MouseEvent<HTMLImageElement>) => {
@@ -68,12 +68,12 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
     setActiveLike(!activeLike);
   };
 
-  const handletoTweet = () => {
-    window.location.href = `${PATH.HOME_PAGE}/tweet/${tweet_id}`;
+  const handleToTweet = () => {
+    navigate(`${PATH.HOME_PAGE}/tweet/${tweet_id}`);
   };
 
   return (
-    <TweetContainer onClick={() => handletoTweet()}>
+    <TweetContainer onClick={() => handleToTweet()}>
       <TweetIcon src={user.photoURL || DefaultIconUser} alt="Avatar" />
       <TweetUserInfo>
         <HeaderTweets>

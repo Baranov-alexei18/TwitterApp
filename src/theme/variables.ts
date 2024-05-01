@@ -3,6 +3,7 @@ export const COLOR = {
   light: '#FFFFFF',
   primary: '#1DA1F2',
   lightGrey: '#C4C4C4',
+  lightGrey1: '#EFF3F4',
   darkGrey: '#909090',
   error: '#FF0000',
   success: '#8AE564',
