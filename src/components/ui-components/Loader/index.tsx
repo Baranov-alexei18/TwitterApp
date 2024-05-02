@@ -1,5 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
+import { BORDER_RADIUS, COLOR, SPACING } from '@/theme/variables';
+
 const spin = keyframes`
   0% {
     transform: rotate(0deg);
@@ -10,11 +12,11 @@ const spin = keyframes`
 `;
 
 export const Loader = styled.div`
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #09f;
-  border-radius: 50%;
-  width: 24px;
   height: 24px;
-  margin: 0 auto;
+  width: 24px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: ${COLOR.primary};
+  border-radius: ${BORDER_RADIUS.circle};
+  margin: ${SPACING.zero} auto;
   animation: ${spin} 1s linear infinite;
 `;

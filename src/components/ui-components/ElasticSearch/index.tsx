@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import Search from '@/assets/image/icons/search.svg';
 import { TweetType } from '@/components/ViewTweets/types';
+import { TIMEOUT_DEBOUNCE } from '@/constants';
+import useDebounce from '@/hooks/useDebounce';
 import { searchItemFirestore } from '@/services/firestore/searchItemFirestore';
 import { RootState } from '@/store/store';
 import { UserTypes } from '@/types/user';
@@ -17,18 +19,29 @@ export const ElasticSearch = ({ onChange }:
   const [searchQuery, setSearchQuery] = useState('');
   const [showResults, setShowResults] = useState(false);
 
-  const handleChange = async (event: { target: { value: string; }; }) => {
-    const { value } = event.target;
-    setSearchQuery(value);
-    if (value.length === 0) {
-      onChange({ users: [], tweets: [], show: false });
+  const debouncedSearchTerm = useDebounce(searchQuery, TIMEOUT_DEBOUNCE);
+
+  useEffect(() => {
+    async function fetchData() {
+      setShowResults(true);
+
+      if (debouncedSearchTerm) {
+        const results = await searchItemFirestore(debouncedSearchTerm as string);
+        onChange({ ...results, show: true } as {users:UserTypes[], tweets:TweetType[], show:true});
+      }
+      setShowResults(false);
     }
 
-    if (value.length >= 3) {
-      setShowResults(true);
-      const results = await searchItemFirestore(value);
-      onChange({ ...results, show: true } as {users:UserTypes[], tweets: TweetType[], show: true});
-      setShowResults(false);
+    fetchData();
+  }, [debouncedSearchTerm]);
+
+  const handleChange = async (event: { target: { value: string; }; }) => {
+    const { value } = event.target;
+
+    setSearchQuery(value);
+
+    if (!value.length) {
+      onChange({ users: [], tweets: [], show: false });
     }
   };
 

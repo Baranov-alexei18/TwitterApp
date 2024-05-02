@@ -18,6 +18,15 @@ export const FONT_SIZE = {
   xl: '20px',
 };
 
+export const WEIGHT = {
+  xs: '400',
+  sm: '500',
+  md: '600',
+  lg: '700',
+  xl: '800',
+  xxl: '900',
+};
+
 export const SPACING = {
   zero: '0',
   xxxs: '4px',

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { THEME } from '@/constants/theme';
-import { COLOR, SPACING } from '@/theme/variables';
+import { COLOR, SPACING, WEIGHT } from '@/theme/variables';
 
 export const SidebarContainer = styled.div<{theme: string}>`
   display: flex;
@@ -28,13 +28,13 @@ export const IconRoute = styled.img<{theme: string}>`
   filter: ${(props) => (props.theme === THEME.LIGHT ? 'none' : 'invert(100%)')};
 `;
 
-export const NavLink = styled(Link)<{isActive: boolean}>`
+export const NavLink = styled(Link)<{['is-active']: string | undefined}>`
   display: flex;
   align-items: center;
   color: inherit;
   text-decoration: none;
   margin-bottom: ${SPACING.md};
-  font-weight: ${(props) => (props.isActive ? '600' : '')};
+  font-weight: ${(props) => (!props['is-active'] ? '' : WEIGHT.md)};
 
   &:hover {
     color: ${COLOR.primary};

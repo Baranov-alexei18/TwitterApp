@@ -1,23 +1,25 @@
 import styled from 'styled-components';
 
-import { BORDER_RADIUS, COLOR } from '@/theme/variables';
+import {
+  BORDER_RADIUS, COLOR, FONT_SIZE, SPACING,
+} from '@/theme/variables';
 
 export const TextAreaWrapper = styled.div`
   position: relative;
   width: 100%;
-  padding: 16px;
+  padding: ${SPACING.sm};
 `;
 
-export const TextAreaStyle = styled.textarea<{overLimit: boolean}>`
+export const TextAreaStyle = styled.textarea<{overlimit: boolean | undefined}>`
   position: relative;
   width: 100%;
   height: 70px;
   resize: none;
-  padding: 4px;
-  background-color: inherit;
   color: inherit;
+  background-color: inherit;
   border-radius: ${BORDER_RADIUS.xxs};
-  border: ${(props) => (props.overLimit ? `1px solid ${COLOR.error}` : 'none')};
+  border: ${(props) => (!props.overlimit ? 'none' : `1px solid ${COLOR.error}`)};
+  padding: ${SPACING.xxxs};
 `;
 
 export const ButtonsWrapper = styled.div`
@@ -33,24 +35,15 @@ export const UploadButton = styled.input`
 `;
 
 export const ImageUploadButton = styled.label`
-  color: #fff;
-  border: none;
+  color: ${COLOR.darkGrey};
   cursor: pointer;
-  margin-left: 8px;
+  border: none;
+  margin-left: ${SPACING.xxs};
 `;
 
-export const SubmitButton = styled.button`
-  padding: 10px 20px;
-  background-color: ${COLOR.primary};
-  color: #fff;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-`;
-
-export const MaxLengthText = styled.div<{overLimit: boolean}>`
-  margin-bottom: 4px;
-  font-size: 12px;
+export const MaxLengthText = styled.div<{overlimit: boolean | undefined}>`
+  font-size: ${FONT_SIZE.xs};
   text-align: end;
-  color: ${(props) => (props.overLimit ? 'red' : 'inherit')};
+  color: ${(props) => (props.overlimit ? COLOR.error : 'inherit')};
+  margin-bottom: ${SPACING.xxxs};
 `;

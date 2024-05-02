@@ -1,16 +1,15 @@
-import React, { ChangeEventHandler, FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 
 import PictureIcon from '@/assets/image/icons/picture.svg';
 import { MAX_CHARACTERS_TEXTAREA } from '@/constants';
 
 import { Button } from '../Button';
 import { ButtonStyled4 } from '../Button/config';
-import { Loader } from '../Loader';
 
 import {
   ButtonsWrapper,
   ImageUploadButton,
-  MaxLengthText, SubmitButton, TextAreaStyle, TextAreaWrapper, UploadButton,
+  MaxLengthText, TextAreaStyle, TextAreaWrapper, UploadButton,
 } from './styles';
 import { TextAreaTypes } from './types';
 
@@ -51,10 +50,10 @@ export const TextArea: FC<TextAreaTypes> = ({ loader, onSubmit, ...rest }) => {
         value={text}
         onChange={handleTextChange}
         maxLength={MAX_CHARACTERS_TEXTAREA}
-        overLimit={isOverLimit}
+        overlimit={isOverLimit || undefined}
         {...rest}
       />
-      <MaxLengthText overLimit={isOverLimit}>
+      <MaxLengthText overlimit={isOverLimit || undefined}>
         {` ${text.length}/${MAX_CHARACTERS_TEXTAREA}`}
       </MaxLengthText>
       <ButtonsWrapper>
