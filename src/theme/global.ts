@@ -17,8 +17,8 @@ export const Container = styled.div<{theme: string}>`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.light : COLOR.dark)};
-  color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.dark : COLOR.light)};
+  background-color: inherit;
+  color: inherit;
 `;
 
 export const ThemeContainer = styled.div<{theme: string}>`

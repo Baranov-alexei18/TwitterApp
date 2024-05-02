@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { FirestoreError } from 'firebase/firestore';
 
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
-import { getDays, getMonths, getYears } from '@/helpers/getDate';
 import { Button } from '@/components/ui-components/Button';
 import { ButtonStyled2 } from '@/components/ui-components/Button/config';
 import { ContentText } from '@/components/ui-components/ContentText';
@@ -22,6 +21,7 @@ import { Title } from '@/components/ui-components/Title';
 import { Toast } from '@/components/ui-components/Toast';
 import { SIGN_UP_FORM } from '@/constants/pages/forms';
 import { PATH } from '@/constants/routerLinks';
+import { getDays, getMonths, getYears } from '@/helpers/getDate';
 import { useToast } from '@/hooks/useToast';
 import { createAccountWithEmail } from '@/services/auth/createUserWithEmail';
 import { Container } from '@/theme/global';
