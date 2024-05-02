@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { THEME } from '@/constants/theme';
 import { ThemeState, ThemesType } from '@/types/theme';
 
 const initialState: ThemeState = {
-  theme: 'dark',
+  theme: THEME.LIGHT,
 };
 
 const setThemeSlice = createSlice({

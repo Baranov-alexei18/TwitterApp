@@ -51,6 +51,9 @@ export const TweetDate = styled.span`
 export const TweetText = styled.div`
   margin-top: 5px;
   margin-bottom: 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 530px;
 `;
 
 export const TweetImage = styled.img`

@@ -1,8 +1,10 @@
 import React, { FC, useState } from 'react';
 import { useController } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 import CloseEye from '@/assets/image/icons/close-eye.svg';
 import OpenEye from '@/assets/image/icons/open-eye.svg';
+import { RootState } from '@/store/store';
 
 import {
   StyledInput, WrapperErrorMessage, WrapperIcon, WrapperInput,
@@ -30,7 +32,7 @@ export const Input: FC<Partial<InputType>> = ({
     defaultValue,
     name: name || '',
   });
-
+  const themes = useSelector((state: RootState) => state.theme.theme);
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -50,6 +52,7 @@ export const Input: FC<Partial<InputType>> = ({
       <StyledInput
         {...inputProps}
         error={invalid}
+        theme={themes}
         placeholder={placeholder}
         type={showPassword && type === 'password' ? 'text' : type}
         ref={ref}

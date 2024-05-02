@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FirestoreError } from 'firebase/firestore';
 
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
-import { getDays, getMonths, getYears } from '@/components/helpers/getDate';
+import { getDays, getMonths, getYears } from '@/helpers/getDate';
 import { Button } from '@/components/ui-components/Button';
 import { ButtonStyled2 } from '@/components/ui-components/Button/config';
 import { ContentText } from '@/components/ui-components/ContentText';

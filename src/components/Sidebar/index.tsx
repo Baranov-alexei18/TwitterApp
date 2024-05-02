@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 
@@ -8,11 +8,13 @@ import { LOCALSTORAGE_TOKEN } from '@/constants';
 import { SidebarLinks } from '@/constants/pages/mainPage';
 import { PATH } from '@/constants/routerLinks';
 import { auth } from '@/firebase/firebaseConfig';
-import { clearUser } from '@/store/sliceUser';
-import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
+import { RootState } from '@/store/store';
+import { COLOR } from '@/theme/variables';
 
+import { TweetForm } from '../TweetForm';
 import { Button } from '../ui-components/Button';
 import { ButtonStyled3 } from '../ui-components/Button/config';
+import { ModalBase } from '../ui-components/Modal/ModalBase';
 import UserInfoBlock from '../UserInfoBlock';
 
 import {
@@ -20,34 +22,44 @@ import {
 } from './styles';
 
 export const Sidebar = () => {
+  const themes = useSelector((state: RootState) => state.theme.theme);
+  const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
 
   const exitFromAccount = async () => {
     try {
       await signOut(auth);
       localStorage.removeItem(LOCALSTORAGE_TOKEN);
-      dispatch(clearUser());
+      setIsModal(false);
       navigate(PATH.LOG_IN_PAGE);
     } catch (error) {
       console.error('Ошибка при выходе из учетной записи:', error);
     }
   };
 
+  const openModal = () => {
+    setIsModal(true);
+  };
+
+  const closeModal = () => {
+    setIsModal(false);
+  };
+
   return (
-    <SidebarContainer>
+    <SidebarContainer theme={themes}>
       <Icon src={TwitterLogo} alt="twitter-logo" title="twitter" />
       {SidebarLinks.map(({
         icon, title, alt, link,
       }) => (
         <NavLink to={link} key={title} isActive={link === location.pathname}>
-          <IconRoute src={icon} alt={`${alt}-icon`} title={alt} />
+          <IconRoute theme={themes} src={icon} alt={`${alt}-icon`} title={alt} />
           {title}
         </NavLink>
       ))}
       <Button
         {...ButtonStyled3}
+        onClick={openModal}
       >
         Tweet
       </Button>
@@ -59,6 +71,9 @@ export const Sidebar = () => {
       >
         Log out
       </Button>
+      <ModalBase isOpen={isModal} onCloseModal={closeModal}>
+        <TweetForm />
+      </ModalBase>
     </SidebarContainer>
   );
 };

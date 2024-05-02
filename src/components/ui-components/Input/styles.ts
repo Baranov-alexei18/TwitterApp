@@ -1,16 +1,24 @@
 import styled from 'styled-components';
 
-import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
+import { THEME } from '@/constants/theme';
+import {
+  BORDER_RADIUS,
+  COLOR,
+  FONT_SIZE,
+  SPACING,
+} from '@/theme/variables';
 
-export const StyledInput = styled.input<{error:boolean}>`
+export const StyledInput = styled.input<{error:boolean, theme: string}>`
   box-sizing: border-box;
   width: 100%;
   height: 70px;
+  background-color: inherit;
+  color: inherit;
   font-size: ${FONT_SIZE.md};
-  border: 1px solid ${({ error }) => (error ? COLOR.error : COLOR.lightGrey)};
+  border: 1px solid ${({ error, theme }) => (error ? COLOR.error : theme === THEME.LIGHT ? COLOR.lightGrey : COLOR.light)};
   border-radius: ${BORDER_RADIUS.xxs};
-  padding: 10px;
-  margin-bottom: 25px;
+  padding: ${SPACING.xxs};
+  margin-bottom: ${SPACING.lg};
 `;
 
 export const WrapperInput = styled.div`
@@ -33,6 +41,5 @@ export const WrapperIcon = styled.div`
 export const WrapperErrorMessage = styled.p`
   color: ${COLOR.error};
   font-size: ${FONT_SIZE.xs};
-  margin: -20px 0 16px 0;
-
+  margin: -${SPACING.md} ${SPACING.zero} ${SPACING.sm} ${SPACING.zero};
 `;

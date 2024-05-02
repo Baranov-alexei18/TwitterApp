@@ -1,13 +1,16 @@
 import React, { memo, MutableRefObject, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import { useSelector } from 'react-redux';
 
 import { ModalProps } from '@/components/ui-components/Modal/types';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
+import { RootState } from '@/store/store';
 
 import { CloseButton, ModalContainer, ModalOverlay } from './styles';
 
 export const ModalBase: React.FC<ModalProps> = memo(
   ({ isOpen, onCloseModal, children }: ModalProps) => {
+    const themes = useSelector((state: RootState) => state.theme.theme);
     const modalRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
     useOutsideClick(modalRef, onCloseModal, isOpen);
@@ -16,7 +19,11 @@ export const ModalBase: React.FC<ModalProps> = memo(
 
     return createPortal(
       <ModalOverlay onClick={onCloseModal}>
-        <ModalContainer ref={modalRef} onClick={(e) => e.stopPropagation()}>
+        <ModalContainer
+          ref={modalRef}
+          theme={themes}
+          onClick={(e) => e.stopPropagation()}
+        >
           <CloseButton onClick={onCloseModal}>X</CloseButton>
           {children}
         </ModalContainer>
