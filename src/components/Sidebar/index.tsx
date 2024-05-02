@@ -53,7 +53,7 @@ export const Sidebar = () => {
         icon, title, alt, link,
       }) => (
         <NavLink to={link} key={title} isActive={link === location.pathname}>
-          <IconRoute src={icon} alt={`${alt}-icon`} title={alt} />
+          <IconRoute theme={themes} src={icon} alt={`${alt}-icon`} title={alt} />
           {title}
         </NavLink>
       ))}

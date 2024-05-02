@@ -21,10 +21,11 @@ export const Icon = styled.img`
   margin-bottom: ${SPACING.xl};
 `;
 
-export const IconRoute = styled.img`
+export const IconRoute = styled.img<{theme: string}>`
   width: 24px;
   height: 24px;
   margin-right: ${SPACING.xs};
+  filter: ${(props) => (props.theme === THEME.LIGHT ? 'none' : 'invert(100%)')};
 `;
 
 export const NavLink = styled(Link)<{isActive: boolean}>`
@@ -33,6 +34,7 @@ export const NavLink = styled(Link)<{isActive: boolean}>`
   color: inherit;
   text-decoration: none;
   margin-bottom: ${SPACING.md};
+  font-weight: ${(props) => (props.isActive ? '600' : '')};
 
   &:hover {
     color: ${COLOR.primary};

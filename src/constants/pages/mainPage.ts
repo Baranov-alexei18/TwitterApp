@@ -5,7 +5,7 @@ import Lists from '@/assets/image/icons/lists.svg';
 import Messages from '@/assets/image/icons/messages.svg';
 import More from '@/assets/image/icons/more.svg';
 import Notification from '@/assets/image/icons/notification.svg';
-import Profile from '@/assets/image/icons/profile-fill.svg';
+import Profile from '@/assets/image/icons/profile-outline.svg';
 
 export const SidebarLinks = [
   {

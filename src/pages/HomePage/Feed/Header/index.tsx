@@ -6,11 +6,12 @@ import ArrowLeft from '@/assets/image/icons/left.svg';
 import { SwitchTheme } from '@/components/ui-components/Switcher';
 import { Title } from '@/components/ui-components/Title';
 import { PATH } from '@/constants/routerLinks';
-import { UserState } from '@/types/user';
+import { RootState } from '@/store/store';
 
 import { Container, IconBack } from './styles';
 
 export const HeaderProfile = () => {
+  const themes = useSelector((state: RootState) => state.theme.theme);
   const { tweetId } = useParams();
 
   return (
@@ -18,7 +19,7 @@ export const HeaderProfile = () => {
       <Title row="xs">
         {tweetId && (
           <Link to={PATH.HOME_PAGE}>
-            <IconBack src={ArrowLeft} alt="back arrow" />
+            <IconBack theme={themes} src={ArrowLeft} alt="back arrow" />
           </Link>
         )}
         Home

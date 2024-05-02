@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
-import { COLOR } from '@/theme/variables';
+import { THEME } from '@/constants/theme';
+import { COLOR, SPACING } from '@/theme/variables';
 
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid ${COLOR.lightGrey};
-  padding: 0 12px;
+  padding: ${SPACING.zero} ${SPACING.xs};
 `;
-export const IconBack = styled.img`
+export const IconBack = styled.img<{theme: string}>`
   width: 20px;
-  margin: 12px 12px 0 0;
+  margin: ${SPACING.xs} ${SPACING.xs} ${SPACING.zero} ${SPACING.zero};
+  filter: ${(props) => (props.theme === THEME.LIGHT ? 'none' : 'invert(100%)')};
 `;
