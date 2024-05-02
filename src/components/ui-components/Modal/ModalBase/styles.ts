@@ -1,18 +1,25 @@
 import styled from 'styled-components';
 
-import { BORDER_RADIUS } from '@/theme/variables';
+import { THEME } from '@/constants/theme';
+import {
+  BORDER_RADIUS,
+  COLOR,
+  FONT_SIZE,
+  SPACING,
+  Z_INDEX,
+} from '@/theme/variables';
 
 export const ModalOverlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
+  top: ${SPACING.zero};
+  left: ${SPACING.zero};
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 1000;
+  z-index: ${Z_INDEX.xl};
 `;
 
-export const ModalContainer = styled.div`
+export const ModalContainer = styled.div<{ theme: string; }>`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -21,16 +28,17 @@ export const ModalContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 12px;
-  border-radius: ${BORDER_RADIUS.xxs}
+  padding: ${SPACING.xs};
+  border-radius: ${BORDER_RADIUS.md};
+  background-color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.light : COLOR.lightGrey)};
+  color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.dark : COLOR.light)};
 `;
 
 export const CloseButton = styled.button`
-  background-color: transparent;
-  margin-left: auto;
-  margin-bottom: 4px;
-  border: none;
-  font-size: 20px;
   cursor: pointer;
+  margin-left: auto;
+  margin-bottom: ${SPACING.xxxs};
+  border: none;
+  font-size: ${FONT_SIZE.xl};
+  background-color: transparent;
 `;

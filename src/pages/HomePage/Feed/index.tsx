@@ -9,6 +9,7 @@ import { ViewTweets } from '@/components/ViewTweets';
 import { TweetType } from '@/components/ViewTweets/types';
 import { getAllTweets } from '@/services/firestore/getAllTweets';
 import { getUserTweets } from '@/services/firestore/getUserTweets';
+import { RootState } from '@/store/store';
 import { UserState } from '@/types/user';
 
 import { HeaderProfile } from './Header';
@@ -94,12 +95,12 @@ export const Feed = () => {
   }
 
   return (
-    <div>
+    <>
       <HeaderProfile />
       {!tweetId && <TweetForm />}
       <ViewTweets data={tweetsAll} />
       <div ref={sentinelRef} />
       {loading && <Loader />}
-    </div>
+    </>
   );
 };

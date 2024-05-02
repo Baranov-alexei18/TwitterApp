@@ -4,7 +4,6 @@ import { UserTypes } from '@/types/user';
 
 import { SearchResults } from '../SearchResult';
 import { ElasticSearch } from '../ui-components/ElasticSearch';
-import { Loader } from '../ui-components/Loader';
 import { TweetType } from '../ViewTweets/types';
 
 import { SearchBarWrapper } from './styles';

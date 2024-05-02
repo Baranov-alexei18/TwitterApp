@@ -14,6 +14,8 @@ export const TextAreaStyle = styled.textarea<{overLimit: boolean}>`
   height: 70px;
   resize: none;
   padding: 4px;
+  background-color: inherit;
+  color: inherit;
   border-radius: ${BORDER_RADIUS.xxs};
   border: ${(props) => (props.overLimit ? `1px solid ${COLOR.error}` : 'none')};
 `;

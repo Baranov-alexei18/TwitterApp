@@ -1,36 +1,38 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { COLOR } from '@/theme/variables';
+import { THEME } from '@/constants/theme';
+import { COLOR, SPACING } from '@/theme/variables';
 
-export const SidebarContainer = styled.div`
+export const SidebarContainer = styled.div<{theme: string}>`
   display: flex;
   flex-direction: column;
   flex: 1;
-  color: #fff;
   height: 100vh;
-  padding: 20px;
-  border-right: 1px solid ${COLOR.lightGrey};
+  padding: ${SPACING.md};
+  border-right: 1px solid ${(props) => (props.theme === THEME.LIGHT ? COLOR.lightGrey : COLOR.darkGrey)};
+  background-color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.light : COLOR.dark)};
+  color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.dark : COLOR.light)};
 `;
 
 export const Icon = styled.img`
   width: 40px;
   height: 34px;
-  margin-bottom: 30px;
+  margin-bottom: ${SPACING.xl};
 `;
 
 export const IconRoute = styled.img`
   width: 24px;
   height: 24px;
-  margin-right: 10px;
+  margin-right: ${SPACING.xs};
 `;
 
 export const NavLink = styled(Link)<{isActive: boolean}>`
   display: flex;
   align-items: center;
+  color: inherit;
   text-decoration: none;
-  margin-bottom: 20px;
-  color:${({ isActive }) => (isActive ? COLOR.primary : COLOR.dark)};
+  margin-bottom: ${SPACING.md};
 
   &:hover {
     color: ${COLOR.primary};

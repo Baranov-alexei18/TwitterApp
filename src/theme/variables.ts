@@ -18,9 +18,25 @@ export const FONT_SIZE = {
   xl: '20px',
 };
 
+export const SPACING = {
+  zero: '0',
+  xxxs: '4px',
+  xxs: '8px',
+  xs: '12px',
+  sm: '16px',
+  md: '20px',
+  lg: '24px',
+  xl: '28px',
+  xxl: '32px',
+  xxxl: '36px',
+  xxxxl: '40px',
+};
+
 export const BORDER_RADIUS = {
   xxs: '6px',
+  md: '16px',
   xl: '42px',
+  circle: '50%',
 };
 
 export const BREAKPOINTS = {

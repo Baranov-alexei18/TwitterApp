@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 
+import { RootState } from '@/store/store';
 import { Container } from '@/theme/global';
 import { UserTypes } from '@/types/user';
 
@@ -12,17 +14,17 @@ import {
 } from './styles';
 
 export const SearchResults = ({ users, tweets }: { users: UserTypes[], tweets: TweetType[] }) => {
+  const themes = useSelector((state: RootState) => state.theme.theme);
+
   if (tweets.length === 0 && users.length === 0) {
     return (
-      <ResultsContainer>
-        <Container>
-          No search
-        </Container>
+      <ResultsContainer theme={themes}>
+        No result
       </ResultsContainer>
     );
   }
   return (
-    <ResultsContainer>
+    <ResultsContainer theme={themes}>
       <Title row="xs">You might like </Title>
       <ResultGroup>
         {!!tweets.length && (

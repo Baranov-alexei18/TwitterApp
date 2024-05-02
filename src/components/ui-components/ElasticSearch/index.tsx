@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import Search from '@/assets/image/icons/search.svg';
 import { TweetType } from '@/components/ViewTweets/types';
 import { searchItemFirestore } from '@/services/firestore/searchItemFirestore';
+import { RootState } from '@/store/store';
 import { UserTypes } from '@/types/user';
 
 import { Loader } from '../Loader';
@@ -11,6 +13,7 @@ import { Container, Input } from './styles';
 
 export const ElasticSearch = ({ onChange }:
   { onChange: (data: { users: UserTypes[], tweets: TweetType[], show: boolean, }) => void }) => {
+  const themes = useSelector((state: RootState) => state.theme.theme);
   const [searchQuery, setSearchQuery] = useState('');
   const [showResults, setShowResults] = useState(false);
 
@@ -30,7 +33,7 @@ export const ElasticSearch = ({ onChange }:
   };
 
   return (
-    <Container>
+    <Container theme={themes}>
       <img src={Search} width="20px" alt="search-icon" title="search" />
       <Input
         type="text"

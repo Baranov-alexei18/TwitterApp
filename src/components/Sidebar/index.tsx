@@ -8,6 +8,7 @@ import { LOCALSTORAGE_TOKEN } from '@/constants';
 import { SidebarLinks } from '@/constants/pages/mainPage';
 import { PATH } from '@/constants/routerLinks';
 import { auth } from '@/firebase/firebaseConfig';
+import { RootState } from '@/store/store';
 import { COLOR } from '@/theme/variables';
 
 import { TweetForm } from '../TweetForm';
@@ -21,10 +22,10 @@ import {
 } from './styles';
 
 export const Sidebar = () => {
+  const themes = useSelector((state: RootState) => state.theme.theme);
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
 
   const exitFromAccount = async () => {
     try {
@@ -46,7 +47,7 @@ export const Sidebar = () => {
   };
 
   return (
-    <SidebarContainer>
+    <SidebarContainer theme={themes}>
       <Icon src={TwitterLogo} alt="twitter-logo" title="twitter" />
       {SidebarLinks.map(({
         icon, title, alt, link,
