@@ -8,6 +8,7 @@ import { ErrorBoundary } from '../ErrorBoundary';
 
 export const App = () => {
   const isModal = useSelector((state: { modal: { isOpen: boolean } }) => state.modal.isOpen);
+
   useAuthToken();
 
   return (

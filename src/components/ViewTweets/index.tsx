@@ -17,6 +17,7 @@ import { TweetType } from './types';
 
 export const ViewTweets = ({ data }: { data: TweetType[] }) => {
   const [activeTweetId, setActiveTweetId] = useState<TweetType | null>(null);
+  const userTweets = useSelector((state: UserState) => state.user.data);
   const [isModal, setIsModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
     setActiveTweetId(dataTweet);
   };
 
-  if (!data.length) {
+  if (!data.length && !userTweets.tweets!.length) {
     return (
       <Container>
         <Title row="xs">No tweets</Title>

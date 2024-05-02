@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
@@ -8,9 +8,7 @@ import { LOCALSTORAGE_TOKEN } from '@/constants';
 import { SidebarLinks } from '@/constants/pages/mainPage';
 import { PATH } from '@/constants/routerLinks';
 import { auth } from '@/firebase/firebaseConfig';
-import { modalClose, modalOpen } from '@/store/sliceModal';
-import { clearUser } from '@/store/sliceUser';
-import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
+import { COLOR } from '@/theme/variables';
 
 import { TweetForm } from '../TweetForm';
 import { Button } from '../ui-components/Button';
@@ -23,7 +21,7 @@ import {
 } from './styles';
 
 export const Sidebar = () => {
-  const isModal = useSelector((state: { modal: { isOpen: boolean } }) => state.modal.isOpen);
+  const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -32,7 +30,7 @@ export const Sidebar = () => {
     try {
       await signOut(auth);
       localStorage.removeItem(LOCALSTORAGE_TOKEN);
-      dispatch(clearUser());
+      setIsModal(false);
       navigate(PATH.LOG_IN_PAGE);
     } catch (error) {
       console.error('Ошибка при выходе из учетной записи:', error);
@@ -40,11 +38,11 @@ export const Sidebar = () => {
   };
 
   const openModal = () => {
-    dispatch(modalOpen());
+    setIsModal(true);
   };
 
   const closeModal = () => {
-    dispatch(modalClose());
+    setIsModal(false);
   };
 
   return (

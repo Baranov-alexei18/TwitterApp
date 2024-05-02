@@ -26,6 +26,7 @@
     "no-await-in-loop": "off",
     "no-restricted-syntax": "off",
     "react/react-in-jsx-scope": "off",
+    "no-use-before-define": "off",
     "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
     "react/jsx-props-no-spreading": ["off", { "html": "ignore" }],
     "react/jsx-filename-extension": ["off", { "extensions": [".js", " .jsx", ".tsx"] }],
