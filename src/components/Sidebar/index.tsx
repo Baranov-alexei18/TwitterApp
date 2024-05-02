@@ -52,7 +52,11 @@ export const Sidebar = () => {
       {SidebarLinks.map(({
         icon, title, alt, link,
       }) => (
-        <NavLink to={link} key={title} isActive={link === location.pathname}>
+        <NavLink
+          key={title}
+          to={link}
+          is-active={(link === location.pathname).toString() || undefined}
+        >
           <IconRoute theme={themes} src={icon} alt={`${alt}-icon`} title={alt} />
           {title}
         </NavLink>
