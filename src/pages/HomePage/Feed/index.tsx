@@ -10,8 +10,6 @@ import { TweetType } from '@/components/ViewTweets/types';
 import { firestore } from '@/firebase/firebaseConfig';
 import { getAllTweets } from '@/services/firestore/getAllTweets';
 import { getUserTweets } from '@/services/firestore/getUserTweets';
-import { setUser } from '@/store/sliceUser';
-import { RootState } from '@/store/store';
 import { UserState } from '@/types/user';
 
 import { HeaderProfile } from './Header';
