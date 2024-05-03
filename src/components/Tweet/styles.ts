@@ -73,7 +73,7 @@ export const TweetText = styled.div`
 
 export const TweetImage = styled.img`
   max-height: 400px;
-  width: 95%;
+  max-width: 95%;
   margin-bottom: ${SPACING.xs};
   border-radius: ${BORDER_RADIUS.xxs}
 `;

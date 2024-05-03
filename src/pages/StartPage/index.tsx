@@ -21,7 +21,7 @@ import { setUser } from '@/store/sliceUser';
 import { Container } from '@/theme/global';
 import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
 
-import { Content, Image } from './styles';
+import { ContainerWrapper, Content, Image } from './styles';
 
 const StartPage = () => {
   const {
@@ -55,8 +55,8 @@ const StartPage = () => {
   };
 
   return (
-    <>
-      <Container>
+    <div>
+      <ContainerWrapper>
         <Image src={BackTwitter} alt="Twitter Background" title="back twitter" />
         <Content>
           <img src={TwitterLogo} alt="twitter" title="twitter" width="41" />
@@ -92,9 +92,9 @@ const StartPage = () => {
             <LinkApp to={PATH.LOG_IN_PAGE}>{LINKS_TO.login}</LinkApp>
           </ContentText>
         </Content>
-      </Container>
+      </ContainerWrapper>
       <Footer />
-    </>
+    </div>
   );
 };
 

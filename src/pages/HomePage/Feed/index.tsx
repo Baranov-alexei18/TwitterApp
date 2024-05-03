@@ -34,7 +34,7 @@ export const Feed = () => {
           fetchMoreTweets();
         }
       },
-      { threshold: 1 },
+      { threshold: 0.6 },
     );
 
     if (sentinelRef.current) {
@@ -99,7 +99,7 @@ export const Feed = () => {
       <HeaderProfile />
       {!tweetId && <TweetForm />}
       <ViewTweets data={tweetsAll} />
-      <div ref={sentinelRef} />
+      <div ref={sentinelRef} style={{ height: '4px' }} />
       {loading && <Loader />}
     </>
   );

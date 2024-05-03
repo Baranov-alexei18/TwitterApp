@@ -9,4 +9,6 @@ export const StyledContent = styled.div<ContentProps>`
   font-size: ${(props) => props.size || FONT_SIZE.sm};
   width: ${(props) => props.width || 'auto'};
   margin-bottom: ${SPACING.sm};
+
+  
 `;
