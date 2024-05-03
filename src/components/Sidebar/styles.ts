@@ -28,31 +28,8 @@ export const SidebarContainer = styled.div<{theme: string}>`
   }
 `;
 
-export const Icon = styled.img`
-  width: 40px;
-  height: 34px;
-  margin-bottom: ${SPACING.xl};
-  @media (max-width: ${BREAKPOINTS.lg}px) {
-    width: 30px;
-  }
-`;
-
-export const IconRoute = styled.img<{theme: string}>`
-  width: 24px;
-  height: 24px;
-  margin-right: ${SPACING.xs};
-  filter: ${(props) => (props.theme === THEME.LIGHT ? 'none' : 'invert(100%)')};
-  
-  @media (max-width: ${BREAKPOINTS.lg}px) {
-    margin-left: ${SPACING.xxxs};
-  }
-`;
-export const IconLogout = styled.img<{theme: string}>`
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
+export const IconLogout = styled.div`
   margin-left: ${SPACING.xxxs};
-  filter: ${(props) => (props.theme === THEME.LIGHT ? 'none' : 'invert(100%)')};
   
   @media (min-width: ${BREAKPOINTS.lg}px) {
     display: none

@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
 import { Button } from '@/components/ui-components/Button';
 import { ButtonStyled2 } from '@/components/ui-components/Button/config';
+import { Icon } from '@/components/ui-components/Icon';
+import { StyledIcon40 } from '@/components/ui-components/Icon/config';
 import { Input } from '@/components/ui-components/Input';
 import { Loader } from '@/components/ui-components/Loader';
 import { Title } from '@/components/ui-components/Title';
@@ -53,7 +55,7 @@ export const LoginPageForm = () => {
 
   return (
     <StyledLoginForm onSubmit={handleSubmit(onSubmit)}>
-      <img src={TwitterLogo} alt="twitter-logo" title="twitter" />
+      <Icon src={TwitterLogo} alt="twitter" {...StyledIcon40} />
       <Title row="md">{TITLE}</Title>
       <Input
         control={control}

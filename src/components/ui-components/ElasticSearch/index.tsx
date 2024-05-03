@@ -9,6 +9,7 @@ import { searchItemFirestore } from '@/services/firestore/searchItemFirestore';
 import { RootState } from '@/store/store';
 import { UserTypes } from '@/types/user';
 
+import { Icon } from '../Icon';
 import { Loader } from '../Loader';
 
 import { Container, Input } from './styles';
@@ -47,7 +48,7 @@ export const ElasticSearch = ({ onChange }:
 
   return (
     <Container theme={themes}>
-      <img src={Search} width="20px" alt="search-icon" title="search" />
+      <Icon src={Search} alt="search" />
       <Input
         type="text"
         placeholder="Search Twitter"

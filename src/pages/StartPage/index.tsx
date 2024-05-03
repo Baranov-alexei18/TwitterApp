@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import BackTwitter from '@/assets/image/backTwitter.png';
 import GoogleLogo from '@/assets/image/icons/google-logo.svg';
@@ -9,17 +9,16 @@ import { Footer } from '@/components/Footer';
 import { Button } from '@/components/ui-components/Button';
 import { ButtonStyled1 } from '@/components/ui-components/Button/config';
 import { ContentText } from '@/components/ui-components/ContentText';
+import { Icon } from '@/components/ui-components/Icon';
+import { StyledIcon40 } from '@/components/ui-components/Icon/config';
 import { LinkApp } from '@/components/ui-components/Link';
 import { Title } from '@/components/ui-components/Title';
-import { LOCALSTORAGE_TOKEN } from '@/constants';
 import { START_PAGE } from '@/constants/pages/startPage';
 import { PATH } from '@/constants/routerLinks';
-import { useAuthToken } from '@/hooks/useAuthToken';
 import { createAccountWithGoogle } from '@/services/auth/createUserWithGoogle';
 import { getUserDataFromFirestore } from '@/services/firestore/getUserDataFromFirestore';
 import { setUser } from '@/store/sliceUser';
-import { Container } from '@/theme/global';
-import { BORDER_RADIUS, COLOR, FONT_SIZE } from '@/theme/variables';
+import { FONT_SIZE } from '@/theme/variables';
 
 import { ContainerWrapper, Content, Image } from './styles';
 
@@ -59,14 +58,14 @@ const StartPage = () => {
       <ContainerWrapper>
         <Image src={BackTwitter} alt="Twitter Background" title="back twitter" />
         <Content>
-          <img src={TwitterLogo} alt="twitter" title="twitter" width="41" />
+          <Icon src={TwitterLogo} alt="twitter" {...StyledIcon40} />
           <Title row="lg">{TITLE}</Title>
           <Title row="md">{SUBTITLE}</Title>
           <Button
             {...ButtonStyled1}
             onClick={createWithGoogle}
           >
-            <img src={GoogleLogo} alt="google" title="google" width="41" />
+            <Icon src={GoogleLogo} alt="google" {...StyledIcon40} margin="0" />
             <span>{SIGN_UP_GOOGLE}</span>
           </Button>
           <Button

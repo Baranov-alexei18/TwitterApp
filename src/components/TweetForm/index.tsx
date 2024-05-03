@@ -5,11 +5,14 @@ import DefaultUserIcon from '@/assets/image/defaultUserImage.png';
 import { setTweetToFirestore } from '@/services/firestore/setTweetToFirestore';
 import { modalClose } from '@/store/sliceModal';
 import { setUser } from '@/store/sliceUser';
+import { SPACING } from '@/theme/variables';
 import { UserState } from '@/types/user';
 
+import { Icon } from '../ui-components/Icon';
+import { StyledIcon40, StyledIconCircle40 } from '../ui-components/Icon/config';
 import { TextArea } from '../ui-components/TextArea';
 
-import { Container, UserIcon } from './styles';
+import { Container } from './styles';
 
 export const TweetForm = () => {
   const user = useSelector((state: UserState) => state.user.data);
@@ -30,7 +33,12 @@ export const TweetForm = () => {
 
   return (
     <Container>
-      <UserIcon src={user.photoURL || DefaultUserIcon} alt="User Icon" />
+      <Icon
+        src={user.photoURL || DefaultUserIcon}
+        alt="User Icon"
+        {...StyledIconCircle40}
+        margin={`${SPACING.sm} ${SPACING.zero} ${SPACING.zero} ${SPACING.xs}`}
+      />
       <TextArea
         onSubmit={handleTweetSubmit}
         placeholder="What's happening?"

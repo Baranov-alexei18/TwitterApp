@@ -15,11 +15,13 @@ import { COLOR } from '@/theme/variables';
 import { TweetForm } from '../TweetForm';
 import { Button } from '../ui-components/Button';
 import { ButtonStyled3 } from '../ui-components/Button/config';
+import { Icon } from '../ui-components/Icon';
+import { StyledIcon24, StyledIcon40 } from '../ui-components/Icon/config';
 import { ModalBase } from '../ui-components/Modal/ModalBase';
 import UserInfoBlock from '../UserInfoBlock';
 
 import {
-  Icon, IconLogout, IconRoute, NavLink, NavLinkTitle, SidebarContainer,
+  IconLogout, NavLink, NavLinkTitle, SidebarContainer,
 } from './styles';
 
 export const Sidebar = () => {
@@ -49,7 +51,7 @@ export const Sidebar = () => {
 
   return (
     <SidebarContainer theme={themes}>
-      <Icon src={TwitterLogo} alt="twitter-logo" title="twitter" />
+      <Icon src={TwitterLogo} alt="twitter" {...StyledIcon40} />
       {SidebarLinks.map(({
         icon, title, alt, link,
       }) => (
@@ -58,17 +60,18 @@ export const Sidebar = () => {
           to={link}
           active={(link === location.pathname).toString() || undefined}
         >
-          <IconRoute theme={themes} src={icon} alt={`${alt}-icon`} title={alt} />
+          <Icon src={icon} alt={alt} theme={themes} {...StyledIcon24} />
           <NavLinkTitle>{title}</NavLinkTitle>
         </NavLink>
       ))}
-      <IconLogout
-        src={Logout}
-        theme={themes}
-        alt="exit-icon"
-        title="exit"
-        onClick={exitFromAccount}
-      />
+      <IconLogout>
+        <Icon
+          src={Logout}
+          theme={themes}
+          alt="exit"
+          onClick={exitFromAccount}
+        />
+      </IconLogout>
       <Button
         {...ButtonStyled3}
         onClick={openModal}

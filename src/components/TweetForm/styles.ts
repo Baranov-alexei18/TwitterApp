@@ -9,10 +9,3 @@ export const Container = styled.div`
   width: 100%;
   border-bottom: 1px solid ${COLOR.lightGrey};
 `;
-
-export const UserIcon = styled.img`
-  width: 40px;
-  height: 40px;
-  border-radius: ${BORDER_RADIUS.circle};
-  margin: ${SPACING.sm} ${SPACING.zero} ${SPACING.zero} ${SPACING.xs};
-`;
