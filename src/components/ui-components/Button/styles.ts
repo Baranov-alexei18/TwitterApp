@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { COLOR, SPACING } from '@/theme/variables';
+import { BREAKPOINTS, COLOR, SPACING } from '@/theme/variables';
 
 import { ButtonProps } from './types';
 

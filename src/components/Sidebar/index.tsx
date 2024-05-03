@@ -24,6 +24,7 @@ import {
 export const Sidebar = () => {
   const themes = useSelector((state: RootState) => state.theme.theme);
   const [isModal, setIsModal] = useState(false);
+
   const navigate = useNavigate();
   const location = useLocation();
 
