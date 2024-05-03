@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
+import { FONT_SIZE, SPACING } from '@/theme/variables';
+
 export const WrapperButton = styled.div`
   display: flex;
-  gap: 4px;
+  cursor: pointer;
+  font-size: ${FONT_SIZE.md};
+  gap: ${SPACING.xxxs};
   background-color: transparent;
   border: none;
-  font-size: 20px;
-  cursor: pointer;
-  margin-top: 12px;
+  margin-top: ${SPACING.xs};
 `;

@@ -1,27 +1,36 @@
 import styled from 'styled-components';
 
-import { BORDER_RADIUS, COLOR, Z_INDEX } from '@/theme/variables';
+import {
+  BORDER_RADIUS, BREAKPOINTS, COLOR, FONT_SIZE, SPACING, WEIGHT, Z_INDEX,
+} from '@/theme/variables';
 
 export const TweetContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  margin-bottom: 12px;
-  padding: 4px 12px 12px 0;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid ${COLOR.lightGrey};
+  width: 100%;
+  max-width: 100%;
+  padding: ${SPACING.xs} ${SPACING.zero} ;
+
+  @media (max-width: ${BREAKPOINTS.md}px) {
+    max-width: 95%;
+    padding-right:${SPACING.zero};
+  }
 `;
 
 export const TweetIcon = styled.img`
   width: 40px;
   height: 40px;
-  border-radius: 50%;
   overflow: hidden;
-  margin: 4px 0 0 12px;
+  margin: ${SPACING.xxxs} ${SPACING.zero} ${SPACING.zero} ${SPACING.xs};
+  border-radius: ${BORDER_RADIUS.circle};
 `;
 
 export const TweetUserInfo = styled.div`
   position: relative;
   flex: 1;
-  padding: 0 12px; 
+  width: 80%;
+  padding: ${SPACING.zero} ${SPACING.xs}; 
 `;
 
 export const UserNames = styled.div`
@@ -34,31 +43,38 @@ export const HeaderTweets = styled.div`
   justify-content: space-between;
 `;
 export const UserName = styled.span`
-  font-weight: bold;
+  font-weight: ${WEIGHT.lg};
 `;
 
 export const UserEmail = styled.span`
-  color: #777;
-  margin: 0 8px;
-  font-size: 12px;
+  color: ${COLOR.darkGrey};
+  font-size: ${FONT_SIZE.xxs};
+  margin: ${SPACING.zero} ${SPACING.xxs};
+  
+  @media (max-width: ${BREAKPOINTS.sm}px) {
+    display: none;
+  }
 `;
 
 export const TweetDate = styled.span`
-  color: #777;
-  font-size: 12px;
+  color: ${COLOR.darkGrey};
+  font-size: ${FONT_SIZE.xxs};
+  margin: ${SPACING.zero} ${SPACING.xxs};
 `;
 
 export const TweetText = styled.div`
-  margin-top: 5px;
-  margin-bottom: 10px;
-  word-wrap: break-word;
+  max-width: inherit;
+  word-wrap: break-word; 
   overflow-wrap: break-word;
-  max-width: 530px;
+  overflow: hidden;
+  margin-top: ${SPACING.xxxs};
+  margin-bottom: ${SPACING.xxs};
 `;
 
 export const TweetImage = styled.img`
   max-height: 400px;
-  margin-bottom: 10px;
+  width: 95%;
+  margin-bottom: ${SPACING.xs};
   border-radius: ${BORDER_RADIUS.xxs}
 `;
 
@@ -68,9 +84,9 @@ export const TweetLikes = styled.div`
   cursor: pointer;
 `;
 
-export const LikeCount = styled.span<{active: boolean}>`
-  margin-left: 5px;
-  color: ${(props) => (!props.active ? COLOR.dark : COLOR.likeColor)}
+export const LikeCount = styled.span<{active: string}>`
+  margin-left: ${SPACING.xxxs};
+  color: ${(props) => (props.active === 'false' ? COLOR.dark : COLOR.likeColor)}
 `;
 
 export const MoreOptionsIcon = styled.img`
@@ -80,21 +96,21 @@ export const MoreOptionsIcon = styled.img`
 
 export const ToolTip = styled.div`
   position: absolute;
-  top: 20px;
-  right: 0;
-  transform: translateX(10px);
-  padding: 4px;
+  top: ${SPACING.md};
+  right: ${SPACING.zero};
+  transform: translateX(${SPACING.xxs});
+  padding: ${SPACING.xxxs};
   background-color: ${COLOR.light};
   border-radius: ${BORDER_RADIUS.xxs};
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: ${SPACING.zero} ${SPACING.xxxs} ${SPACING.xxs} rgba(0, 0, 0, 0.3);
   z-index: ${Z_INDEX.md};
 `;
 
 export const ToolTipOption = styled.div`
-  color: ${COLOR.error};
-  font-size: 14px;
   cursor: pointer;
-  margin: 8px;
+  font-size: ${FONT_SIZE.xs};
+  margin: ${SPACING.xxs};
+  color: ${COLOR.error};
 
   &:hover {
     color: ${COLOR.primary};
@@ -103,10 +119,10 @@ export const ToolTipOption = styled.div`
 
 export const WrapperButton = styled.div`
   display: flex;
-  gap: 4px;
-  background-color: transparent;
-  border: none;
-  font-size: 20px;
   cursor: pointer;
-  margin-top: 12px;
+  font-size: ${FONT_SIZE.xl}};
+  gap: ${SPACING.xxs};
+  border: none;
+  background-color: transparent;
+  margin-top: ${SPACING.xs};
 `;

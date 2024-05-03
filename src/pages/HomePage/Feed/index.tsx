@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Timestamp } from 'firebase/firestore';
+import { collection, onSnapshot, Timestamp } from 'firebase/firestore';
 
 import { TweetForm } from '@/components/TweetForm';
 import { Loader } from '@/components/ui-components/Loader';
 import { ViewTweets } from '@/components/ViewTweets';
 import { TweetType } from '@/components/ViewTweets/types';
+import { firestore } from '@/firebase/firebaseConfig';
 import { getAllTweets } from '@/services/firestore/getAllTweets';
 import { getUserTweets } from '@/services/firestore/getUserTweets';
-import { RootState } from '@/store/store';
 import { UserState } from '@/types/user';
 
 import { HeaderProfile } from './Header';
@@ -24,33 +24,13 @@ export const Feed = () => {
 
   useEffect(() => {
     setLoading(true);
+    const tweetsDocRef = collection(firestore, 'tweets');
 
-    const getTweets = async () => {
-      try {
-        let tweets: TweetType[];
-        if (tweetId) {
-          setTweetsAll([]);
-          setLastDoc(null);
-          tweets = await getUserTweets([tweetId]) as TweetType[];
-        } else {
-          const nextTweets = await getAllTweets(lastDoc) as TweetType[];
+    const unsubscribe = onSnapshot(tweetsDocRef, (snap) => {
+      getTweets();
+    });
 
-          if (nextTweets.length > 0) {
-            setLastDoc(nextTweets[nextTweets.length - 1].date_created);
-            tweets = [...tweetsAll, ...nextTweets];
-          } else {
-            tweets = nextTweets;
-          }
-        }
-        setTweetsAll(tweets);
-      } catch (error) {
-        console.error('Ошибка при загрузке твитов:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getTweets();
+    return () => unsubscribe();
   }, [user && user.tweets?.length, tweetId]);
 
   useEffect(() => {
@@ -74,6 +54,32 @@ export const Feed = () => {
       }
     };
   }, [loading]);
+
+  const getTweets = async () => {
+    try {
+      let tweets: TweetType[];
+      setTweetsAll([]);
+      setLastDoc(null);
+
+      if (tweetId) {
+        tweets = await getUserTweets([tweetId]) as TweetType[];
+      } else {
+        const nextTweets = await getAllTweets(lastDoc) as TweetType[];
+
+        if (nextTweets.length > 0) {
+          setLastDoc(nextTweets[nextTweets.length - 1].date_created);
+          tweets = [...tweetsAll, ...nextTweets];
+        } else {
+          tweets = nextTweets;
+        }
+      }
+      setTweetsAll(tweets);
+    } catch (error) {
+      console.error('Ошибка при загрузке твитов:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const fetchMoreTweets = async () => {
     if (!tweetsAll.length) return;

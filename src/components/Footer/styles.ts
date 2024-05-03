@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-import { FONT_SIZE } from '@/theme/variables';
+import { FONT_SIZE, SPACING } from '@/theme/variables';
 
 export const StyledFooter = styled.footer`
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  padding: 15px;
-  margin-right: 50px;
+  gap: ${SPACING.xs};
+  padding: ${SPACING.sm};
+  margin-right: ${SPACING.xxxxl};
   font-size: ${FONT_SIZE.xxs}
 `;

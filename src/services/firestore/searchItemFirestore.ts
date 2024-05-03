@@ -8,6 +8,7 @@ import { UserTypes } from '@/types/user';
 
 export const searchItemFirestore = async (queryUser: string) => {
   try {
+    console.log('DEBOUNE');
     const tweetsRef = collection(firestore, 'tweets');
     const tweetsSnapshot = query(tweetsRef, where('text', '>=', queryUser), where('text', '<=', `${queryUser}\uf8ff`));
     const tweetResults = (await getDocs(tweetsSnapshot)).docs.map((docTweet) => docTweet.data());

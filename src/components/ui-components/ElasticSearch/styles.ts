@@ -15,6 +15,7 @@ export const Container = styled.div<{theme: string}>`
 
 export const Input = styled.input`
   flex: 1;
+  width: 100%;
   background-color: inherit;
   border: none;
   outline: none;

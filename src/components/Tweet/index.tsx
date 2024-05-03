@@ -40,7 +40,7 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
   const userNow = useSelector((state: UserState) => state.user.data);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [countLikes, setCountLikes] = useState(likes.length);
-  const [activeLike, setActiveLike] = useState(() => !!likes.find((item) => item === userNow.uid));
+  const [activeLike, setActiveLike] = useState(!!likes.find((item) => item === userNow.uid));
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -107,7 +107,7 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
             onClick={(e) => setLike(e, tweet_id, userNow.uid)}
             aria-hidden
           />
-          <LikeCount active={activeLike}>{countLikes || ''}</LikeCount>
+          <LikeCount active={activeLike.toString()}>{countLikes || false}</LikeCount>
         </TweetLikes>
       </TweetUserInfo>
     </TweetContainer>

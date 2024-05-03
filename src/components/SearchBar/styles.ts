@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
-import { COLOR } from '@/theme/variables';
+import { BREAKPOINTS, COLOR, SPACING } from '@/theme/variables';
 
 export const SearchBarWrapper = styled.div`
+  box-sizing: content-box;
   flex: 1;
-  padding: 12px 20px;
+  width: 100%;
+  max-width: 300px;
   height: 100vh;
   border-left: 1px solid ${COLOR.lightGrey};
-  box-sizing: content-box;
-  width: 100%;
+  padding: ${SPACING.md};
+
+  @media (max-width: ${BREAKPOINTS.md}px) {
+    display: none;
+  }
 `;

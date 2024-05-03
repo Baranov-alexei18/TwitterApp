@@ -6,6 +6,7 @@ export const Container = styled.div`
   display: flex;
   margin-right: auto;
   margin-left: auto;
+  width: 100%;
   max-width: 1200px;
 
   @media (max-width: ${BREAKPOINTS.xl}) {
@@ -27,6 +28,13 @@ export const Container = styled.div`
 
 export const MainContent = styled.div`
   flex: 2.5;
+  width: 100%;
+  max-width: 590px;
+
+  @media (max-width: ${BREAKPOINTS.md}px) {
+    flex: 1;
+    max-width: calc(100% - 70px);
+  }
 `;
 
 export const SectionTab = styled.div`
