@@ -1,23 +1,25 @@
 import styled from 'styled-components';
 
+import { BREAKPOINTS, SPACING } from '@/theme/variables';
+
 export const StyledSignUpForm = styled.form`
   width: 700px;
-  padding: 0 10px;
+  padding: ${SPACING.zero} ${SPACING.xs};
   box-sizing: border-box;
   margin: 60px auto;
 
-  @media screen and (max-width: 576px) {
+  @media (max-width: ${BREAKPOINTS.sm}px) {
     text-align: center;
     width: calc(100% - 20px);
-    padding: 10px;
+    padding: ${SPACING.xs};
   }
 `;
 
 export const SelectWrapper = styled.div`
   display: flex;
   flex: 2;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: ${SPACING.md};
+  margin-bottom: ${SPACING.md};
   
 `;
 

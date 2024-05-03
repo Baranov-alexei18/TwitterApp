@@ -5,6 +5,7 @@ import { MAX_CHARACTERS_TEXTAREA } from '@/constants';
 
 import { Button } from '../Button';
 import { ButtonStyled4 } from '../Button/config';
+import { Icon } from '../Icon';
 
 import {
   ButtonsWrapper,
@@ -58,7 +59,7 @@ export const TextArea: FC<TextAreaTypes> = ({ loader, onSubmit, ...rest }) => {
       </MaxLengthText>
       <ButtonsWrapper>
         <ImageUploadButton>
-          <img src={PictureIcon} alt="load" />
+          <Icon src={PictureIcon} alt="load" />
           <UploadButton type="file" accept="image/*" onChange={handlePhotoChange} />
         </ImageUploadButton>
         <span>{photo?.name}</span>

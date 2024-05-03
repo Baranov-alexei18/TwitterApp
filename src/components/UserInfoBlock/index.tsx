@@ -2,11 +2,13 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 import DefaultUserImg from '@/assets/image/defaultUserImage.png';
+import { SPACING } from '@/theme/variables';
 import { UserState } from '@/types/user';
 
-import {
-  EllipsisWrapper, InfoContainer, UserIcon, UserInfo,
-} from './styles';
+import { Icon } from '../ui-components/Icon';
+import { StyledIcon40, StyledIconCircle40 } from '../ui-components/Icon/config';
+
+import { EllipsisWrapper, InfoContainer, UserInfo } from './styles';
 
 export const UserInfoBlock = () => {
   const user = useSelector((state: UserState) => state.user?.data);
@@ -17,7 +19,12 @@ export const UserInfoBlock = () => {
 
   return (
     <InfoContainer>
-      <UserIcon src={user.photoURL || DefaultUserImg} alt="User Icon" />
+      <Icon
+        src={user.photoURL || DefaultUserImg}
+        alt="User Icon"
+        {...StyledIconCircle40}
+        margin={`${SPACING.zero} ${SPACING.zero} ${SPACING.xxxs} ${SPACING.zero}`}
+      />
       <UserInfo>
         <EllipsisWrapper>{user.name || 'Guest'}</EllipsisWrapper>
         <EllipsisWrapper>{user.email || 'Guest.exemple.com'}</EllipsisWrapper>

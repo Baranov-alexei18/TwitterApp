@@ -4,6 +4,8 @@ import {
   BORDER_RADIUS, BREAKPOINTS, COLOR, FONT_SIZE, SPACING, WEIGHT, Z_INDEX,
 } from '@/theme/variables';
 
+import { Icon } from '../ui-components/Icon';
+
 export const TweetContainer = styled.div`
   display: flex;
   align-items: flex-start;
@@ -16,14 +18,6 @@ export const TweetContainer = styled.div`
     max-width: 95%;
     padding-right:${SPACING.zero};
   }
-`;
-
-export const TweetIcon = styled.img`
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-  margin: ${SPACING.xxxs} ${SPACING.zero} ${SPACING.zero} ${SPACING.xs};
-  border-radius: ${BORDER_RADIUS.circle};
 `;
 
 export const TweetUserInfo = styled.div`
@@ -73,7 +67,7 @@ export const TweetText = styled.div`
 
 export const TweetImage = styled.img`
   max-height: 400px;
-  width: 95%;
+  max-width: 95%;
   margin-bottom: ${SPACING.xs};
   border-radius: ${BORDER_RADIUS.xxs}
 `;
@@ -87,11 +81,6 @@ export const TweetLikes = styled.div`
 export const LikeCount = styled.span<{active: string}>`
   margin-left: ${SPACING.xxxs};
   color: ${(props) => (props.active === 'false' ? COLOR.dark : COLOR.likeColor)}
-`;
-
-export const MoreOptionsIcon = styled.img`
-  position: relative;
-  cursor: pointer;
 `;
 
 export const ToolTip = styled.div`
