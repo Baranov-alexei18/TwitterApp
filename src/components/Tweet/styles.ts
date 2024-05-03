@@ -1,14 +1,21 @@
 import styled from 'styled-components';
 
 import {
-  BORDER_RADIUS, COLOR, FONT_SIZE, SPACING, WEIGHT, Z_INDEX,
+  BORDER_RADIUS, BREAKPOINTS, COLOR, FONT_SIZE, SPACING, WEIGHT, Z_INDEX,
 } from '@/theme/variables';
 
 export const TweetContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  padding: ${SPACING.xs} ${SPACING.xxxs} ;
   border-bottom: 1px solid ${COLOR.lightGrey};
+  width: 100%;
+  max-width: 100%;
+  padding: ${SPACING.xs} ${SPACING.zero} ;
+
+  @media (max-width: ${BREAKPOINTS.md}px) {
+    max-width: 95%;
+    padding-right:${SPACING.zero};
+  }
 `;
 
 export const TweetIcon = styled.img`
@@ -22,6 +29,7 @@ export const TweetIcon = styled.img`
 export const TweetUserInfo = styled.div`
   position: relative;
   flex: 1;
+  width: 80%;
   padding: ${SPACING.zero} ${SPACING.xs}; 
 `;
 
@@ -42,23 +50,30 @@ export const UserEmail = styled.span`
   color: ${COLOR.darkGrey};
   font-size: ${FONT_SIZE.xxs};
   margin: ${SPACING.zero} ${SPACING.xxs};
+  
+  @media (max-width: ${BREAKPOINTS.sm}px) {
+    display: none;
+  }
 `;
 
 export const TweetDate = styled.span`
   color: ${COLOR.darkGrey};
   font-size: ${FONT_SIZE.xxs};
+  margin: ${SPACING.zero} ${SPACING.xxs};
 `;
 
 export const TweetText = styled.div`
+  max-width: inherit;
   word-wrap: break-word; 
   overflow-wrap: break-word;
-  max-width: 530px;
+  overflow: hidden;
   margin-top: ${SPACING.xxxs};
   margin-bottom: ${SPACING.xxs};
 `;
 
 export const TweetImage = styled.img`
   max-height: 400px;
+  width: 95%;
   margin-bottom: ${SPACING.xs};
   border-radius: ${BORDER_RADIUS.xxs}
 `;
@@ -71,7 +86,7 @@ export const TweetLikes = styled.div`
 
 export const LikeCount = styled.span<{active: string}>`
   margin-left: ${SPACING.xxxs};
-  color: ${(props) => (!props.active ? COLOR.dark : COLOR.likeColor)}
+  color: ${(props) => (props.active === 'false' ? COLOR.dark : COLOR.likeColor)}
 `;
 
 export const MoreOptionsIcon = styled.img`

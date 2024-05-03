@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
 import {
-  BORDER_RADIUS, COLOR, FONT_SIZE, SPACING,
+  BORDER_RADIUS, BREAKPOINTS, COLOR, FONT_SIZE, SPACING,
 } from '@/theme/variables';
 
 export const TextAreaWrapper = styled.div`
   position: relative;
   width: 100%;
   padding: ${SPACING.sm};
+
+  @media (max-width: ${BREAKPOINTS.md}px) {
+    max-width: 95%;
+  }
 `;
 
 export const TextAreaStyle = styled.textarea<{overlimit: boolean | undefined}>`
@@ -23,7 +27,6 @@ export const TextAreaStyle = styled.textarea<{overlimit: boolean | undefined}>`
 `;
 
 export const ButtonsWrapper = styled.div`
-  width: 100%;
   bottom: 80px;
   display: flex;
   align-items: center;
