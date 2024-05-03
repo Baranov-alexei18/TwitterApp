@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 
+import Logout from '@/assets/image/icons/logout.svg';
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
 import { LOCALSTORAGE_TOKEN } from '@/constants';
 import { SidebarLinks } from '@/constants/pages/mainPage';
@@ -18,13 +19,12 @@ import { ModalBase } from '../ui-components/Modal/ModalBase';
 import UserInfoBlock from '../UserInfoBlock';
 
 import {
-  Icon, IconRoute, NavLink, SidebarContainer,
+  Icon, IconLogout, IconRoute, NavLink, NavLinkTitle, SidebarContainer,
 } from './styles';
 
 export const Sidebar = () => {
   const themes = useSelector((state: RootState) => state.theme.theme);
   const [isModal, setIsModal] = useState(false);
-
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -56,12 +56,19 @@ export const Sidebar = () => {
         <NavLink
           key={title}
           to={link}
-          is-active={(link === location.pathname).toString() || undefined}
+          active={(link === location.pathname).toString() || undefined}
         >
           <IconRoute theme={themes} src={icon} alt={`${alt}-icon`} title={alt} />
-          {title}
+          <NavLinkTitle>{title}</NavLinkTitle>
         </NavLink>
       ))}
+      <IconLogout
+        src={Logout}
+        theme={themes}
+        alt="exit-icon"
+        title="exit"
+        onClick={exitFromAccount}
+      />
       <Button
         {...ButtonStyled3}
         onClick={openModal}

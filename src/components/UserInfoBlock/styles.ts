@@ -7,6 +7,10 @@ export const InfoContainer = styled.div`
   align-items: center;
   max-width: 280px;
   margin: ${SPACING.xxxxl} ${SPACING.zero} ${SPACING.md} ${SPACING.zero};
+
+  @media (max-width: ${BREAKPOINTS.lg}px) {
+    display: none;
+  }
 `;
 
 export const UserIcon = styled.img`
@@ -30,4 +34,5 @@ export const EllipsisWrapper = styled.div`
   @media (max-width: ${BREAKPOINTS.xl}px) {
     width: 100px;
   }
+
 `;
