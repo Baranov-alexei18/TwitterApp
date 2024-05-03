@@ -23,14 +23,7 @@ export const Feed = () => {
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setLoading(true);
-    const tweetsDocRef = collection(firestore, 'tweets');
-
-    const unsubscribe = onSnapshot(tweetsDocRef, (snap) => {
-      getTweets();
-    });
-
-    return () => unsubscribe();
+    getTweets();
   }, [user && user.tweets?.length, tweetId]);
 
   useEffect(() => {
@@ -56,6 +49,7 @@ export const Feed = () => {
   }, [loading]);
 
   const getTweets = async () => {
+    setLoading(true);
     try {
       let tweets: TweetType[];
       setTweetsAll([]);
