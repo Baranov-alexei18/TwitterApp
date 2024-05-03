@@ -9,20 +9,21 @@ import likeIcon from '@/assets/image/icons/like.svg';
 import { PATH } from '@/constants/routerLinks';
 import { deleteLikesToTweet, setLikesToTweet } from '@/services/firestore/setLikesToTweet';
 import { modalOpen } from '@/store/sliceModal';
+import { SPACING } from '@/theme/variables';
 import { UserState } from '@/types/user';
 import { formatDate, formatTimestampToDate } from '@/utils/date';
 
+import { Icon } from '../ui-components/Icon';
+import { StyledIcon24, StyledIcon40, StyledIconCircle40 } from '../ui-components/Icon/config';
 import { TweetType } from '../ViewTweets/types';
 
 import {
   HeaderTweets,
   LikeCount,
-  MoreOptionsIcon,
   ToolTip,
   ToolTipOption,
   TweetContainer,
   TweetDate,
-  TweetIcon,
   TweetImage,
   TweetLikes,
   TweetText,
@@ -44,20 +45,20 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleTooltipOpen = (e: MouseEvent<HTMLImageElement>) => {
-    e!.stopPropagation();
+  const handleTooltipOpen = (e: unknown) => {
+    (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
     setIsTooltipOpen(!isTooltipOpen);
   };
 
-  const handleOpenModal = (e: MouseEvent<HTMLImageElement>, tweet: TweetType) => {
-    e!.stopPropagation();
+  const handleOpenModal = (e: unknown, tweet: TweetType) => {
+    (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
     dispatch(modalOpen());
     onHandleTweet(tweet);
     setIsTooltipOpen(false);
   };
 
-  const setLike = (e: MouseEvent<HTMLImageElement>, id: string, userId: string) => {
-    e!.stopPropagation();
+  const setLike = (e: unknown, id: string, userId: string) => {
+    (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
     if (!activeLike) {
       setLikesToTweet(id, userId);
       setCountLikes((prev) => prev + 1);
@@ -74,7 +75,12 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
 
   return (
     <TweetContainer onClick={() => handleToTweet()}>
-      <TweetIcon src={user.photoURL || DefaultIconUser} alt="Avatar" />
+      <Icon
+        src={user.photoURL || DefaultIconUser}
+        alt="Avatar"
+        {...StyledIconCircle40}
+        margin={`${SPACING.xxxs} ${SPACING.zero} ${SPACING.zero} ${SPACING.xs}`}
+      />
       <TweetUserInfo>
         <HeaderTweets>
           <UserNames>
@@ -94,18 +100,18 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
 
           </UserNames>
           {user.uid === userNow.uid && (
-            <MoreOptionsIcon src={DotsIcon} onClick={handleTooltipOpen} />
+            <Icon src={DotsIcon} alt="dots" onClick={handleTooltipOpen} />
           )}
         </HeaderTweets>
         <TweetText>{text}</TweetText>
         {image && <TweetImage src={image} alt="Tweet" />}
         <TweetLikes>
-          <img
+          <Icon
             src={activeLike ? ActivelikeIcon : likeIcon}
-            height="20px"
             alt="Like"
+            {...StyledIcon24}
+            margin={`${SPACING.zero} ${SPACING.xxxs} ${SPACING.zero} ${SPACING.zero}`}
             onClick={(e) => setLike(e, tweet_id, userNow.uid)}
-            aria-hidden
           />
           <LikeCount active={activeLike.toString()}>{countLikes || false}</LikeCount>
         </TweetLikes>

@@ -4,20 +4,13 @@ import { BORDER_RADIUS, BREAKPOINTS, SPACING } from '@/theme/variables';
 
 export const InfoContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-item: center;
   max-width: 280px;
   margin: ${SPACING.xxxxl} ${SPACING.zero} ${SPACING.md} ${SPACING.zero};
 
   @media (max-width: ${BREAKPOINTS.lg}px) {
     display: none;
   }
-`;
-
-export const UserIcon = styled.img`
-  width: 45px;
-  height: 45px;
-  margin-right: ${SPACING.xxs};
-  border-radius: ${BORDER_RADIUS.circle};
 `;
 
 export const UserInfo = styled.div`

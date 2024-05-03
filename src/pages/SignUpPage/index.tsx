@@ -7,6 +7,8 @@ import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
 import { Button } from '@/components/ui-components/Button';
 import { ButtonStyled2 } from '@/components/ui-components/Button/config';
 import { ContentText } from '@/components/ui-components/ContentText';
+import { Icon } from '@/components/ui-components/Icon';
+import { StyledIcon40 } from '@/components/ui-components/Icon/config';
 import { Input } from '@/components/ui-components/Input';
 import {
   EmailInputConfig,
@@ -85,7 +87,7 @@ const SignUpPage = () => {
     <Container>
       <StyledSignUpForm onSubmit={handleSubmit(onSubmit)}>
         <ImageDiv>
-          <img src={TwitterLogo} alt="twitter" title="twitter" />
+          <Icon src={TwitterLogo} alt="twitter" {...StyledIcon40} />
         </ImageDiv>
         <Title row="sm">{TITLE}</Title>
         <Input

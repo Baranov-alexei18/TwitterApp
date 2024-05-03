@@ -10,8 +10,3 @@ export const Container = styled.div`
   border-bottom: 1px solid ${COLOR.lightGrey};
   padding: ${SPACING.zero} ${SPACING.xs};
 `;
-export const IconBack = styled.img<{theme: string}>`
-  width: 20px;
-  margin: ${SPACING.xs} ${SPACING.xs} ${SPACING.zero} ${SPACING.zero};
-  filter: ${(props) => (props.theme === THEME.LIGHT ? 'none' : 'invert(100%)')};
-`;

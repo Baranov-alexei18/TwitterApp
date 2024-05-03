@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { ErrorBoundaryProps, ErrorBoundaryState } from '@/components/ErrorBoundary/types';
+import { Container } from '@/theme/global';
 
 import { Loader } from '../ui-components/Loader';
 
@@ -20,10 +21,10 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
     if (hasError) {
       return (
-        <div>
+        <Container>
           <Loader />
           <h3>Something went wrong, try again later</h3>
-        </div>
+        </Container>
       );
     }
 
