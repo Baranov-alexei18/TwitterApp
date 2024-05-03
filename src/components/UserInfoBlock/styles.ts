@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BORDER_RADIUS, SPACING } from '@/theme/variables';
+import { BORDER_RADIUS, BREAKPOINTS, SPACING } from '@/theme/variables';
 
 export const InfoContainer = styled.div`
   display: flex;
@@ -26,4 +26,8 @@ export const EllipsisWrapper = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  @media (max-width: ${BREAKPOINTS.xl}px) {
+    width: 100px;
+  }
 `;
