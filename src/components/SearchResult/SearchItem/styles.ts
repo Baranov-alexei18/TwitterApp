@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import {
   BORDER_RADIUS,
+  BREAKPOINTS,
   COLOR,
   FONT_SIZE,
   SPACING,
@@ -11,7 +12,7 @@ import {
 export const FormContainer = styled.div`
   cursor: pointer;
   display: flex;
-  width: 100%;
+  flex: 1;
   align-items: center;
   border-radius: ${BORDER_RADIUS.xxs};
   margin-bottom: ${SPACING.xxs};
@@ -20,6 +21,12 @@ export const FormContainer = styled.div`
   &:hover{
     background: ${COLOR.lightGrey}
   }
+  
+  @media (max-width: ${BREAKPOINTS.lg}px) {
+    button{
+      display: none;
+    };
+  }
 `;
 
 export const UserIcon = styled.img`
@@ -27,6 +34,11 @@ export const UserIcon = styled.img`
   height: 36px;
   border-radius: ${BORDER_RADIUS.circle};
   margin-right: ${SPACING.xxxs};
+
+  @media (max-width: ${BREAKPOINTS.lg}px) {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 export const UserInfo = styled.div`
@@ -34,10 +46,14 @@ export const UserInfo = styled.div`
   font-size: ${FONT_SIZE.xxs};
 `;
 export const TweetText = styled.div`
-  width: 200px;
+  width: 180px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @media (max-width: ${BREAKPOINTS.lg}px) {
+    width: 100px;
+  }
 `;
 
 export const Name = styled.div`
