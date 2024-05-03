@@ -33,7 +33,7 @@ export const MainContent = styled.div`
 
   @media (max-width: ${BREAKPOINTS.md}px) {
     flex: 1;
-    max-width: 100%;
+    max-width: calc(100% - 70px);
   }
 `;
 
