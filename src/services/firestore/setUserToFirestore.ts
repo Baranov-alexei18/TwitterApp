@@ -1,11 +1,12 @@
 import { doc, setDoc } from 'firebase/firestore';
 
+import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
 import { UserTypes } from '@/types/user';
 
 export const setUserToFirestore = async (data: UserTypes) => {
   try {
-    await setDoc(doc(firestore, 'users', data.uid!), {
+    await setDoc(doc(firestore, FIRESTORE_COLLECTION.USERS, data.uid!), {
       uid: data.uid,
       email: data.email?.trim(),
       description: '',

@@ -20,6 +20,6 @@ export const changePassword = async (email: string, oldPassword: string, newPass
     await changeUserPassword(newPassword);
   } catch (error) {
     console.error('Ошибка при изменении пароля:', error);
-    throw error; // Можно обработать ошибку дальше или просто выбросить её
+    throw error;
   }
 };
