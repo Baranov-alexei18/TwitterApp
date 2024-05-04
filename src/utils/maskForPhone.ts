@@ -1,4 +1,4 @@
-export const maskForPhone = (value: string, hasCountryCode: string) => {
+export const maskForPhone = (value: string, hasCountryCode?: string) => {
   const cleaned = value.replace(/\D/g, '');
 
   const limitedValue = hasCountryCode ? cleaned.slice(3, 12) : cleaned.slice(0, 9);
