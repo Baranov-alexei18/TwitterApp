@@ -56,10 +56,8 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
     async function setLikes() {
       if (debouncedLike) {
         setLikesToTweet(tweet_id, userNow.uid, TYPE_LIKE.ADD);
-        // setCountLikes((prev) => prev + 1);
       } else {
         setLikesToTweet(tweet_id, userNow.uid, TYPE_LIKE.DELETE);
-        // setCountLikes((prev) => prev - 1);
       }
     }
 
@@ -78,17 +76,17 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
     setIsTooltipOpen(false);
   };
 
-  const setLike = useCallback((e: unknown, id: string, userId: string) => {
+  const setLike = (e: unknown) => {
     (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
-    if (!activeLike) {
-      // setLikesToTweet(id, userId);
-      setCountLikes((prev) => prev + 1);
-    } else {
-      // deleteLikesToTweet(id, userId);
+
+    if (activeLike) {
       setCountLikes((prev) => prev - 1);
+    } else {
+      setCountLikes((prev) => prev + 1);
     }
+
     setActiveLike(!activeLike);
-  }, [tweet_id]);
+  };
 
   const handleToTweet = () => {
     navigate(`${PATH.HOME_PAGE}/tweet/${tweet_id}`);
@@ -132,7 +130,7 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
             alt="Like"
             {...StyledIcon24}
             margin={`${SPACING.zero} ${SPACING.xxxs} ${SPACING.zero} ${SPACING.zero}`}
-            onClick={(e) => setLike(e, tweet_id, userNow.uid)}
+            onClick={(e) => setLike(e)}
           />
           <LikeCount active={activeLike.toString()}>{countLikes || false}</LikeCount>
         </TweetLikes>
