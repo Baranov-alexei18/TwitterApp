@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
 import { ErrorBoundaryProps, ErrorBoundaryState } from '@/components/ErrorBoundary/types';
-import { Container } from '@/theme/global';
 
 import { Loader } from '../ui-components/Loader';
+
+import { ContainerError } from './styles';
 
 export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps | Readonly<ErrorBoundaryProps>) {
@@ -21,10 +22,10 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
     if (hasError) {
       return (
-        <Container>
+        <ContainerError>
           <Loader />
           <h3>Something went wrong, try again later</h3>
-        </Container>
+        </ContainerError>
       );
     }
 
