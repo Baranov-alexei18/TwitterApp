@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { collection, onSnapshot, Timestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 
 import { TweetForm } from '@/components/TweetForm';
 import { Loader } from '@/components/ui-components/Loader';
 import { ViewTweets } from '@/components/ViewTweets';
 import { TweetType } from '@/components/ViewTweets/types';
-import { firestore } from '@/firebase/firebaseConfig';
 import { getAllTweets } from '@/services/firestore/getAllTweets';
 import { getUserTweets } from '@/services/firestore/getUserTweets';
 import { UserState } from '@/types/user';
+import { getUniqueDocs } from '@/utils/getUniqueDocs';
 
 import { HeaderProfile } from './Header';
 
@@ -24,6 +24,7 @@ export const Feed = () => {
 
   useEffect(() => {
     getTweets();
+    console.log(tweetsAll);
   }, [user && user.tweets?.length, tweetId]);
 
   useEffect(() => {
@@ -67,7 +68,9 @@ export const Feed = () => {
           tweets = nextTweets;
         }
       }
-      setTweetsAll(tweets);
+      const uniqueTweets = getUniqueDocs('tweet_id', ...tweets!);
+
+      setTweetsAll(uniqueTweets);
     } catch (error) {
       console.error('Ошибка при загрузке твитов:', error);
     } finally {
@@ -76,7 +79,7 @@ export const Feed = () => {
   };
 
   const fetchMoreTweets = async () => {
-    if (!tweetsAll.length) return;
+    if (!tweetsAll.length || tweetId) return;
     try {
       setLoading(true);
 

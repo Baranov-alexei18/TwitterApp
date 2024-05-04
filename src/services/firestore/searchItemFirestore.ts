@@ -5,7 +5,7 @@ import {
 
 import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
-import { uniqueDoc } from '@/utils/uniqueDoc';
+import { getUniqueDocs } from '@/utils/getUniqueDocs';
 
 export const getSnapshotQuery = async (
   ref: CollectionReference<DocumentData, DocumentData>,
@@ -33,7 +33,7 @@ export const searchItemFirestore = async (queryString: string) => {
     const userResults = await getSnapshotQuery(usersRef, 'name', queryString);
     const emailResults = await getSnapshotQuery(usersRef, 'email', queryString);
 
-    const resultEmailAndName = uniqueDoc('uid', ...userResults!, ...emailResults!);
+    const resultEmailAndName = getUniqueDocs('uid', ...userResults!, ...emailResults!);
 
     return { tweets: tweetResults, users: [...resultEmailAndName] };
   } catch (error) {

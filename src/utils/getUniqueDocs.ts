@@ -1,6 +1,6 @@
 import { DocumentData } from 'firebase/firestore';
 
-export const uniqueDoc = (
+export const getUniqueDocs = (
   property: string,
   ...args: DocumentData[]
 ) => {
