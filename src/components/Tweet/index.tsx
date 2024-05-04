@@ -1,4 +1,6 @@
-import React, { memo, MouseEvent, useState } from 'react';
+import React, {
+  memo, MouseEvent, useCallback, useEffect, useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -6,11 +8,15 @@ import DefaultIconUser from '@/assets/image/defaultUserImage.png';
 import ActivelikeIcon from '@/assets/image/icons/active-like.svg';
 import DotsIcon from '@/assets/image/icons/dots.svg';
 import likeIcon from '@/assets/image/icons/like.svg';
+import { TIMEOUT_DEBOUNCE } from '@/constants';
+import { TYPE_LIKE } from '@/constants/firestore';
 import { PATH } from '@/constants/routerLinks';
-import { deleteLikesToTweet, setLikesToTweet } from '@/services/firestore/setLikesToTweet';
+import useDebounce from '@/hooks/useDebounce';
+import { searchItemFirestore } from '@/services/firestore/searchItemFirestore';
+import { setLikesToTweet } from '@/services/firestore/setLikesToTweet';
 import { modalOpen } from '@/store/sliceModal';
 import { SPACING } from '@/theme/variables';
-import { UserState } from '@/types/user';
+import { UserState, UserTypes } from '@/types/user';
 import { formatDate, formatTimestampToDate } from '@/utils/date';
 
 import { Icon } from '../ui-components/Icon';
@@ -44,6 +50,21 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
   const [activeLike, setActiveLike] = useState(!!likes.find((item) => item === userNow.uid));
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const debouncedLike = useDebounce(activeLike, TIMEOUT_DEBOUNCE);
+
+  useEffect(() => {
+    async function setLikes() {
+      if (debouncedLike) {
+        setLikesToTweet(tweet_id, userNow.uid, TYPE_LIKE.ADD);
+        // setCountLikes((prev) => prev + 1);
+      } else {
+        setLikesToTweet(tweet_id, userNow.uid, TYPE_LIKE.DELETE);
+        // setCountLikes((prev) => prev - 1);
+      }
+    }
+
+    setLikes();
+  }, [debouncedLike]);
 
   const handleTooltipOpen = (e: unknown) => {
     (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
@@ -57,17 +78,17 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
     setIsTooltipOpen(false);
   };
 
-  const setLike = (e: unknown, id: string, userId: string) => {
+  const setLike = useCallback((e: unknown, id: string, userId: string) => {
     (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
     if (!activeLike) {
-      setLikesToTweet(id, userId);
+      // setLikesToTweet(id, userId);
       setCountLikes((prev) => prev + 1);
     } else {
-      deleteLikesToTweet(id, userId);
+      // deleteLikesToTweet(id, userId);
       setCountLikes((prev) => prev - 1);
     }
     setActiveLike(!activeLike);
-  };
+  }, [tweet_id]);
 
   const handleToTweet = () => {
     navigate(`${PATH.HOME_PAGE}/tweet/${tweet_id}`);
