@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BREAKPOINTS, SPACING } from '@/theme/variables';
+import { SPACING } from '@/theme/variables';
 
 export const SignUpWrapper = styled.div`
   display: flex;

@@ -14,6 +14,7 @@ import { Loader } from '@/components/ui-components/Loader';
 import { Title } from '@/components/ui-components/Title';
 import { Toast } from '@/components/ui-components/Toast';
 import { genders, MAX_SIZE_IMAGE } from '@/constants';
+import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
 import { useToast } from '@/hooks/useToast';
 import { changePassword } from '@/services/firestore/changePassword';
@@ -37,16 +38,18 @@ export const FormUpdateUser = ({ closeModal }: {closeModal:()=>void}) => {
   const {
     uid, name, description, photoURL, email,
   } = useSelector((state: UserState) => state.user.data);
+
   const [isLoading, setIsLoading] = useState(false);
   const [avatar, setAvatar] = useState<{fileType: File|null, src: string}>({ fileType: null, src: '' });
   const { control, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+
   const {
     showToast, visible, text, type,
   } = useToast();
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    const userDocRef = doc(firestore, 'users', uid);
+    const userDocRef = doc(firestore, FIRESTORE_COLLECTION.USERS, uid);
 
     const unsubscribe = onSnapshot(userDocRef, (snapshot) => {
       dispatch(setUser({ ...snapshot.data() }));
@@ -57,23 +60,27 @@ export const FormUpdateUser = ({ closeModal }: {closeModal:()=>void}) => {
 
   const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file && file.size <= MAX_SIZE_IMAGE) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAvatar({
-          fileType: file,
-          src: reader.result as string,
-        });
-      };
-      reader.readAsDataURL(file);
-    } else {
+
+    if (file && file.size >= MAX_SIZE_IMAGE) {
       alert('Выберите изображение размером не более 2Мб');
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setAvatar({
+        fileType: file!,
+        src: reader.result as string,
+      });
+    };
+    reader.readAsDataURL(file!);
   };
 
   const onSubmitUser = async (data: Partial<UserUpdateType>) => {
     const { password_confirm, password_confirm_new } = data;
+
     setIsLoading(true);
+
     try {
       if (password_confirm && password_confirm_new) {
         await changePassword(email!, password_confirm, password_confirm_new);
@@ -82,7 +89,6 @@ export const FormUpdateUser = ({ closeModal }: {closeModal:()=>void}) => {
       await updateUser(uid, data, avatar!.fileType!);
 
       showToast('Update success', 'success');
-
       closeModal();
     } catch (error) {
       showToast('Incorrect old password', 'error');
