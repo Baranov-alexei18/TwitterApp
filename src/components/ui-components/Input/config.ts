@@ -2,7 +2,7 @@ import { MAX_CHARACTERS_TEXTAREA } from '@/constants';
 import { INPUT_FORM_NAMES } from '@/constants/pages/forms';
 import {
   EmailValidate, MaxLengthValidate, NameValidate, PasswordValidate, PhoneValidate,
-} from '@/pages/SignUpPage/options';
+} from '@/components/Forms/options';
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
 import { maskForPhone } from '@/utils/maskForPhone';
 
