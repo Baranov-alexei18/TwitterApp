@@ -7,7 +7,7 @@ import { UserTypes } from '@/types/user';
 import { Title } from '../ui-components/Title';
 import { TweetType } from '../ViewTweets/types';
 
-import SearchItem from './SearchItem';
+import { SearchItem } from './SearchItem';
 import {
   ResultGroup, ResultHeader, ResultsContainer,
 } from './styles';
