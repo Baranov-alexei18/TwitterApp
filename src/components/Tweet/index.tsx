@@ -2,7 +2,7 @@ import React, {
   memo, MouseEvent, useCallback, useEffect, useState,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import DefaultIconUser from '@/assets/image/defaultUserImage.png';
 import ActivelikeIcon from '@/assets/image/icons/active-like.svg';
@@ -12,15 +12,14 @@ import { TIMEOUT_DEBOUNCE } from '@/constants';
 import { TYPE_LIKE } from '@/constants/firestore';
 import { PATH } from '@/constants/routerLinks';
 import useDebounce from '@/hooks/useDebounce';
-import { searchItemFirestore } from '@/services/firestore/searchItemFirestore';
 import { setLikesToTweet } from '@/services/firestore/setLikesToTweet';
 import { modalOpen } from '@/store/sliceModal';
 import { SPACING } from '@/theme/variables';
-import { UserState, UserTypes } from '@/types/user';
+import { UserState } from '@/types/user';
 import { formatDate, formatTimestampToDate } from '@/utils/date';
 
 import { Icon } from '../ui-components/Icon';
-import { StyledIcon24, StyledIcon40, StyledIconCircle40 } from '../ui-components/Icon/config';
+import { StyledIcon24, StyledIconCircle40 } from '../ui-components/Icon/config';
 import { TweetType } from '../ViewTweets/types';
 
 import {
@@ -44,6 +43,7 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
   const {
     user, text, image, likes, tweet_id,
   } = data;
+
   const userNow = useSelector((state: UserState) => state.user.data);
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
   const [countLikes, setCountLikes] = useState(likes.length);
@@ -88,12 +88,12 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
     setActiveLike(!activeLike);
   };
 
-  const handleToTweet = () => {
+  const handleToTweet = useCallback(() => () => {
     navigate(`${PATH.HOME_PAGE}/tweet/${tweet_id}`);
-  };
+  }, []);
 
   return (
-    <TweetContainer onClick={() => handleToTweet()}>
+    <TweetContainer onClick={handleToTweet()}>
       <Icon
         src={user.photoURL || DefaultIconUser}
         alt="Avatar"
@@ -132,7 +132,7 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
             margin={`${SPACING.zero} ${SPACING.xxxs} ${SPACING.zero} ${SPACING.zero}`}
             onClick={(e) => setLike(e)}
           />
-          <LikeCount active={activeLike.toString()}>{countLikes || false}</LikeCount>
+          <LikeCount active={activeLike.toString()}>{countLikes || ''}</LikeCount>
         </TweetLikes>
       </TweetUserInfo>
     </TweetContainer>

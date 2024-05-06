@@ -13,6 +13,7 @@ import { UserState } from '@/types/user';
 import { getUniqueDocs } from '@/utils/getUniqueDocs';
 
 import { HeaderProfile } from './Header';
+import { IntersectionDiv } from './styles';
 
 export const Feed = () => {
   const user = useSelector((state: UserState) => state.user.data);
@@ -24,7 +25,6 @@ export const Feed = () => {
 
   useEffect(() => {
     getTweets();
-    console.log(tweetsAll);
   }, [user && user.tweets?.length, tweetId]);
 
   useEffect(() => {
@@ -57,17 +57,19 @@ export const Feed = () => {
       setLastDoc(null);
 
       if (tweetId) {
-        tweets = await getUserTweets([tweetId]) as TweetType[];
-      } else {
-        const nextTweets = await getAllTweets(lastDoc) as TweetType[];
-
-        if (nextTweets.length > 0) {
-          setLastDoc(nextTweets[nextTweets.length - 1].date_created);
-          tweets = [...tweetsAll, ...nextTweets];
-        } else {
-          tweets = nextTweets;
-        }
+        const tweet = await getUserTweets([tweetId]) as TweetType[];
+        setTweetsAll(tweet);
+        return;
       }
+      const nextTweets = await getAllTweets(lastDoc) as TweetType[];
+
+      if (nextTweets.length > 0) {
+        setLastDoc(nextTweets[nextTweets.length - 1].date_created);
+        tweets = [...tweetsAll, ...nextTweets];
+      } else {
+        tweets = nextTweets;
+      }
+
       const uniqueTweets = getUniqueDocs('tweet_id', ...tweets!);
 
       setTweetsAll(uniqueTweets);
@@ -102,7 +104,7 @@ export const Feed = () => {
       <HeaderProfile />
       {!tweetId && <TweetForm />}
       <ViewTweets data={tweetsAll} />
-      <div ref={sentinelRef} style={{ height: '4px' }} />
+      <IntersectionDiv ref={sentinelRef} />
       {loading && <Loader />}
     </>
   );

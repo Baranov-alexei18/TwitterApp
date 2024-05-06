@@ -30,14 +30,18 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
 
   const handleDeletePost = async (dataTweet:TweetType) => {
     const { user, tweet_id } = dataTweet;
+
     await deleteTweet(user, tweet_id);
+
     dispatch(setUser({
       ...user,
       tweets: user.tweets!.filter((tweetIds: string) => tweetIds !== tweet_id),
     }));
+
     if (tweetId) {
       navigate(PATH.HOME_PAGE);
     }
+
     dispatch(modalClose());
     setIsModal(false);
     setActiveTweetId(null);
