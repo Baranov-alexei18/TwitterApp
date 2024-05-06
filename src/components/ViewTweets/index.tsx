@@ -60,6 +60,7 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
       {
         data.map((item: TweetType) => (
           <Tweet
+            data-testid="tweet"
             key={item.tweet_id}
             data={item}
             onHandleTweet={handleTweet}
@@ -67,6 +68,7 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
         ))
       }
       <ModalConfirm
+        data-testid="modal-confirm"
         isOpen={isModal}
         onConfirm={() => handleDeletePost(activeTweetId!)}
         onCloseModal={handleModalClose}

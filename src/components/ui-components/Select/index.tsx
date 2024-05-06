@@ -4,6 +4,7 @@ import { StyledSelect } from './styles';
 import { SelectProps } from './types';
 
 export const Select: React.FC<Partial<SelectProps>> = ({
+  name,
   options,
   size,
   borderColor,
@@ -13,6 +14,7 @@ export const Select: React.FC<Partial<SelectProps>> = ({
   onChange,
 }) => (
   <StyledSelect
+    data-testid={`${name}-id`}
     size={size}
     borderColor={borderColor}
     color={color}

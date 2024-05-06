@@ -120,16 +120,19 @@ const SignUpPage = () => {
         </ContentText>
         <SelectWrapper>
           <Select
+            name="year"
             options={arrayYears}
             onChange={(e) => setYear(parseFloat(e.target.value))}
             placeholder="Year"
           />
           <Select
+            name="month"
             options={arrayMonth}
             placeholder="Month"
             onChange={(e) => setMonth(parseFloat(e.target.value))}
           />
           <Select
+            name="day"
             options={arrayDays}
             onChange={(e) => setDay(parseFloat(e.target.value))}
             placeholder="Day"

@@ -7,6 +7,7 @@ export type Option = {
 
 export type SelectProps = {
     options: Option[];
+    name: string;
     size: string;
     width: string;
     borderColor: string;

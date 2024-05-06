@@ -6,7 +6,6 @@ import HeaderBackground from '@/assets/image/headerBackground.png';
 import { Button } from '@/components/ui-components/Button';
 import { ButtonStyled4 } from '@/components/ui-components/Button/config';
 import { ModalBase } from '@/components/ui-components/Modal/ModalBase';
-import { modalClose, modalOpen } from '@/store/sliceModal';
 import { COLOR } from '@/theme/variables';
 import { UserState } from '@/types/user';
 
