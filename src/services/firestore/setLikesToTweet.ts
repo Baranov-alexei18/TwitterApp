@@ -1,6 +1,4 @@
-import {
-  deleteDoc, doc, getDoc, updateDoc,
-} from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
 import { FIRESTORE_COLLECTION, TYPE_LIKE } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';

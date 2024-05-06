@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { TIME_TOAST } from '@/constants';
+
 export const useToast = () => {
   const [visible, setVisible] = useState(false);
   const [text, setText] = useState('');
@@ -16,7 +18,7 @@ export const useToast = () => {
     if (visible) {
       timer = setTimeout(() => {
         setVisible(false);
-      }, 3000);
+      }, TIME_TOAST);
     }
     return () => clearTimeout(timer);
   }, [visible]);

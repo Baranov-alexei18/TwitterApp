@@ -14,10 +14,12 @@ export const useAuthToken = () => {
 
   useEffect(() => {
     const token = localStorage.getItem(LOCALSTORAGE_TOKEN);
+
     if (token) {
       getUserDataFromFirestore(token)
         .then((userData) => {
           dispatch(setUser({ ...userData }));
+
           if (location.pathname === PATH.SIGN_UP_PAGE
               || location.pathname === PATH.LOG_IN_PAGE
               || location.pathname === PATH.START_PAGE) navigate(PATH.HOME_PAGE);

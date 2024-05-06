@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import DefaultIconUser from '@/assets/image/defaultUserImage.png';
 import HeaderBackground from '@/assets/image/headerBackground.png';
+import { FormUpdateUser } from '@/components/Forms/UpdateForm';
 import { Button } from '@/components/ui-components/Button';
 import { ButtonStyled4 } from '@/components/ui-components/Button/config';
 import { ModalBase } from '@/components/ui-components/Modal/ModalBase';
 import { COLOR } from '@/theme/variables';
 import { UserState } from '@/types/user';
-
-import { FormUpdateUser } from '../../../../components/Forms/UpdateForm';
 
 import {
   Container, Description, Icon, Image,
@@ -71,7 +70,7 @@ export const HeaderProfile = () => {
         isOpen={isModal}
         onCloseModal={handleModalClose}
       >
-        <FormUpdateUser closeModal={() => handleModalClose()} />
+        <FormUpdateUser closeModal={handleModalClose} />
       </ModalBase>
     </Container>
   );
