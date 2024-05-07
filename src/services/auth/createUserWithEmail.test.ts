@@ -1,9 +1,8 @@
 import { initializeTestEnvironment } from '@firebase/rules-unit-testing';
 import { expect } from '@jest/globals';
-import { connectAuthEmulator } from 'firebase/auth';
 import { Timestamp } from 'firebase/firestore';
 
-import { auth, PROJECT_ID, testEnvConfig } from '@/firebase/firebaseConfig';
+import { auth, testEnvConfig } from '@/firebase/firebaseConfig';
 
 import { createAccountWithEmail } from './createUserWithEmail';
 
