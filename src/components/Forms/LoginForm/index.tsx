@@ -15,12 +15,11 @@ import { Toast } from '@/components/ui-components/Toast';
 import { INPUT_FORM_NAMES, LOGIN_FORM } from '@/constants/pages/forms';
 import { PATH } from '@/constants/routerLinks';
 import { useToast } from '@/hooks/useToast';
+import { StyledLoginForm } from '@/pages/LoginPage/styles';
 import { LoginToAccount } from '@/services/auth/loginToAccount';
 import { setUser } from '@/store/sliceUser';
 import { UserTypes } from '@/types/user';
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
-
-import { StyledLoginForm } from '../../../pages/LoginPage/styles';
 
 export const LoginPageForm = () => {
   const { TITLE, LOGIN } = LOGIN_FORM;

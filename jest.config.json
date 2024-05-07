@@ -1,5 +1,22 @@
 {
-  "roots": ["<rootDir>/src"],
-  "testMatch": ["**/__tests__/**/*.+(ts|tsx|js|jsx)", "**/?(*.)+(spec|test).+(ts|tsx|js|jsx)"],
-  "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
+  "roots": [
+    "<rootDir>/src"
+  ],
+  "testMatch": [
+    "**/__tests__/**/*.+(ts|tsx|js|jsx)",
+    "**/?(*.)+(spec|test).+(ts|tsx|js|jsx)"
+  ],
+  "moduleFileExtensions": [
+    "ts",
+    "tsx",
+    "js",
+    "jsx",
+    "json",
+    "node"
+  ],
+  "moduleNameMapper": {
+    "^@/(.*)$": "<rootDir>/src/$1"
+  },
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.ts"],
+  "testEnvironment": "node"
 }

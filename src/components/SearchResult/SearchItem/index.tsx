@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import DefaultIconUser from '@/assets/image/defaultUserImage.png';
@@ -14,7 +14,7 @@ import {
   Email, FormContainer, Name, TweetText, UserIcon, UserInfo,
 } from './styles';
 
-const SearchItem = ({ item }: { item: UserTypes | TweetType }) => {
+export const SearchItem = memo(({ item }: { item: UserTypes | TweetType }) => {
   const navigate = useNavigate();
 
   if ('tweet_id' in item) {
@@ -47,6 +47,4 @@ const SearchItem = ({ item }: { item: UserTypes | TweetType }) => {
       <Button {...ButtonStyled4} fontSize={FONT_SIZE.xs} background={COLOR.dark}>Follow</Button>
     </FormContainer>
   );
-};
-
-export default SearchItem;
+});

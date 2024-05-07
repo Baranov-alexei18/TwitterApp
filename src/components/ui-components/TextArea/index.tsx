@@ -65,6 +65,7 @@ export const TextArea: FC<TextAreaTypes> = ({ loader, onSubmit, ...rest }) => {
         <span>{photo?.name}</span>
         <Button
           {...ButtonStyled4}
+          data-testid="textaria-btn"
           onClick={handleSubmit}
           disabled={loader}
         >

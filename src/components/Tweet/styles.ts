@@ -4,8 +4,6 @@ import {
   BORDER_RADIUS, BREAKPOINTS, COLOR, FONT_SIZE, SPACING, WEIGHT, Z_INDEX,
 } from '@/theme/variables';
 
-import { Icon } from '../ui-components/Icon';
-
 export const TweetContainer = styled.div`
   display: flex;
   align-items: flex-start;

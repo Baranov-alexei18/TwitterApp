@@ -48,6 +48,7 @@ export const NavLink = styled(Link)<{active: string | undefined}>`
     color: ${COLOR.primary};
   }
 `;
+
 export const NavLinkTitle = styled.span`
   @media (max-width: ${BREAKPOINTS.lg}px) {
     display: none;

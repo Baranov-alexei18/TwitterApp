@@ -7,15 +7,17 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 
+import { TWEETS_LIMIT } from '@/constants';
+import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
 
 export const getAllTweets = async (lastTweet: Timestamp|null = null) => {
   try {
-    const tweetsCollectionRef = collection(firestore, 'tweets');
-    let tweetsQuery = query(tweetsCollectionRef, orderBy('date_created', 'desc'), limit(5));
+    const tweetsCollectionRef = collection(firestore, FIRESTORE_COLLECTION.TWEETS);
+    let tweetsQuery = query(tweetsCollectionRef, orderBy('date_created', 'desc'), limit(TWEETS_LIMIT));
 
     if (lastTweet) {
-      tweetsQuery = query(tweetsCollectionRef, orderBy('date_created', 'desc'), startAfter(lastTweet), limit(5));
+      tweetsQuery = query(tweetsCollectionRef, orderBy('date_created', 'desc'), startAfter(lastTweet), limit(TWEETS_LIMIT));
     }
 
     const tweetsQuerySnapshot = await getDocs(tweetsQuery);
@@ -24,7 +26,7 @@ export const getAllTweets = async (lastTweet: Timestamp|null = null) => {
 
     for (const tweetDoc of tweetsQuerySnapshot.docs) {
       const tweetData = tweetDoc.data();
-      const userDocRef = doc(firestore, 'users', tweetData.user_id);
+      const userDocRef = doc(firestore, FIRESTORE_COLLECTION.USERS, tweetData.user_id);
       const userDocSnap = await getDoc(userDocRef);
 
       if (userDocSnap.exists()) {

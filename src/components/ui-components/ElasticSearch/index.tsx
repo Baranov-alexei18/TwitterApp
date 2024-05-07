@@ -23,7 +23,7 @@ export const ElasticSearch = ({ onChange }:
   const debouncedSearchTerm = useDebounce(searchQuery, TIMEOUT_DEBOUNCE);
 
   useEffect(() => {
-    async function fetchData() {
+    async function getSearchResult() {
       setShowResults(true);
 
       if (debouncedSearchTerm) {
@@ -33,7 +33,7 @@ export const ElasticSearch = ({ onChange }:
       setShowResults(false);
     }
 
-    fetchData();
+    getSearchResult();
   }, [debouncedSearchTerm]);
 
   const handleChange = async (event: { target: { value: string; }; }) => {

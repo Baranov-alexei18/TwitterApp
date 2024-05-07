@@ -1,6 +1,7 @@
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
+import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore, storage } from '@/firebase/firebaseConfig';
 import { UserTypes } from '@/types/user';
 
@@ -9,7 +10,7 @@ export const updateUser = async (
   data: Partial<UserTypes & {gender: string}>,
   avatar: File,
 ) => {
-  const userDocRef = doc(firestore, 'users', userId);
+  const userDocRef = doc(firestore, FIRESTORE_COLLECTION.USERS, userId);
   const dataUser = await getDoc(userDocRef);
 
   let photoURL;

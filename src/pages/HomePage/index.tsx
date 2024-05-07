@@ -16,7 +16,7 @@ const HomePage = () => {
   const user = useSelector((state: UserState) => state.user);
 
   return (
-    <Container>
+    <Container data-testid="main-page">
       <Sidebar />
       <MainContent>
         <Outlet />

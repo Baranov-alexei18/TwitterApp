@@ -14,7 +14,7 @@ export const App = () => {
   useAuthToken();
 
   return (
-    <ThemeContainer theme={themes}>
+    <ThemeContainer data-testid="theme-main" theme={themes}>
       <GlobalStyles modal={isModal} />
       <ErrorBoundary>
         <Outlet />

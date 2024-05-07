@@ -14,6 +14,7 @@ export const LoginToAccount = async (
     const userData = await getUserDataFromFirestore(user.uid);
 
     localStorage.setItem(LOCALSTORAGE_TOKEN, user.uid);
+
     return userData;
   } catch (error) {
     console.error('Ошибка при атворизации пользователя:', error);

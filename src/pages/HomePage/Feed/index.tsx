@@ -1,18 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { collection, onSnapshot, Timestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 
 import { TweetForm } from '@/components/TweetForm';
 import { Loader } from '@/components/ui-components/Loader';
 import { ViewTweets } from '@/components/ViewTweets';
 import { TweetType } from '@/components/ViewTweets/types';
-import { firestore } from '@/firebase/firebaseConfig';
 import { getAllTweets } from '@/services/firestore/getAllTweets';
 import { getUserTweets } from '@/services/firestore/getUserTweets';
 import { UserState } from '@/types/user';
+import { getUniqueDocs } from '@/utils/getUniqueDocs';
 
 import { HeaderProfile } from './Header';
+import { IntersectionDiv } from './styles';
 
 export const Feed = () => {
   const user = useSelector((state: UserState) => state.user.data);
@@ -56,18 +57,22 @@ export const Feed = () => {
       setLastDoc(null);
 
       if (tweetId) {
-        tweets = await getUserTweets([tweetId]) as TweetType[];
-      } else {
-        const nextTweets = await getAllTweets(lastDoc) as TweetType[];
-
-        if (nextTweets.length > 0) {
-          setLastDoc(nextTweets[nextTweets.length - 1].date_created);
-          tweets = [...tweetsAll, ...nextTweets];
-        } else {
-          tweets = nextTweets;
-        }
+        const tweet = await getUserTweets([tweetId]) as TweetType[];
+        setTweetsAll(tweet);
+        return;
       }
-      setTweetsAll(tweets);
+      const nextTweets = await getAllTweets(lastDoc) as TweetType[];
+
+      if (nextTweets.length > 0) {
+        setLastDoc(nextTweets[nextTweets.length - 1].date_created);
+        tweets = [...tweetsAll, ...nextTweets];
+      } else {
+        tweets = nextTweets;
+      }
+
+      const uniqueTweets = getUniqueDocs('tweet_id', ...tweets!);
+
+      setTweetsAll(uniqueTweets);
     } catch (error) {
       console.error('Ошибка при загрузке твитов:', error);
     } finally {
@@ -76,7 +81,7 @@ export const Feed = () => {
   };
 
   const fetchMoreTweets = async () => {
-    if (!tweetsAll.length) return;
+    if (!tweetsAll.length || tweetId) return;
     try {
       setLoading(true);
 
@@ -99,7 +104,7 @@ export const Feed = () => {
       <HeaderProfile />
       {!tweetId && <TweetForm />}
       <ViewTweets data={tweetsAll} />
-      <div ref={sentinelRef} style={{ height: '4px' }} />
+      <IntersectionDiv ref={sentinelRef} />
       {loading && <Loader />}
     </>
   );

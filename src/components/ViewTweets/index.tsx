@@ -30,14 +30,18 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
 
   const handleDeletePost = async (dataTweet:TweetType) => {
     const { user, tweet_id } = dataTweet;
+
     await deleteTweet(user, tweet_id);
+
     dispatch(setUser({
       ...user,
       tweets: user.tweets!.filter((tweetIds: string) => tweetIds !== tweet_id),
     }));
+
     if (tweetId) {
       navigate(PATH.HOME_PAGE);
     }
+
     dispatch(modalClose());
     setIsModal(false);
     setActiveTweetId(null);
@@ -60,6 +64,7 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
       {
         data.map((item: TweetType) => (
           <Tweet
+            data-testid="tweet"
             key={item.tweet_id}
             data={item}
             onHandleTweet={handleTweet}
@@ -67,6 +72,7 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
         ))
       }
       <ModalConfirm
+        data-testid="modal-confirm"
         isOpen={isModal}
         onConfirm={() => handleDeletePost(activeTweetId!)}
         onCloseModal={handleModalClose}

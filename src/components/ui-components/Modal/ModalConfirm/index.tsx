@@ -15,14 +15,14 @@ export const ModalConfirm = React.memo(
   }: ModalConfirmProps) => {
     if (!isOpen) return null;
 
-    const handleConfirm = () => {
+    const handleConfirm = () => () => {
       onConfirm();
     };
     return (
       <ModalBase isOpen={isOpen} onCloseModal={onCloseModal}>
         {children}
         <WrapperButton>
-          <Button onClick={() => handleConfirm()} {...ButtonStyled4} background={COLOR.error}>
+          <Button onClick={handleConfirm()} {...ButtonStyled4} background={COLOR.error}>
             Ok
           </Button>
           <Button onClick={onCloseModal} {...ButtonStyled4} background={COLOR.lightGrey}>

@@ -16,7 +16,9 @@ export const createAccountWithGoogle = async () => {
     .then(async (result) => {
       const { user } = result;
       localStorage.setItem(LOCALSTORAGE_TOKEN, user.uid);
+
       await setUserToFirestore({ ...user } as UserTypes);
+
       return user;
     }).catch((error) => {
       GoogleAuthProvider.credentialFromError(error);

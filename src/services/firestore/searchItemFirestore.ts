@@ -1,26 +1,41 @@
 import {
-  collection, doc, getDoc, getDocs, query, where,
+  collection, CollectionReference,
+  DocumentData, getDocs, query, where,
 } from 'firebase/firestore';
 
-import { TweetType } from '@/components/ViewTweets/types';
+import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
-import { UserTypes } from '@/types/user';
+import { getUniqueDocs } from '@/utils/getUniqueDocs';
 
-export const searchItemFirestore = async (queryUser: string) => {
+export const getSnapshotQuery = async (
+  ref: CollectionReference<DocumentData, DocumentData>,
+  value: string,
+  queryString: string,
+) => {
   try {
-    console.log('DEBOUNE');
-    const tweetsRef = collection(firestore, 'tweets');
-    const tweetsSnapshot = query(tweetsRef, where('text', '>=', queryUser), where('text', '<=', `${queryUser}\uf8ff`));
-    const tweetResults = (await getDocs(tweetsSnapshot)).docs.map((docTweet) => docTweet.data());
+    const snapshot = query(ref, where(value, '>=', queryString), where(value, '<=', `${queryString}\uf8ff`));
+    const snapshotResults = (await getDocs(snapshot)).docs.map((docItem) => docItem.data());
 
-    const usersRef = collection(firestore, 'users');
-    const usersSnapshot = query(usersRef, where('name', '>=', queryUser), where('name', '<=', `${queryUser}\uf8ff`));
-    const emailSnapshot = query(usersRef, where('email', '>=', queryUser), where('email', '<=', `${queryUser}\uf8ff`));
-    const userResults = (await getDocs(usersSnapshot)).docs.map((docUser) => docUser.data());
+    return snapshotResults;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-    const emailResults = (await getDocs(emailSnapshot)).docs.map((docUser) => docUser.data());
+export const searchItemFirestore = async (queryString: string) => {
+  try {
+    const tweetsRef = collection(firestore, FIRESTORE_COLLECTION.TWEETS);
 
-    return { tweets: tweetResults, users: [...userResults, ...emailResults] };
+    const tweetResults = await getSnapshotQuery(tweetsRef, 'text', queryString);
+
+    const usersRef = collection(firestore, FIRESTORE_COLLECTION.USERS);
+
+    const userResults = await getSnapshotQuery(usersRef, 'name', queryString);
+    const emailResults = await getSnapshotQuery(usersRef, 'email', queryString);
+
+    const resultEmailAndName = getUniqueDocs('uid', ...userResults!, ...emailResults!);
+
+    return { tweets: tweetResults, users: [...resultEmailAndName] };
   } catch (error) {
     console.error('Error fetching search results:', error);
     return { tweets: [], users: [] };

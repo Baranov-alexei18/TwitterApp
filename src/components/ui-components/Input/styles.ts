@@ -27,8 +27,8 @@ export const WrapperInput = styled.div`
 
 export const WrapperIcon = styled.div`
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: ${SPACING.md};
+  right: ${SPACING.md};
   width: 30px;
   cursor: pointer;
   border-radius: ${BORDER_RADIUS.xl};
