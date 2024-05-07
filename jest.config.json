@@ -13,5 +13,10 @@
     "jsx",
     "json",
     "node"
-  ]
+  ],
+  "moduleNameMapper": {
+    "^@/(.*)$": "<rootDir>/src/$1"
+  },
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.ts"],
+  "testEnvironment": "node"
 }
