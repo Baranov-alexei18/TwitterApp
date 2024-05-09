@@ -81,12 +81,18 @@ export const Feed = () => {
   };
 
   const fetchMoreTweets = async () => {
-    if (!tweetsAll.length || tweetId) return;
+    if (!tweetsAll.length || tweetId || loading) return;
     try {
       setLoading(true);
 
       const lastTweet = tweetsAll[tweetsAll.length - 1];
       const nextTweets = await getAllTweets(lastTweet.date_created) as unknown as TweetType[];
+
+      if (!nextTweets.length) {
+        setLoading(false);
+        setLastDoc(null);
+        return;
+      }
       setTweetsAll((prevTweets) => [...prevTweets, ...nextTweets]);
     } catch (error) {
       console.error('Ошибка при загрузке новых твитов:', error);
@@ -104,7 +110,7 @@ export const Feed = () => {
       <HeaderProfile />
       {!tweetId && <TweetForm />}
       <ViewTweets data={tweetsAll} />
-      <IntersectionDiv ref={sentinelRef} />
+      {!loading && lastDoc && <IntersectionDiv ref={sentinelRef} />}
       {loading && <Loader />}
     </>
   );
