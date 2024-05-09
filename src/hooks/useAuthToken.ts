@@ -21,8 +21,7 @@ export const useAuthToken = () => {
           dispatch(setUser({ ...userData }));
 
           if (location.pathname === PATH.SIGN_UP_PAGE
-              || location.pathname === PATH.LOG_IN_PAGE
-              || location.pathname === PATH.START_PAGE) navigate(PATH.HOME_PAGE);
+            || location.pathname === PATH.LOG_IN_PAGE) navigate(PATH.HOME_PAGE);
         })
         .catch((error) => {
           console.error('Ошибка при получении данных пользователя из Firestore:', error);

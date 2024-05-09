@@ -6,11 +6,13 @@ import { Icon } from '@/components/ui-components/Icon';
 import { StyledIcon40 } from '@/components/ui-components/Icon/config';
 import { Title } from '@/components/ui-components/Title';
 import { SIGN_UP_FORM } from '@/constants/pages/forms';
+import { useAuthToken } from '@/hooks/useAuthToken';
 
 import { ImageDiv, SignUpWrapper } from './styles';
 
 const SignUpPage = () => {
   const { TITLE } = SIGN_UP_FORM;
+  useAuthToken();
 
   return (
     <SignUpWrapper>
