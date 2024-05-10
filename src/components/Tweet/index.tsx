@@ -1,7 +1,7 @@
 import React, {
   memo, MouseEvent, useCallback, useEffect, useState,
 } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import DefaultIconUser from '@/assets/image/defaultUserImage.png';
@@ -13,7 +13,6 @@ import { TYPE_LIKE } from '@/constants/firestore';
 import { PATH } from '@/constants/routerLinks';
 import useDebounce from '@/hooks/useDebounce';
 import { setLikesToTweet } from '@/services/firestore/setLikesToTweet';
-import { modalOpen } from '@/store/sliceModal';
 import { SPACING } from '@/theme/variables';
 import { UserState } from '@/types/user';
 import { formatDate, formatTimestampToDate } from '@/utils/date';
@@ -49,7 +48,6 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
   const [countLikes, setCountLikes] = useState(likes.length);
   const [activeLike, setActiveLike] = useState(!!likes.find((item) => item === userNow.uid));
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const debouncedLike = useDebounce(activeLike, TIMEOUT_DEBOUNCE);
 
   useEffect(() => {
@@ -71,7 +69,6 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
 
   const handleOpenModal = (e: unknown, tweet: TweetType) => {
     (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
-    dispatch(modalOpen());
     onHandleTweet(tweet);
     setIsTooltipOpen(false);
   };

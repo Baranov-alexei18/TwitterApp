@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { BORDER_RADIUS, COLOR, SPACING } from '@/theme/variables';
+import { COLOR } from '@/theme/variables';
 
 export const Container = styled.div`
   display: flex;

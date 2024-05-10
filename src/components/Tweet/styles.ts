@@ -78,7 +78,7 @@ export const TweetLikes = styled.div`
 
 export const LikeCount = styled.span<{active: string}>`
   margin-left: ${SPACING.xxxs};
-  color: ${(props) => (props.active === 'false' ? COLOR.dark : COLOR.likeColor)}
+  color: ${(props) => (props.active === 'false' ? 'inherit' : COLOR.likeColor)}
 `;
 
 export const ToolTip = styled.div`
@@ -96,7 +96,7 @@ export const ToolTip = styled.div`
 export const ToolTipOption = styled.div`
   cursor: pointer;
   font-size: ${FONT_SIZE.xs};
-  margin: ${SPACING.xxs};
+  padding: ${SPACING.xxs};
   color: ${COLOR.error};
 
   &:hover {

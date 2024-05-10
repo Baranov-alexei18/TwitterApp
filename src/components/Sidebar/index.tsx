@@ -9,6 +9,7 @@ import { LOCALSTORAGE_TOKEN } from '@/constants';
 import { SidebarLinks } from '@/constants/pages/mainPage';
 import { PATH } from '@/constants/routerLinks';
 import { auth } from '@/firebase/firebaseConfig';
+import { modalClose, modalOpen } from '@/store/sliceModal';
 import { RootState } from '@/store/store';
 import { COLOR } from '@/theme/variables';
 
@@ -26,9 +27,11 @@ import {
 
 export const Sidebar = () => {
   const themes = useSelector((state: RootState) => state.theme.theme);
+  const modal = useSelector((state: RootState) => state.modal.isOpen);
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const exitFromAccount = async () => {
     try {
@@ -43,10 +46,12 @@ export const Sidebar = () => {
 
   const openModal = () => {
     setIsModal(true);
+    dispatch(modalOpen());
   };
 
   const closeModal = () => {
     setIsModal(false);
+    dispatch(modalClose());
   };
 
   return (
@@ -86,7 +91,7 @@ export const Sidebar = () => {
       >
         Log out
       </Button>
-      <ModalBase isOpen={isModal} onCloseModal={closeModal}>
+      <ModalBase isOpen={modal} onCloseModal={closeModal}>
         <TweetForm />
       </ModalBase>
     </SidebarContainer>
