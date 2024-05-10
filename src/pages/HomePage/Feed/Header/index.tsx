@@ -25,7 +25,7 @@ export const HeaderProfile = () => {
               src={ArrowLeft}
               alt="back arrow"
               theme={themes}
-              margin={`${SPACING.xs} ${SPACING.xs} ${SPACING.zero} ${SPACING.zero}`}
+              margin={`${SPACING.zero} ${SPACING.xxs}`}
             />
           </Link>
         )}
