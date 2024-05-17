@@ -9,10 +9,8 @@ import { ViewTweets } from '@/components/ViewTweets';
 import { TweetType } from '@/components/ViewTweets/types';
 import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
-import { useAuthToken } from '@/hooks/useAuthToken';
 import { getAllTweets } from '@/services/firestore/getAllTweets';
 import { getUserTweets } from '@/services/firestore/getUserTweets';
-import { setUser } from '@/store/sliceUser';
 import { UserState } from '@/types/user';
 import { getUniqueDocs } from '@/utils/getUniqueDocs';
 

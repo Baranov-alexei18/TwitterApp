@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -25,7 +25,7 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
     setIsModal(false);
   };
 
-  const handleDeletePost = async (dataTweet:TweetType) => {
+  const handleDeletePost = async (dataTweet: TweetType) => {
     const { user, tweet_id } = dataTweet;
 
     await deleteTweet(user, tweet_id);
@@ -46,10 +46,16 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
     setActiveTweetId(null);
   };
 
-  const handleTweet = (dataTweet:TweetType) => {
+  const handleTweet = (dataTweet: TweetType) => {
     setIsModal(true);
     setActiveTweetId(dataTweet);
   };
+
+  const handleConfirmDelete = useCallback(() => {
+    if (activeTweetId) {
+      handleDeletePost(activeTweetId);
+    }
+  }, [activeTweetId, handleDeletePost]);
 
   return (
     <>
@@ -68,7 +74,7 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
       <ModalConfirm
         data-testid="modal-confirm"
         isOpen={isModal}
-        onConfirm={() => handleDeletePost(activeTweetId!)}
+        onConfirm={handleConfirmDelete}
         onCloseModal={handleModalClose}
       >
         Remove this tweet

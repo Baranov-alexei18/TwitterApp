@@ -13,7 +13,6 @@ import {
 import { Loader } from '@/components/ui-components/Loader';
 import { Title } from '@/components/ui-components/Title';
 import { Toast } from '@/components/ui-components/Toast';
-import { genders, MAX_SIZE_IMAGE } from '@/constants';
 import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
 import { useToast } from '@/hooks/useToast';
@@ -22,17 +21,8 @@ import { updateUser } from '@/services/firestore/updateUser';
 import { setUser } from '@/store/sliceUser';
 import { UserState, UserUpdateType } from '@/types/user';
 
-import {
-  AvatarContainer,
-  AvatarImage,
-  FormUpdateWrapper,
-  GenderOption,
-  GenderRadio,
-  GenderSelectorContainer,
-  InputImage,
-  PasswordUpdate,
-  UserInfoUpdate,
-} from './styles';
+import { genders, MAX_SIZE_IMAGE } from './config';
+import * as Styled from './styles';
 
 export const FormUpdateUser = ({ closeModal }: {closeModal:()=>void}) => {
   const {
@@ -99,17 +89,17 @@ export const FormUpdateUser = ({ closeModal }: {closeModal:()=>void}) => {
   };
 
   return (
-    <FormUpdateWrapper onSubmit={handleSubmit(onSubmitUser)}>
-      <UserInfoUpdate>
-        <AvatarContainer>
+    <Styled.FormUpdateWrapper onSubmit={handleSubmit(onSubmitUser)}>
+      <Styled.UserInfoUpdate>
+        <Styled.AvatarContainer>
           <label htmlFor="avatarInput">
-            <AvatarImage src={photoURL || defaultUserIcon} alt="Avatar" />
+            <Styled.AvatarImage src={photoURL || defaultUserIcon} alt="Avatar" />
           </label>
-          <InputImage id="avatarInput" type="file" accept="image/*" onChange={handleAvatarChange} />
+          <Styled.InputImage id="avatarInput" type="file" accept="image/*" onChange={handleAvatarChange} />
           {avatar!.src && (
-          <AvatarImage src={avatar!.src} alt="New avatar" />
+          <Styled.AvatarImage src={avatar!.src} alt="New avatar" />
           )}
-        </AvatarContainer>
+        </Styled.AvatarContainer>
 
         <Input
           control={control}
@@ -125,24 +115,24 @@ export const FormUpdateUser = ({ closeModal }: {closeModal:()=>void}) => {
           name="gender"
           control={control}
           render={({ field: { onChange, value } }) => (
-            <GenderSelectorContainer>
+            <Styled.GenderSelectorContainer>
               {genders.map((gen: string) => (
-                <GenderOption>
-                  <GenderRadio
+                <Styled.GenderOption key={gen}>
+                  <Styled.GenderRadio
                     type="radio"
                     value={gen}
                     checked={value === gen}
                     onChange={(e) => onChange(e.target.value)}
                   />
                   {gen}
-                </GenderOption>
+                </Styled.GenderOption>
               ))}
-            </GenderSelectorContainer>
+            </Styled.GenderSelectorContainer>
           )}
         />
-      </UserInfoUpdate>
+      </Styled.UserInfoUpdate>
 
-      <PasswordUpdate>
+      <Styled.PasswordUpdate>
         <Title row="xs">Update password</Title>
         <Input
           control={control}
@@ -156,9 +146,9 @@ export const FormUpdateUser = ({ closeModal }: {closeModal:()=>void}) => {
         <Button {...ButtonStyled4}>
           {isLoading ? <Loader /> : 'Update'}
         </Button>
-      </PasswordUpdate>
+      </Styled.PasswordUpdate>
 
       {visible && <Toast text={text} type={type} dataTestId="toast" />}
-    </FormUpdateWrapper>
+    </Styled.FormUpdateWrapper>
   );
 };

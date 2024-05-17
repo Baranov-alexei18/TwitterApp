@@ -18,9 +18,7 @@ import { createAccountWithGoogle } from '@/services/auth/createUserWithGoogle';
 import { getUserDataFromFirestore } from '@/services/firestore/getUserDataFromFirestore';
 import { setUser } from '@/store/sliceUser';
 
-import {
-  ContainerWrapper, Content, ContentLinks, ContentText, Image,
-} from './styles';
+import * as Styled from './styles';
 
 const StartPage = () => {
   const {
@@ -55,9 +53,9 @@ const StartPage = () => {
 
   return (
     <div>
-      <ContainerWrapper>
-        <Image src={BackTwitter} alt="Twitter Background" title="back twitter" />
-        <Content>
+      <Styled.ContainerWrapper>
+        <Styled.Image src={BackTwitter} alt="Twitter Background" title="back twitter" />
+        <Styled.Content>
           <Icon src={TwitterLogo} alt="twitter" {...StyledIcon40} />
           <Title row="lg">{TITLE}</Title>
           <Title row="md">{SUBTITLE}</Title>
@@ -74,21 +72,21 @@ const StartPage = () => {
           >
             {SIGN_UP_EMAIL}
           </Button>
-          <ContentText>
+          <Styled.ContentText>
             {'By singing up you agree to the '}
             <LinkApp>{LINKS_TO.service}</LinkApp>
             {' and '}
             <LinkApp>{LINKS_TO.policy}</LinkApp>
             {', including '}
             <LinkApp>{LINKS_TO.cookie}</LinkApp>
-          </ContentText>
-          <ContentLinks>
+          </Styled.ContentText>
+          <Styled.ContentLinks>
             <span>{ACCOUNT}</span>
             {' '}
             <LinkApp to={PATH.LOG_IN_PAGE}>{LINKS_TO.login}</LinkApp>
-          </ContentLinks>
-        </Content>
-      </ContainerWrapper>
+          </Styled.ContentLinks>
+        </Styled.Content>
+      </Styled.ContainerWrapper>
       <Footer />
     </div>
   );

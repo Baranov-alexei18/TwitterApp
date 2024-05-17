@@ -8,9 +8,7 @@ import { SearchBar } from '@/components/SearchBar';
 import { Sidebar } from '@/components/Sidebar';
 import { UserState } from '@/types/user';
 
-import {
-  Container, MainContent,
-} from './styles';
+import { Container, MainContent } from './styles';
 
 const HomePage = () => {
   const user = useSelector((state: UserState) => state.user);

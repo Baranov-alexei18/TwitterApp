@@ -8,9 +8,7 @@ import { Title } from '../ui-components/Title';
 import { TweetType } from '../ViewTweets/types';
 
 import { SearchItem } from './SearchItem';
-import {
-  ResultGroup, ResultHeader, ResultsContainer,
-} from './styles';
+import { ResultGroup, ResultHeader, ResultsContainer } from './styles';
 
 export const SearchResults = ({ users, tweets }: { users: UserTypes[], tweets: TweetType[] }) => {
   const themes = useSelector((state: RootState) => state.theme.theme);

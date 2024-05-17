@@ -10,12 +10,7 @@ import { ModalBase } from '@/components/ui-components/Modal/ModalBase';
 import { COLOR } from '@/theme/variables';
 import { UserState } from '@/types/user';
 
-import {
-  Container, Description, Icon, Image,
-  SubTitleHeader, TitleHeader,
-  UserInfo,
-  UserUpdate,
-} from './styles';
+import * as Styled from './styles';
 
 export const HeaderProfile = () => {
   const user = useSelector((state: UserState) => state.user.data);
@@ -29,18 +24,18 @@ export const HeaderProfile = () => {
   };
 
   return (
-    <Container>
-      <UserInfo>
-        <TitleHeader>{user.name}</TitleHeader>
-        <SubTitleHeader>
+    <Styled.Container>
+      <Styled.UserInfo>
+        <Styled.TitleHeader>{user.name}</Styled.TitleHeader>
+        <Styled.SubTitleHeader>
           {user.tweets?.length || 0 }
           {' Tweets'}
-        </SubTitleHeader>
-      </UserInfo>
-      <Image src={HeaderBackground} alt="User Avatar" />
-      <UserInfo>
-        <Icon src={user.photoURL ?? DefaultIconUser} alt="Icon" />
-        <UserUpdate>
+        </Styled.SubTitleHeader>
+      </Styled.UserInfo>
+      <Styled.Image src={HeaderBackground} alt="User Avatar" />
+      <Styled.UserInfo>
+        <Styled.Icon src={user.photoURL ?? DefaultIconUser} alt="Icon" />
+        <Styled.UserUpdate>
           <Button
             {...ButtonStyled4}
             background="inherit"
@@ -50,28 +45,28 @@ export const HeaderProfile = () => {
           >
             Edit profile
           </Button>
-        </UserUpdate>
-      </UserInfo>
-      <UserInfo>
-        <TitleHeader>{user.name}</TitleHeader>
-        <SubTitleHeader>
+        </Styled.UserUpdate>
+      </Styled.UserInfo>
+      <Styled.UserInfo>
+        <Styled.TitleHeader>{user.name}</Styled.TitleHeader>
+        <Styled.SubTitleHeader>
           {user.email}
-        </SubTitleHeader>
-        <Description>{user.description}</Description>
-        <SubTitleHeader>
+        </Styled.SubTitleHeader>
+        <Styled.Description>{user.description}</Styled.Description>
+        <Styled.SubTitleHeader>
           <b>0</b>
           {' Following '}
           <b>0</b>
           {' '}
           Followers
-        </SubTitleHeader>
-      </UserInfo>
+        </Styled.SubTitleHeader>
+      </Styled.UserInfo>
       <ModalBase
         isOpen={isModal}
         onCloseModal={handleModalClose}
       >
         <FormUpdateUser closeModal={handleModalClose} />
       </ModalBase>
-    </Container>
+    </Styled.Container>
   );
 };

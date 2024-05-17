@@ -1,4 +1,6 @@
-import React, { memo, MutableRefObject, useRef } from 'react';
+import React, {
+  memo, MutableRefObject, useCallback, useRef,
+} from 'react';
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 
@@ -17,12 +19,16 @@ export const ModalBase: React.FC<ModalProps> = memo(
 
     if (!isOpen) return null;
 
+    const handleModalClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+    }, []);
+
     return createPortal(
       <ModalOverlay onClick={onCloseModal}>
         <ModalContainer
           ref={modalRef}
           theme={themes}
-          onClick={(e) => e.stopPropagation()}
+          onClick={handleModalClick}
         >
           <CloseButton onClick={onCloseModal}>X</CloseButton>
           {children}

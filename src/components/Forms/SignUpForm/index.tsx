@@ -72,6 +72,19 @@ export const SignUpForm = () => {
       setIsLoading(false);
     }
   };
+
+  const handleYearChange = (e: { target: { value: string; }; }) => {
+    setYear(parseFloat(e.target.value));
+  };
+
+  const handleMonthChange = (e: { target: { value: string; }; }) => {
+    setYear(parseFloat(e.target.value));
+  };
+
+  const handleDayChange = (e: { target: { value: string; }; }) => {
+    setYear(parseFloat(e.target.value));
+  };
+
   return (
     <>
       <StyledSignUpForm onSubmit={handleSubmit(onSubmit)}>
@@ -104,19 +117,19 @@ export const SignUpForm = () => {
           <Select
             name="year"
             options={arrayYears}
-            onChange={(e) => setYear(parseFloat(e.target.value))}
+            onChange={handleYearChange}
             placeholder="Year"
           />
           <Select
             name="month"
             options={arrayMonth}
             placeholder="Month"
-            onChange={(e) => setMonth(parseFloat(e.target.value))}
+            onChange={handleMonthChange}
           />
           <Select
             name="day"
             options={arrayDays}
-            onChange={(e) => setDay(parseFloat(e.target.value))}
+            onChange={handleDayChange}
             placeholder="Day"
           />
         </SelectWrapper>

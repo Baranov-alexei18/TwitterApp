@@ -9,7 +9,7 @@ import { SPACING } from '@/theme/variables';
 import { UserState } from '@/types/user';
 
 import { Icon } from '../ui-components/Icon';
-import { StyledIcon40, StyledIconCircle40 } from '../ui-components/Icon/config';
+import { StyledIconCircle40 } from '../ui-components/Icon/config';
 import { TextArea } from '../ui-components/TextArea';
 
 import { Container } from './styles';
