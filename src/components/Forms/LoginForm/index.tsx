@@ -4,14 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
-import { Button } from '@/components/ui-components/Button';
-import { ButtonStyled2 } from '@/components/ui-components/Button/config';
-import { Icon } from '@/components/ui-components/Icon';
-import { StyledIcon40 } from '@/components/ui-components/Icon/config';
-import { Input } from '@/components/ui-components/Input';
 import { Loader } from '@/components/ui-components/Loader';
-import { Title } from '@/components/ui-components/Title';
-import { Toast } from '@/components/ui-components/Toast';
 import { INPUT_FORM_NAMES, LOGIN_FORM } from '@/constants/pages/forms';
 import { PATH } from '@/constants/routerLinks';
 import { useToast } from '@/hooks/useToast';
@@ -19,6 +12,13 @@ import { StyledLoginForm } from '@/pages/LoginPage/styles';
 import { LoginToAccount } from '@/services/auth/loginToAccount';
 import { setUser } from '@/store/sliceUser';
 import { UserTypes } from '@/types/user';
+import { Button } from '@/ui-components/Button';
+import { ButtonStyled2 } from '@/ui-components/Button/config';
+import { Icon } from '@/ui-components/Icon';
+import { StyledIcon40 } from '@/ui-components/Icon/config';
+import { Input } from '@/ui-components/Input';
+import { Title } from '@/ui-components/Title';
+import { Toast } from '@/ui-components/Toast';
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
 
 export const LoginPageForm = () => {

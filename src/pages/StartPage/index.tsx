@@ -6,17 +6,17 @@ import BackTwitter from '@/assets/image/backTwitter.png';
 import GoogleLogo from '@/assets/image/icons/google-logo.svg';
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
 import { Footer } from '@/components/Footer';
-import { Button } from '@/components/ui-components/Button';
-import { ButtonStyled1 } from '@/components/ui-components/Button/config';
-import { Icon } from '@/components/ui-components/Icon';
-import { StyledIcon40 } from '@/components/ui-components/Icon/config';
-import { LinkApp } from '@/components/ui-components/Link';
-import { Title } from '@/components/ui-components/Title';
 import { START_PAGE } from '@/constants/pages/startPage';
 import { PATH } from '@/constants/routerLinks';
 import { createAccountWithGoogle } from '@/services/auth/createUserWithGoogle';
 import { getUserDataFromFirestore } from '@/services/firestore/getUserDataFromFirestore';
 import { setUser } from '@/store/sliceUser';
+import { Button } from '@/ui-components/Button';
+import { ButtonStyled1 } from '@/ui-components/Button/config';
+import { Icon } from '@/ui-components/Icon';
+import { StyledIcon40 } from '@/ui-components/Icon/config';
+import { LinkApp } from '@/ui-components/Link';
+import { Title } from '@/ui-components/Title';
 
 import * as Styled from './styles';
 

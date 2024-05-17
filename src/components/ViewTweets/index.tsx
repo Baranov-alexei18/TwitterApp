@@ -8,8 +8,8 @@ import { deleteTweet } from '@/services/firestore/deleteTweet';
 import { modalClose } from '@/store/sliceModal';
 import { setUser } from '@/store/sliceUser';
 
+import { ModalConfirm } from '../../ui-components/Modal/ModalConfirm';
 import { Tweet } from '../Tweet';
-import { ModalConfirm } from '../ui-components/Modal/ModalConfirm';
 
 import { TweetType } from './types';
 

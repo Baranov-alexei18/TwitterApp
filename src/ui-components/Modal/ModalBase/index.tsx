@@ -4,9 +4,9 @@ import React, {
 import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 
-import { ModalProps } from '@/components/ui-components/Modal/types';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { RootState } from '@/store/store';
+import { ModalProps } from '@/ui-components/Modal/types';
 
 import { CloseButton, ModalContainer, ModalOverlay } from './styles';
 
@@ -19,9 +19,9 @@ export const ModalBase: React.FC<ModalProps> = memo(
 
     if (!isOpen) return null;
 
-    const handleModalClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const handleModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
-    }, []);
+    };
 
     return createPortal(
       <ModalOverlay onClick={onCloseModal}>

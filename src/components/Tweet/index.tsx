@@ -17,8 +17,8 @@ import { SPACING } from '@/theme/variables';
 import { UserState } from '@/types/user';
 import { formatDate, formatTimestampToDate } from '@/utils/date';
 
-import { Icon } from '../ui-components/Icon';
-import { StyledIcon24, StyledIconCircle40 } from '../ui-components/Icon/config';
+import { Icon } from '../../ui-components/Icon';
+import { StyledIcon24, StyledIconCircle40 } from '../../ui-components/Icon/config';
 import { TweetType } from '../ViewTweets/types';
 
 import * as Styled from './styles';

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ModalConfirmProps } from '@/components/ui-components/Modal/types';
 import { COLOR } from '@/theme/variables';
+import { ModalConfirmProps } from '@/ui-components/Modal/types';
 
 import { Button } from '../../Button';
 import { ButtonStyled4 } from '../../Button/config';

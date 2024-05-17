@@ -13,12 +13,12 @@ import { modalClose, modalOpen } from '@/store/sliceModal';
 import { RootState } from '@/store/store';
 import { COLOR } from '@/theme/variables';
 
+import { Button } from '../../ui-components/Button';
+import { ButtonStyled3 } from '../../ui-components/Button/config';
+import { Icon } from '../../ui-components/Icon';
+import { StyledIcon24, StyledIcon40 } from '../../ui-components/Icon/config';
+import { ModalBase } from '../../ui-components/Modal/ModalBase';
 import { TweetForm } from '../TweetForm';
-import { Button } from '../ui-components/Button';
-import { ButtonStyled3 } from '../ui-components/Button/config';
-import { Icon } from '../ui-components/Icon';
-import { StyledIcon24, StyledIcon40 } from '../ui-components/Icon/config';
-import { ModalBase } from '../ui-components/Modal/ModalBase';
 import UserInfoBlock from '../UserInfoBlock';
 
 import {

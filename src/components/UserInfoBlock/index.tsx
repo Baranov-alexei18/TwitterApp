@@ -5,8 +5,8 @@ import DefaultUserImg from '@/assets/image/defaultUserImage.png';
 import { SPACING } from '@/theme/variables';
 import { UserState } from '@/types/user';
 
-import { Icon } from '../ui-components/Icon';
-import { StyledIconCircle40 } from '../ui-components/Icon/config';
+import { Icon } from '../../ui-components/Icon';
+import { StyledIconCircle40 } from '../../ui-components/Icon/config';
 
 import { EllipsisWrapper, InfoContainer, UserInfo } from './styles';
 

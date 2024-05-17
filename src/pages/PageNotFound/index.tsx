@@ -1,13 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Button } from '@/components/ui-components/Button';
+import { PATH } from '@/constants/routerLinks';
+import { Button } from '@/ui-components/Button';
 
 export const PageNotFound = () => {
   const navigate = useNavigate();
 
   const handleReturnHome = () => {
-    navigate('/');
+    navigate(PATH.START_PAGE);
   };
 
   return (

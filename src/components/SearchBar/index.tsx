@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 import { UserTypes } from '@/types/user';
 
+import { ElasticSearch } from '../../ui-components/ElasticSearch';
 import { SearchResults } from '../SearchResult';
-import { ElasticSearch } from '../ui-components/ElasticSearch';
 import { TweetType } from '../ViewTweets/types';
 
 import { SearchBarWrapper } from './styles';

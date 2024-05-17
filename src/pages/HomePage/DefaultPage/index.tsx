@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Loader } from '@/components/ui-components/Loader';
+import { Loader } from '@/ui-components/Loader';
 
 export const DefaultPage = () => (
   <div>

@@ -2,11 +2,11 @@ import React from 'react';
 
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
 import { SignUpForm } from '@/components/Forms/SignUpForm';
-import { Icon } from '@/components/ui-components/Icon';
-import { StyledIcon40 } from '@/components/ui-components/Icon/config';
-import { Title } from '@/components/ui-components/Title';
 import { SIGN_UP_FORM } from '@/constants/pages/forms';
 import { useAuthToken } from '@/hooks/useAuthToken';
+import { Icon } from '@/ui-components/Icon';
+import { StyledIcon40 } from '@/ui-components/Icon/config';
+import { Title } from '@/ui-components/Title';
 
 import { ImageDiv, SignUpWrapper } from './styles';
 

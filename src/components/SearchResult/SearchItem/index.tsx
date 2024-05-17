@@ -2,12 +2,12 @@ import React, { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import DefaultIconUser from '@/assets/image/defaultUserImage.png';
-import { Button } from '@/components/ui-components/Button';
-import { ButtonStyled4 } from '@/components/ui-components/Button/config';
 import { TweetType } from '@/components/ViewTweets/types';
 import { PATH } from '@/constants/routerLinks';
 import { COLOR, FONT_SIZE } from '@/theme/variables';
 import { UserTypes } from '@/types/user';
+import { Button } from '@/ui-components/Button';
+import { ButtonStyled4 } from '@/ui-components/Button/config';
 import { formatDate, formatTimestampToDate } from '@/utils/date';
 
 import * as Styled from './styles';

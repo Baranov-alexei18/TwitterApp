@@ -4,15 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { doc, onSnapshot } from 'firebase/firestore';
 
 import defaultUserIcon from '@/assets/image/defaultUserImage.png';
-import { Button } from '@/components/ui-components/Button';
-import { ButtonStyled4 } from '@/components/ui-components/Button/config';
-import { Input } from '@/components/ui-components/Input';
-import {
-  DescriptionInputConfig, NameInputConfig, PasswordUpdateInputConfig,
-} from '@/components/ui-components/Input/config';
-import { Loader } from '@/components/ui-components/Loader';
-import { Title } from '@/components/ui-components/Title';
-import { Toast } from '@/components/ui-components/Toast';
 import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
 import { useToast } from '@/hooks/useToast';
@@ -20,6 +11,15 @@ import { changePassword } from '@/services/firestore/changePassword';
 import { updateUser } from '@/services/firestore/updateUser';
 import { setUser } from '@/store/sliceUser';
 import { UserState, UserUpdateType } from '@/types/user';
+import { Button } from '@/ui-components/Button';
+import { ButtonStyled4 } from '@/ui-components/Button/config';
+import { Input } from '@/ui-components/Input';
+import {
+  DescriptionInputConfig, NameInputConfig, PasswordUpdateInputConfig,
+} from '@/ui-components/Input/config';
+import { Loader } from '@/ui-components/Loader';
+import { Title } from '@/ui-components/Title';
+import { Toast } from '@/ui-components/Toast';
 
 import { genders, MAX_SIZE_IMAGE } from './config';
 import * as Styled from './styles';

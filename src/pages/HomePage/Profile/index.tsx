@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import { doc, onSnapshot } from 'firebase/firestore';
 
 import { TweetForm } from '@/components/TweetForm';
-import { Loader } from '@/components/ui-components/Loader';
-import { Title } from '@/components/ui-components/Title';
 import { ViewTweets } from '@/components/ViewTweets';
 import { TweetType } from '@/components/ViewTweets/types';
 import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
 import { getUserTweets } from '@/services/firestore/getUserTweets';
 import { UserState } from '@/types/user';
+import { Loader } from '@/ui-components/Loader';
+import { Title } from '@/ui-components/Title';
 
 import { SectionTab } from '../styles';
 

@@ -8,9 +8,9 @@ import useDebounce from '@/hooks/useDebounce';
 import { searchItemFirestore } from '@/services/firestore/searchItemFirestore';
 import { RootState } from '@/store/store';
 import { UserTypes } from '@/types/user';
+import { Loader } from '@/ui-components/Loader';
 
 import { Icon } from '../Icon';
-import { Loader } from '../Loader';
 
 import { Container, Input } from './styles';
 

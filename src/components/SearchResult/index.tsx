@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import { UserTypes } from '@/types/user';
 
-import { Title } from '../ui-components/Title';
+import { Title } from '../../ui-components/Title';
 import { TweetType } from '../ViewTweets/types';
 
 import { SearchItem } from './SearchItem';
