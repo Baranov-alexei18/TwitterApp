@@ -13,9 +13,9 @@ export const SidebarContainer = styled.div<{theme: string}>`
   height: 100vh;
   max-width: 300px;
   padding: ${SPACING.md};
-  border-right: 1px solid ${(props) => (props.theme === THEME.LIGHT ? COLOR.lightGrey : COLOR.darkGrey)};
-  background-color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.light : COLOR.dark)};
-  color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.dark : COLOR.light)};
+  border-right: 1px solid ${({ theme }) => (theme === THEME.LIGHT ? COLOR.lightGrey : COLOR.darkGrey)};
+  background-color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.light : COLOR.dark)};
+  color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.dark : COLOR.light)};
 
   @media (max-width: ${BREAKPOINTS.lg}px) {
     flex: 0;

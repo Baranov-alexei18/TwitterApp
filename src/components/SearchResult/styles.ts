@@ -8,7 +8,7 @@ export const ResultsContainer = styled.div<{ theme: string }>`
   padding: ${SPACING.xxxs} ${SPACING.xxs};
   margin-top: ${SPACING.xxs};
   color: ${COLOR.dark};
-  background-color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.lightGrey1 : COLOR.darkGrey)};
+  background-color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.lightGrey1 : COLOR.darkGrey)};
 `;
 
 export const ResultGroup = styled.div`

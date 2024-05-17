@@ -13,7 +13,7 @@ const firebaseConfig = {
   measurementId: process.env.VITE_MEASUREMENT_ID,
 };
 
-const isDevelopment = import.meta.env.MODE === 'development';
+// const isDevelopment = import.meta.env.MODE === 'development';
 
 export const firebase = initializeApp(firebaseConfig);
 export const firestore = getFirestore(firebase);
@@ -22,14 +22,13 @@ export const auth = getAuth(firebase);
 const firebaseApp = getApp();
 export const storage = getStorage(firebaseApp);
 
-if (isDevelopment) {
-  connectAuthEmulator(auth, 'http://127.0.0.1:9099');
-  connectFirestoreEmulator(firestore, '127.0.0.1', 8080);
-}
-export const testEnvConfig = {
-  projectId: process.env.VITE_PROJECT_ID,
-  emulators: {
-    auth: isDevelopment && connectAuthEmulator(auth, 'http://127.0.0.1:9099'),
-    firestore: isDevelopment && connectFirestoreEmulator(firestore, '127.0.0.1', 8080),
-  },
-};
+// connectAuthEmulator(auth, 'http://127.0.0.1:9099');
+// connectFirestoreEmulator(firestore, '127.0.0.1', 8080);
+
+// export const testEnvConfig = {
+//   projectId: process.env.VITE_PROJECT_ID,
+//   emulators: {
+//     auth: connectAuthEmulator(auth, 'http://127.0.0.1:9099'),
+//     firestore: connectFirestoreEmulator(firestore, '127.0.0.1', 8080),
+//   },
+// };

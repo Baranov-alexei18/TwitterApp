@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import { THEME } from '@/constants/theme';
 import { COLOR, SPACING } from '@/theme/variables';
 
 export const Container = styled.div`
