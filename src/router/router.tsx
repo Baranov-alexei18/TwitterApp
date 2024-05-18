@@ -3,13 +3,13 @@ import { Provider } from 'react-redux';
 import { createBrowserRouter } from 'react-router-dom';
 
 import { App } from '@/components/App';
-import { Loader } from '@/components/ui-components/Loader';
 import { PATH } from '@/constants/routerLinks';
 import { DefaultPage } from '@/pages/HomePage/DefaultPage';
 import { Feed } from '@/pages/HomePage/Feed';
 import { Profile } from '@/pages/HomePage/Profile';
 import { PageNotFound } from '@/pages/PageNotFound';
 import { store } from '@/store/store';
+import { Loader } from '@/ui-components/Loader';
 
 const StartPage = lazy(() => import('@/pages/StartPage'));
 const BankCardPage = lazy(() => import('@/pages/LoginPage'));

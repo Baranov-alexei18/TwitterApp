@@ -4,16 +4,14 @@ import { useParams } from 'react-router-dom';
 import { doc, onSnapshot, Timestamp } from 'firebase/firestore';
 
 import { TweetForm } from '@/components/TweetForm';
-import { Loader } from '@/components/ui-components/Loader';
 import { ViewTweets } from '@/components/ViewTweets';
 import { TweetType } from '@/components/ViewTweets/types';
 import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
-import { useAuthToken } from '@/hooks/useAuthToken';
 import { getAllTweets } from '@/services/firestore/getAllTweets';
 import { getUserTweets } from '@/services/firestore/getUserTweets';
-import { setUser } from '@/store/sliceUser';
 import { UserState } from '@/types/user';
+import { Loader } from '@/ui-components/Loader';
 import { getUniqueDocs } from '@/utils/getUniqueDocs';
 
 import { HeaderProfile } from './Header';

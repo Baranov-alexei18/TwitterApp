@@ -17,25 +17,11 @@ import { SPACING } from '@/theme/variables';
 import { UserState } from '@/types/user';
 import { formatDate, formatTimestampToDate } from '@/utils/date';
 
-import { Icon } from '../ui-components/Icon';
-import { StyledIcon24, StyledIconCircle40 } from '../ui-components/Icon/config';
+import { Icon } from '../../ui-components/Icon';
+import { StyledIcon24, StyledIconCircle40 } from '../../ui-components/Icon/config';
 import { TweetType } from '../ViewTweets/types';
 
-import {
-  HeaderTweets,
-  LikeCount,
-  ToolTip,
-  ToolTipOption,
-  TweetContainer,
-  TweetDate,
-  TweetImage,
-  TweetLikes,
-  TweetText,
-  TweetUserInfo,
-  UserEmail,
-  UserName,
-  UserNames,
-} from './styles';
+import * as Styled from './styles';
 import { TweetProps } from './types';
 
 export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
@@ -62,18 +48,7 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
     setLikes();
   }, [debouncedLike]);
 
-  const handleTooltipOpen = (e: unknown) => {
-    (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
-    setIsTooltipOpen(!isTooltipOpen);
-  };
-
-  const handleOpenModal = (e: unknown, tweet: TweetType) => {
-    (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
-    onHandleTweet(tweet);
-    setIsTooltipOpen(false);
-  };
-
-  const setLike = (e: unknown) => {
+  const setLike = useCallback((e: unknown) => {
     (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
 
     if (activeLike) {
@@ -82,56 +57,69 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
       setCountLikes((prev) => prev + 1);
     }
 
-    setActiveLike(!activeLike);
-  };
+    setActiveLike((prev) => !prev);
+  }, [activeLike]);
 
-  const handleToTweet = useCallback(() => () => {
+  const handleToTweet = useCallback(() => {
     navigate(`${PATH.HOME_PAGE}/tweet/${tweet_id}`);
   }, []);
 
+  const handleOpenModal = useCallback((e: MouseEvent<HTMLImageElement>) => {
+    e.stopPropagation();
+    onHandleTweet(data);
+    setIsTooltipOpen(false);
+  }, [onHandleTweet, data]);
+
+  const handleTooltipOpen = (e: unknown) => {
+    (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
+    setIsTooltipOpen(!isTooltipOpen);
+  };
+
   return (
-    <TweetContainer onClick={handleToTweet()}>
+    <Styled.TweetContainer onClick={handleToTweet}>
       <Icon
         src={user.photoURL || DefaultIconUser}
         alt="Avatar"
         {...StyledIconCircle40}
         margin={`${SPACING.xxxs} ${SPACING.zero} ${SPACING.zero} ${SPACING.xs}`}
       />
-      <TweetUserInfo>
-        <HeaderTweets>
-          <UserNames>
-            <UserName>{user.name}</UserName>
-            <UserEmail>{user.email}</UserEmail>
-            <TweetDate>{formatDate(formatTimestampToDate(data.date_created)!)}</TweetDate>
+      <Styled.TweetUserInfo>
+        <Styled.HeaderTweets>
+          <Styled.UserNames>
+            <Styled.UserName>{user.name}</Styled.UserName>
+            <Styled.UserEmail>{user.email}</Styled.UserEmail>
+            <Styled.TweetDate>
+              {formatDate(formatTimestampToDate(data.date_created)!)}
+            </Styled.TweetDate>
             {isTooltipOpen && (
-            <ToolTip>
-              <ToolTipOption onClick={
-                  (e: MouseEvent<HTMLImageElement>) => handleOpenModal(e, data)
+              <Styled.ToolTip>
+                <Styled.ToolTipOption onClick={
+                  handleOpenModal
                 }
-              >
-                Delete
-              </ToolTipOption>
-            </ToolTip>
+                >
+                  Delete
+                </Styled.ToolTipOption>
+              </Styled.ToolTip>
             )}
 
-          </UserNames>
+          </Styled.UserNames>
           {user.uid === userNow.uid && (
             <Icon src={DotsIcon} alt="dots" onClick={handleTooltipOpen} />
           )}
-        </HeaderTweets>
-        <TweetText>{text}</TweetText>
-        {image && <TweetImage src={image} alt="Tweet" />}
-        <TweetLikes>
+        </Styled.HeaderTweets>
+        <Styled.TweetText>{text}</Styled.TweetText>
+        {image && <Styled.TweetImage src={image} alt="Tweet" />}
+        <Styled.TweetLikes>
           <Icon
             src={activeLike ? ActivelikeIcon : likeIcon}
             alt="Like"
             {...StyledIcon24}
             margin={`${SPACING.zero} ${SPACING.xxxs} ${SPACING.zero} ${SPACING.zero}`}
-            onClick={(e) => setLike(e)}
+            onClick={setLike}
           />
-          <LikeCount active={activeLike.toString()}>{countLikes || ''}</LikeCount>
-        </TweetLikes>
-      </TweetUserInfo>
-    </TweetContainer>
+          <Styled.LikeCount active={activeLike.toString()}>{countLikes || ''}</Styled.LikeCount>
+        </Styled.TweetLikes>
+      </Styled.TweetUserInfo>
+    </Styled.TweetContainer>
   );
 });

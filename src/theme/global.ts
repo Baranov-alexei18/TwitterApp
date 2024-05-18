@@ -22,6 +22,6 @@ export const Container = styled.div<{theme: string}>`
 `;
 
 export const ThemeContainer = styled.div<{theme: string}>`
-  background-color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.light : COLOR.dark)};
-  color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.dark : COLOR.lightGrey)};
+  background-color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.light : COLOR.dark)};
+  color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.dark : COLOR.lightGrey)};
 `;

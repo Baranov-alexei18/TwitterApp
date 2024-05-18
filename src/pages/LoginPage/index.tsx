@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { LoginPageForm } from '@/components/Forms/LoginForm';
-import { LinkApp } from '@/components/ui-components/Link';
 import { LOGIN_FORM } from '@/constants/pages/forms';
 import { PATH } from '@/constants/routerLinks';
 import { useAuthToken } from '@/hooks/useAuthToken';
+import { LinkApp } from '@/ui-components/Link';
 
 import { ContainerWrapper, WrapperLink } from './styles';
 

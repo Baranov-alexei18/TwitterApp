@@ -3,23 +3,23 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { FirestoreError } from 'firebase/firestore';
 
-import { Button } from '@/components/ui-components/Button';
-import { ButtonStyled2 } from '@/components/ui-components/Button/config';
-import { Input } from '@/components/ui-components/Input';
-import {
-  EmailInputConfig, NameInputConfig, PasswordInputConfig, PhoneInputConfig,
-} from '@/components/ui-components/Input/config';
-import { LinkApp } from '@/components/ui-components/Link';
-import { Loader } from '@/components/ui-components/Loader';
-import { Select } from '@/components/ui-components/Select';
-import { Title } from '@/components/ui-components/Title';
-import { Toast } from '@/components/ui-components/Toast';
 import { SIGN_UP_FORM } from '@/constants/pages/forms';
 import { PATH } from '@/constants/routerLinks';
 import { getDays, getMonths, getYears } from '@/helpers/getDate';
 import { useToast } from '@/hooks/useToast';
 import { createAccountWithEmail } from '@/services/auth/createUserWithEmail';
 import { UserTypes } from '@/types/user';
+import { Button } from '@/ui-components/Button';
+import { ButtonStyled2 } from '@/ui-components/Button/config';
+import { Input } from '@/ui-components/Input';
+import {
+  EmailInputConfig, NameInputConfig, PasswordInputConfig, PhoneInputConfig,
+} from '@/ui-components/Input/config';
+import { LinkApp } from '@/ui-components/Link';
+import { Loader } from '@/ui-components/Loader';
+import { Select } from '@/ui-components/Select';
+import { Title } from '@/ui-components/Title';
+import { Toast } from '@/ui-components/Toast';
 import { convertToTimestamp } from '@/utils/date';
 
 import { ContentDescription, SelectWrapper, StyledSignUpForm } from './styles';
@@ -72,6 +72,19 @@ export const SignUpForm = () => {
       setIsLoading(false);
     }
   };
+
+  const handleYearChange = (e: { target: { value: string; }; }) => {
+    setYear(parseFloat(e.target.value));
+  };
+
+  const handleMonthChange = (e: { target: { value: string; }; }) => {
+    setYear(parseFloat(e.target.value));
+  };
+
+  const handleDayChange = (e: { target: { value: string; }; }) => {
+    setYear(parseFloat(e.target.value));
+  };
+
   return (
     <>
       <StyledSignUpForm onSubmit={handleSubmit(onSubmit)}>
@@ -104,19 +117,19 @@ export const SignUpForm = () => {
           <Select
             name="year"
             options={arrayYears}
-            onChange={(e) => setYear(parseFloat(e.target.value))}
+            onChange={handleYearChange}
             placeholder="Year"
           />
           <Select
             name="month"
             options={arrayMonth}
             placeholder="Month"
-            onChange={(e) => setMonth(parseFloat(e.target.value))}
+            onChange={handleMonthChange}
           />
           <Select
             name="day"
             options={arrayDays}
-            onChange={(e) => setDay(parseFloat(e.target.value))}
+            onChange={handleDayChange}
             placeholder="Day"
           />
         </SelectWrapper>

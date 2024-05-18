@@ -7,9 +7,10 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 
-import { TWEETS_LIMIT } from '@/constants';
 import { FIRESTORE_COLLECTION } from '@/constants/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
+
+const TWEETS_LIMIT = 5;
 
 export const getAllTweets = async (lastTweet: Timestamp|null = null) => {
   try {

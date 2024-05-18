@@ -5,6 +5,7 @@ import { ThemeState, ThemesType } from '@/types/theme';
 
 const initialState: ThemeState = {
   theme: THEME.LIGHT,
+  ...THEME,
 };
 
 const setThemeSlice = createSlice({

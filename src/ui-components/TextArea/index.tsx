@@ -7,11 +7,7 @@ import { Button } from '../Button';
 import { ButtonStyled4 } from '../Button/config';
 import { Icon } from '../Icon';
 
-import {
-  ButtonsWrapper,
-  ImageUploadButton,
-  MaxLengthText, TextAreaStyle, TextAreaWrapper, UploadButton,
-} from './styles';
+import * as Styled from './styles';
 import { TextAreaTypes } from './types';
 
 export const TextArea: FC<TextAreaTypes> = ({ loader, onSubmit, ...rest }) => {
@@ -46,22 +42,22 @@ export const TextArea: FC<TextAreaTypes> = ({ loader, onSubmit, ...rest }) => {
   };
 
   return (
-    <TextAreaWrapper>
-      <TextAreaStyle
+    <Styled.TextAreaWrapper>
+      <Styled.TextAreaStyle
         value={text}
         onChange={handleTextChange}
         maxLength={MAX_CHARACTERS_TEXTAREA}
         overlimit={isOverLimit || undefined}
         {...rest}
       />
-      <MaxLengthText overlimit={isOverLimit || undefined}>
+      <Styled.MaxLengthText overlimit={isOverLimit || undefined}>
         {` ${text.length}/${MAX_CHARACTERS_TEXTAREA}`}
-      </MaxLengthText>
-      <ButtonsWrapper>
-        <ImageUploadButton>
+      </Styled.MaxLengthText>
+      <Styled.ButtonsWrapper>
+        <Styled.ImageUploadButton>
           <Icon src={PictureIcon} alt="load" />
-          <UploadButton type="file" accept="image/*" onChange={handlePhotoChange} />
-        </ImageUploadButton>
+          <Styled.UploadButton type="file" accept="image/*" onChange={handlePhotoChange} />
+        </Styled.ImageUploadButton>
         <span>{photo?.name}</span>
         <Button
           {...ButtonStyled4}
@@ -71,7 +67,7 @@ export const TextArea: FC<TextAreaTypes> = ({ loader, onSubmit, ...rest }) => {
         >
           Tweet
         </Button>
-      </ButtonsWrapper>
-    </TextAreaWrapper>
+      </Styled.ButtonsWrapper>
+    </Styled.TextAreaWrapper>
   );
 };

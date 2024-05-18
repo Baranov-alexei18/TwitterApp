@@ -30,8 +30,8 @@ export const ModalContainer = styled.div<{ theme: string; }>`
   transform: translate(-50%, -50%);
   padding: ${SPACING.xs};
   border-radius: ${BORDER_RADIUS.md};
-  background-color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.light : COLOR.lightGrey)};
-  color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.dark : COLOR.light)};
+  background-color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.light : COLOR.lightGrey)};
+  color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.dark : COLOR.light)};
 `;
 
 export const CloseButton = styled.button`

@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import ArrowLeft from '@/assets/image/icons/left.svg';
-import { Icon } from '@/components/ui-components/Icon';
-import { SwitchTheme } from '@/components/ui-components/Switcher';
-import { Title } from '@/components/ui-components/Title';
 import { PATH } from '@/constants/routerLinks';
 import { RootState } from '@/store/store';
 import { SPACING } from '@/theme/variables';
+import { Icon } from '@/ui-components/Icon';
+import { SwitchTheme } from '@/ui-components/Switcher';
+import { Title } from '@/ui-components/Title';
 
 import { Container } from './styles';
 

@@ -8,15 +8,15 @@ export const SwitchWrapper = styled.div<{theme: string}>`
   cursor: pointer;
   width: 55px;
   height: 30px;
-  background-color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.lightGrey : COLOR.dark)};
-  border: 1px solid ${(props) => (props.theme === THEME.LIGHT ? COLOR.light : COLOR.light)};
+  background-color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.lightGrey : COLOR.dark)};
+  border: 1px solid ${({ theme }) => (theme === THEME.LIGHT ? COLOR.light : COLOR.light)};
   border-radius: ${BORDER_RADIUS.md};
 `;
 
 export const SwitchButton = styled.div<{theme: string}>`
   position: absolute;
   top: 50%;
-  left: ${(props) => (props.theme === THEME.LIGHT ? '3px' : '28px')};
+  left: ${({ theme }) => (theme === THEME.LIGHT ? '3px' : '28px')};
   width: 24px; 
   height: 24px;
   transform: translateY(-50%);

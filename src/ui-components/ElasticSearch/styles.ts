@@ -9,8 +9,8 @@ export const Container = styled.div<{theme: string}>`
   height: 26px;
   padding: ${SPACING.xxs};
   border-radius: ${BORDER_RADIUS.xl};
-  background-color: ${(props) => (props.theme === THEME.LIGHT ? COLOR.lightGrey1 : COLOR.darkGrey)};
-  border: 1px solid ${(props) => (props.theme === THEME.LIGHT ? COLOR.lightGrey1 : COLOR.darkGrey)};
+  background-color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.lightGrey1 : COLOR.darkGrey)};
+  border: 1px solid ${({ theme }) => (theme === THEME.LIGHT ? COLOR.lightGrey1 : COLOR.darkGrey)};
 `;
 
 export const Input = styled.input`

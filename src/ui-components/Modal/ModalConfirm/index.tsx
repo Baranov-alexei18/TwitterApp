@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ModalConfirmProps } from '@/components/ui-components/Modal/types';
 import { COLOR } from '@/theme/variables';
+import { ModalConfirmProps } from '@/ui-components/Modal/types';
 
 import { Button } from '../../Button';
 import { ButtonStyled4 } from '../../Button/config';
@@ -15,14 +15,14 @@ export const ModalConfirm = React.memo(
   }: ModalConfirmProps) => {
     if (!isOpen) return null;
 
-    const handleConfirm = () => () => {
+    const handleConfirm = () => {
       onConfirm();
     };
     return (
       <ModalBase isOpen={isOpen} onCloseModal={onCloseModal}>
         {children}
         <WrapperButton>
-          <Button onClick={handleConfirm()} {...ButtonStyled4} background={COLOR.error}>
+          <Button onClick={handleConfirm} {...ButtonStyled4} background={COLOR.error}>
             Ok
           </Button>
           <Button onClick={onCloseModal} {...ButtonStyled4} background={COLOR.lightGrey}>
