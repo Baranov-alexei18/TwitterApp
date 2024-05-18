@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import TwitterLogo from '@/assets/image/icons/twitter-logo.svg';
-import { Loader } from '@/components/ui-components/Loader';
 import { INPUT_FORM_NAMES, LOGIN_FORM } from '@/constants/pages/forms';
 import { PATH } from '@/constants/routerLinks';
 import { useToast } from '@/hooks/useToast';
@@ -17,6 +16,7 @@ import { ButtonStyled2 } from '@/ui-components/Button/config';
 import { Icon } from '@/ui-components/Icon';
 import { StyledIcon40 } from '@/ui-components/Icon/config';
 import { Input } from '@/ui-components/Input';
+import { Loader } from '@/ui-components/Loader';
 import { Title } from '@/ui-components/Title';
 import { Toast } from '@/ui-components/Toast';
 import { capitalizeFirstLetter } from '@/utils/capitalizeFirstLetter';
