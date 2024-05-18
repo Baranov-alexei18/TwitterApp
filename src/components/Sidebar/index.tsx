@@ -12,6 +12,7 @@ import { auth } from '@/firebase/firebaseConfig';
 import { modalClose, modalOpen } from '@/store/sliceModal';
 import { RootState } from '@/store/store';
 import { COLOR } from '@/theme/variables';
+import { TWEET_CREATE_MODAL } from '@/ui-components/Modal/options';
 
 import { Button } from '../../ui-components/Button';
 import { ButtonStyled3 } from '../../ui-components/Button/config';
@@ -27,8 +28,7 @@ import {
 
 export const Sidebar = () => {
   const themes = useSelector((state: RootState) => state.theme.theme);
-  const modal = useSelector((state: RootState) => state.modal.isOpen);
-  const [isModal, setIsModal] = useState(false);
+  const { isOpen, modalType } = useSelector((state: RootState) => state.modal);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -37,7 +37,6 @@ export const Sidebar = () => {
     try {
       await signOut(auth);
       localStorage.removeItem(LOCALSTORAGE_TOKEN);
-      setIsModal(false);
       navigate(PATH.LOG_IN_PAGE);
     } catch (error) {
       console.error('Ошибка при выходе из учетной записи:', error);
@@ -45,12 +44,12 @@ export const Sidebar = () => {
   };
 
   const openModal = () => {
-    setIsModal(true);
-    dispatch(modalOpen());
+    dispatch(modalOpen({
+      modalType: TWEET_CREATE_MODAL,
+    }));
   };
 
   const closeModal = () => {
-    setIsModal(false);
     dispatch(modalClose());
   };
 
@@ -91,9 +90,11 @@ export const Sidebar = () => {
       >
         Log out
       </Button>
-      <ModalBase isOpen={modal} onCloseModal={closeModal}>
+      {modalType === TWEET_CREATE_MODAL && (
+      <ModalBase isOpen={isOpen} onCloseModal={closeModal}>
         <TweetForm />
       </ModalBase>
+      )}
     </SidebarContainer>
   );
 };

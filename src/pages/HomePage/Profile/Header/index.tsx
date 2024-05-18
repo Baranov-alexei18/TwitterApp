@@ -1,26 +1,32 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import DefaultIconUser from '@/assets/image/defaultUserImage.png';
 import HeaderBackground from '@/assets/image/headerBackground.png';
 import { FormUpdateUser } from '@/components/Forms/UpdateForm';
+import { modalClose, modalOpen } from '@/store/sliceModal';
+import { RootState } from '@/store/store';
 import { COLOR } from '@/theme/variables';
 import { UserState } from '@/types/user';
 import { Button } from '@/ui-components/Button';
 import { ButtonStyled4 } from '@/ui-components/Button/config';
 import { ModalBase } from '@/ui-components/Modal/ModalBase';
+import { USER_UPDATE_MODAL } from '@/ui-components/Modal/options';
 
 import * as Styled from './styles';
 
 export const HeaderProfile = () => {
   const user = useSelector((state: UserState) => state.user.data);
-  const [isModal, setIsModal] = useState(false);
+  const { isOpen, modalType } = useSelector((state: RootState) => state.modal);
+  const dispatch = useDispatch();
 
   const handleModalOpen = () => {
-    setIsModal(true);
+    dispatch(modalOpen({
+      modalType: USER_UPDATE_MODAL,
+    }));
   };
   const handleModalClose = () => {
-    setIsModal(false);
+    dispatch(modalClose());
   };
 
   return (
@@ -61,12 +67,14 @@ export const HeaderProfile = () => {
           Followers
         </Styled.SubTitleHeader>
       </Styled.UserInfo>
-      <ModalBase
-        isOpen={isModal}
-        onCloseModal={handleModalClose}
-      >
-        <FormUpdateUser closeModal={handleModalClose} />
-      </ModalBase>
+      {modalType === USER_UPDATE_MODAL && (
+        <ModalBase
+          isOpen={isOpen}
+          onCloseModal={handleModalClose}
+        >
+          <FormUpdateUser closeModal={handleModalClose} />
+        </ModalBase>
+      )}
     </Styled.Container>
   );
 };

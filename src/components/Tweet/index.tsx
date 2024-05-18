@@ -48,17 +48,6 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
     setLikes();
   }, [debouncedLike]);
 
-  const handleTooltipOpen = (e: unknown) => {
-    (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
-    setIsTooltipOpen(!isTooltipOpen);
-  };
-
-  const handleOpenModal = (e: unknown, tweet: TweetType) => {
-    (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
-    onHandleTweet(tweet);
-    setIsTooltipOpen(false);
-  };
-
   const setLike = useCallback((e: unknown) => {
     (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
 
@@ -74,6 +63,17 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
   const handleToTweet = useCallback(() => {
     navigate(`${PATH.HOME_PAGE}/tweet/${tweet_id}`);
   }, []);
+
+  const handleOpenModal = useCallback((e: MouseEvent<HTMLImageElement>) => {
+    e.stopPropagation();
+    onHandleTweet(data);
+    setIsTooltipOpen(false);
+  }, [onHandleTweet, data]);
+
+  const handleTooltipOpen = (e: unknown) => {
+    (e as MouseEvent<HTMLImageElement>)!.stopPropagation();
+    setIsTooltipOpen(!isTooltipOpen);
+  };
 
   return (
     <Styled.TweetContainer onClick={handleToTweet}>
@@ -92,14 +92,14 @@ export const Tweet = memo(({ data, onHandleTweet }: TweetProps) => {
               {formatDate(formatTimestampToDate(data.date_created)!)}
             </Styled.TweetDate>
             {isTooltipOpen && (
-            <Styled.ToolTip>
-              <Styled.ToolTipOption onClick={
-                  (e: MouseEvent<HTMLImageElement>) => handleOpenModal(e, data)
+              <Styled.ToolTip>
+                <Styled.ToolTipOption onClick={
+                  handleOpenModal
                 }
-              >
-                Delete
-              </Styled.ToolTipOption>
-            </Styled.ToolTip>
+                >
+                  Delete
+                </Styled.ToolTipOption>
+              </Styled.ToolTip>
             )}
 
           </Styled.UserNames>

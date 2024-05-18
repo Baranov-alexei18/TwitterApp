@@ -1,12 +1,14 @@
 import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { TIMEOUT_DEBOUNCE } from '@/constants';
 import { PATH } from '@/constants/routerLinks';
 import { deleteTweet } from '@/services/firestore/deleteTweet';
-import { modalClose } from '@/store/sliceModal';
+import { modalClose, modalOpen } from '@/store/sliceModal';
 import { setUser } from '@/store/sliceUser';
+import { RootState } from '@/store/store';
+import { TWEET_DELETE_MODAL } from '@/ui-components/Modal/options';
 
 import { ModalConfirm } from '../../ui-components/Modal/ModalConfirm';
 import { Tweet } from '../Tweet';
@@ -14,15 +16,14 @@ import { Tweet } from '../Tweet';
 import { TweetType } from './types';
 
 export const ViewTweets = ({ data }: { data: TweetType[] }) => {
+  const { isOpen, modalType } = useSelector((state: RootState) => state.modal);
   const [activeTweetId, setActiveTweetId] = useState<TweetType | null>(null);
-  const [isModal, setIsModal] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { tweetId } = useParams();
 
   const handleModalClose = () => {
     dispatch(modalClose());
-    setIsModal(false);
   };
 
   const handleDeletePost = async (dataTweet: TweetType) => {
@@ -42,12 +43,13 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
     }, TIMEOUT_DEBOUNCE);
 
     dispatch(modalClose());
-    setIsModal(false);
     setActiveTweetId(null);
   };
 
   const handleTweet = (dataTweet: TweetType) => {
-    setIsModal(true);
+    dispatch(modalOpen({
+      modalType: TWEET_DELETE_MODAL,
+    }));
     setActiveTweetId(dataTweet);
   };
 
@@ -71,14 +73,16 @@ export const ViewTweets = ({ data }: { data: TweetType[] }) => {
           )
         ))
       }
-      <ModalConfirm
-        data-testid="modal-confirm"
-        isOpen={isModal}
-        onConfirm={handleConfirmDelete}
-        onCloseModal={handleModalClose}
-      >
-        Remove this tweet
-      </ModalConfirm>
+      {modalType === TWEET_DELETE_MODAL && (
+        <ModalConfirm
+          data-testid="modal-confirm"
+          isOpen={isOpen}
+          onConfirm={handleConfirmDelete}
+          onCloseModal={handleModalClose}
+        >
+          Remove this tweet
+        </ModalConfirm>
+      )}
     </>
 
   );
