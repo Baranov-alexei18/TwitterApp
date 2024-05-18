@@ -22,13 +22,14 @@ export const auth = getAuth(firebase);
 const firebaseApp = getApp();
 export const storage = getStorage(firebaseApp);
 
-connectAuthEmulator(auth, 'http://127.0.0.1:9099');
-connectFirestoreEmulator(firestore, '127.0.0.1', 8080);
-
+if (isDevelopment) {
+  connectAuthEmulator(auth, 'http://127.0.0.1:9099');
+  connectFirestoreEmulator(firestore, '127.0.0.1', 8080);
+}
 export const testEnvConfig = {
   projectId: process.env.VITE_PROJECT_ID,
   emulators: {
-    auth: connectAuthEmulator(auth, 'http://127.0.0.1:9099'),
-    firestore: connectFirestoreEmulator(firestore, '127.0.0.1', 8080),
+    auth: isDevelopment && connectAuthEmulator(auth, 'http://127.0.0.1:9099'),
+    firestore: isDevelopment && connectFirestoreEmulator(firestore, '127.0.0.1', 8080),
   },
 };
