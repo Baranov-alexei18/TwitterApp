@@ -1,24 +1,28 @@
 import { useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 import { useAuthToken } from '@/hooks/useAuthToken';
 import { RootState } from '@/store/store';
 import { GlobalStyles, ThemeContainer } from '@/theme/global';
+import { themes } from '@/theme/variables';
 
 import { ErrorBoundary } from '../ErrorBoundary';
 
 export const App = () => {
   const isModal = useSelector((state: { modal: { isOpen: boolean } }) => state.modal.isOpen);
-  const themes = useSelector((state: RootState) => state.theme.theme);
+  const themesApp = useSelector((state: RootState) => state.theme.theme);
 
   useAuthToken();
 
   return (
-    <ThemeContainer data-testid="theme-main" theme={themes}>
-      <GlobalStyles modal={isModal} />
-      <ErrorBoundary>
-        <Outlet />
-      </ErrorBoundary>
-    </ThemeContainer>
+    <ThemeProvider theme={themes}>
+      <ThemeContainer data-testid="theme-main" themeApp={themesApp}>
+        <GlobalStyles modal={isModal} />
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
+      </ThemeContainer>
+    </ThemeProvider>
   );
 };

@@ -2,14 +2,12 @@ import styled, { createGlobalStyle } from 'styled-components';
 
 import { THEME } from '@/constants/theme';
 
-import { COLOR } from './variables';
-
 export const GlobalStyles = createGlobalStyle<{modal: boolean}>`
   body {
     margin: 0;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    overflow: ${(props) => props.modal && 'hidden'}
+    overflow: ${({ modal }) => modal && 'hidden'}
   }
 `;
 
@@ -21,7 +19,7 @@ export const Container = styled.div<{theme: string}>`
   color: inherit;
 `;
 
-export const ThemeContainer = styled.div<{theme: string}>`
-  background-color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.light : COLOR.dark)};
-  color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.dark : COLOR.lightGrey)};
+export const ThemeContainer = styled.div<{themeApp: string}>`
+  background-color: ${({ themeApp, theme: { colors } }) => (themeApp === THEME.LIGHT ? colors.light : colors.dark)};
+  color: ${({ themeApp, theme: { colors } }) => (themeApp === THEME.LIGHT ? colors.dark : colors.lightGrey)};
 `;
