@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 
-import { BREAKPOINTS, FONT_SIZE, SPACING } from '@/theme/variables';
-
 export const StyledFooter = styled.div`
   display: flex;
   justify-content: flex-end;
-  gap: ${SPACING.xs};
-  padding: ${SPACING.sm};
-  margin-right: ${SPACING.xxxxl};
-  font-size: ${FONT_SIZE.xxs};
+  gap: ${({ theme: { spacing } }) => spacing.xs};
+  padding: ${({ theme: { spacing } }) => spacing.sm};
+  margin-right: ${({ theme: { spacing } }) => spacing.xxxxl};
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.xxs};
   
-  @media (max-width: ${BREAKPOINTS.lg}px) {
+  @media (max-width: ${({ theme: { breakpoints } }) => breakpoints.lg}px) {
     display: none;
   }
 `;

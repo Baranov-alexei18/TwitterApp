@@ -15,13 +15,13 @@ export const SearchResults = ({ users, tweets }: { users: UserTypes[], tweets: T
 
   if (tweets.length === 0 && users.length === 0) {
     return (
-      <ResultsContainer theme={themes}>
+      <ResultsContainer themeApp={themes}>
         No result
       </ResultsContainer>
     );
   }
   return (
-    <ResultsContainer theme={themes}>
+    <ResultsContainer themeApp={themes}>
       <Title row="xs">You might like </Title>
       <ResultGroup>
         {!!tweets.length && (

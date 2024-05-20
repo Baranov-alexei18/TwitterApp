@@ -1,20 +1,16 @@
 import styled from 'styled-components';
 
-import {
-  BORDER_RADIUS, BREAKPOINTS, COLOR, FONT_SIZE, SPACING, WEIGHT, Z_INDEX,
-} from '@/theme/variables';
-
 export const TweetContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  border-bottom: 1px solid ${COLOR.lightGrey};
+  border-bottom: 1px solid ${({ theme: { colors } }) => colors.lightGrey};
   width: 100%;
   max-width: 100%;
-  padding: ${SPACING.xs} ${SPACING.zero} ;
+  padding: ${({ theme: { spacing } }) => `${spacing.xs} ${spacing.zero}`};
 
-  @media (max-width: ${BREAKPOINTS.md}px) {
+  @media (max-width: ${({ theme: { breakpoints } }) => breakpoints.md}px) {
     max-width: 95%;
-    padding-right:${SPACING.zero};
+    padding-right: ${({ theme: { spacing } }) => spacing.zero};
   }
 `;
 
@@ -22,7 +18,7 @@ export const TweetUserInfo = styled.div`
   position: relative;
   flex: 1;
   width: 80%;
-  padding: ${SPACING.zero} ${SPACING.xs}; 
+  padding: ${({ theme: { spacing } }) => `${spacing.zero} ${spacing.xs}`}; 
 `;
 
 export const UserNames = styled.div`
@@ -35,23 +31,23 @@ export const HeaderTweets = styled.div`
   justify-content: space-between;
 `;
 export const UserName = styled.span`
-  font-weight: ${WEIGHT.lg};
+  font-weight: ${({ theme: { fontWeights } }) => fontWeights.lg};
 `;
 
 export const UserEmail = styled.span`
-  color: ${COLOR.darkGrey};
-  font-size: ${FONT_SIZE.xxs};
-  margin: ${SPACING.zero} ${SPACING.xxs};
+  color: ${({ theme: { colors } }) => colors.darkGrey};
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.xxs};
+  margin: ${({ theme: { spacing } }) => `${spacing.zero} ${spacing.xxs}`};
   
-  @media (max-width: ${BREAKPOINTS.sm}px) {
+  @media (max-width: ${({ theme: { breakpoints } }) => breakpoints.sm}px) {
     display: none;
   }
 `;
 
 export const TweetDate = styled.span`
-  color: ${COLOR.darkGrey};
-  font-size: ${FONT_SIZE.xxs};
-  margin: ${SPACING.zero} ${SPACING.xxs};
+  color: ${({ theme: { colors } }) => colors.darkGrey};
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.xxs};
+  margin: ${({ theme: { spacing } }) => `${spacing.zero} ${spacing.xxs}`};
 `;
 
 export const TweetText = styled.div`
@@ -59,15 +55,15 @@ export const TweetText = styled.div`
   word-wrap: break-word; 
   overflow-wrap: break-word;
   overflow: hidden;
-  margin-top: ${SPACING.xxxs};
-  margin-bottom: ${SPACING.xxs};
+  margin-top: ${({ theme: { spacing } }) => spacing.xxxs};
+  margin-bottom: ${({ theme: { spacing } }) => spacing.xxs};
 `;
 
 export const TweetImage = styled.img`
   max-height: 400px;
   max-width: 95%;
-  margin-bottom: ${SPACING.xs};
-  border-radius: ${BORDER_RADIUS.xxs}
+  margin-bottom: ${({ theme: { spacing } }) => spacing.xs};
+  border-radius: ${({ theme: { radius } }) => radius.xxs};
 `;
 
 export const TweetLikes = styled.div`
@@ -77,39 +73,39 @@ export const TweetLikes = styled.div`
 `;
 
 export const LikeCount = styled.span<{active: string}>`
-  margin-left: ${SPACING.xxxs};
-  color: ${(props) => (props.active === 'false' ? 'inherit' : COLOR.likeColor)}
+  margin-left: ${({ theme: { spacing } }) => spacing.xxxs};
+  color: ${({ active, theme: { colors } }) => (active === 'false' ? 'inherit' : colors.likeColor)}
 `;
 
 export const ToolTip = styled.div`
   position: absolute;
-  top: ${SPACING.md};
-  right: ${SPACING.zero};
-  transform: translateX(${SPACING.xxs});
-  padding: ${SPACING.xxxs};
-  background-color: ${COLOR.light};
-  border-radius: ${BORDER_RADIUS.xxs};
-  box-shadow: ${SPACING.zero} ${SPACING.xxxs} ${SPACING.xxs} rgba(0, 0, 0, 0.3);
-  z-index: ${Z_INDEX.md};
+  top: ${({ theme: { spacing } }) => spacing.md};
+  right: ${({ theme: { spacing } }) => spacing.zero};
+  transform: translateX('8px');
+  padding: ${({ theme: { spacing } }) => spacing.xxxs};
+  background-color: ${({ theme: { colors } }) => colors.light};
+  border-radius: ${({ theme: { radius } }) => radius.xxs};
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: ${({ theme: { zIndex } }) => zIndex.md};
 `;
 
 export const ToolTipOption = styled.div`
   cursor: pointer;
-  font-size: ${FONT_SIZE.xs};
-  padding: ${SPACING.xxs};
-  color: ${COLOR.error};
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.xs};
+  padding: ${({ theme: { spacing } }) => spacing.xxs};
+  color: ${({ theme: { colors } }) => colors.error};
 
   &:hover {
-    color: ${COLOR.primary};
+    color: ${({ theme: { colors } }) => colors.primary};
   }
 `;
 
 export const WrapperButton = styled.div`
   display: flex;
   cursor: pointer;
-  font-size: ${FONT_SIZE.xl}};
-  gap: ${SPACING.xxs};
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.xl};
+  gap: ${({ theme: { spacing } }) => spacing.xxs};
   border: none;
   background-color: transparent;
-  margin-top: ${SPACING.xs};
+  margin-top: ${({ theme: { spacing } }) => spacing.xs};
 `;

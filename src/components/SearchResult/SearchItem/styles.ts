@@ -1,28 +1,19 @@
 import styled from 'styled-components';
 
-import {
-  BORDER_RADIUS,
-  BREAKPOINTS,
-  COLOR,
-  FONT_SIZE,
-  SPACING,
-  WEIGHT,
-} from '@/theme/variables';
-
 export const FormContainer = styled.div`
   cursor: pointer;
   display: flex;
   flex: 1;
   align-items: center;
-  border-radius: ${BORDER_RADIUS.xxs};
-  margin-bottom: ${SPACING.xxs};
+  border-radius: ${({ theme: { radius } }) => radius.xxs};
+  margin-bottom: ${({ theme: { spacing } }) => spacing.xxs};
   transition: background 0.5s ease;
 
   &:hover{
-    background: ${COLOR.lightGrey}
+    background: ${({ theme: { colors } }) => colors.lightGrey};
   }
   
-  @media (max-width: ${BREAKPOINTS.lg}px) {
+  @media (max-width: ${({ theme: { breakpoints } }) => breakpoints.lg}px) {
     button{
       display: none;
     };
@@ -32,10 +23,10 @@ export const FormContainer = styled.div`
 export const UserIcon = styled.img`
   width: 36px;
   height: 36px;
-  border-radius: ${BORDER_RADIUS.circle};
-  margin-right: ${SPACING.xxxs};
+  border-radius: ${({ theme: { radius } }) => radius.circle};
+  margin-right: ${({ theme: { spacing } }) => spacing.xxxs};
 
-  @media (max-width: ${BREAKPOINTS.lg}px) {
+  @media (max-width: ${({ theme: { breakpoints } }) => breakpoints.lg}px) {
     width: 20px;
     height: 20px;
   }
@@ -43,7 +34,7 @@ export const UserIcon = styled.img`
 
 export const UserInfo = styled.div`
   flex: 1;
-  font-size: ${FONT_SIZE.xxs};
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.xxs};
 `;
 export const TweetText = styled.div`
   width: 180px;
@@ -51,14 +42,14 @@ export const TweetText = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  @media (max-width: ${BREAKPOINTS.lg}px) {
+  @media (max-width: ${({ theme: { breakpoints } }) => breakpoints.lg}px) {
     width: 100px;
   }
 `;
 
 export const Name = styled.div`
-  font-weight: ${WEIGHT.lg};
-  margin-bottom: ${SPACING.xxxs};
+  font-weight: ${({ theme: { fontWeights } }) => fontWeights.lg};
+  margin-bottom: ${({ theme: { spacing } }) => spacing.xxxs};
 `;
 
 export const Email = styled.div`
@@ -66,5 +57,5 @@ export const Email = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap; 
-  margin-bottom: ${SPACING.xxxs};
+  margin-bottom: ${({ theme: { spacing } }) => spacing.xxxs};
 `;

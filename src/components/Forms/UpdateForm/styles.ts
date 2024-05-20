@@ -1,20 +1,16 @@
 import styled from 'styled-components';
 
-import {
-  BORDER_RADIUS, BREAKPOINTS, COLOR, SPACING,
-} from '@/theme/variables';
-
 export const FormUpdateWrapper = styled.form`
   display: flex;
   justify-content: center;
-  gap: ${SPACING.md};
+  gap: ${({ theme: { spacing } }) => spacing.md};
   width: 500px;
 
-  @media (max-width: ${BREAKPOINTS.md}px) {
+  @media (max-width: ${({ theme: { breakpoints } }) => breakpoints.md}px) {
     flex-direction: column;
     width: 100%;
-    min-width:230px;
-    gap: ${SPACING.zero}
+    min-width: 230px;
+    gap: ${({ theme: { spacing } }) => spacing.zero}
   }
 `;
 
@@ -27,18 +23,18 @@ export const PasswordUpdate = styled.div`
   flex: 1;
   flex-direction: column;
   text-align: center;
-  margin-top: ${SPACING.sm};
-  padding: ${SPACING.xxxxl} ${SPACING.zero} ${SPACING.zero} ${SPACING.md};
-  border-left: 1px solid ${COLOR.lightGrey};
+  margin-top: ${({ theme: { spacing } }) => spacing.sm};
+  padding: ${({ theme: { spacing } }) => `${spacing.xxxxl} ${spacing.zero} ${spacing.zero} ${spacing.md}`};
+  border-left: 1px solid ${({ theme: { colors } }) => colors.darkGrey};
 
   button{
     margin-left: auto;
   }
 
-  @media (max-width: ${BREAKPOINTS.md}px) {
+  @media (max-width: ${({ theme: { breakpoints } }) => breakpoints.md}px) {
     border-left: none;
-    padding: ${SPACING.zero};
-    margin-top: ${SPACING.zero};
+    padding: ${({ theme: { spacing } }) => spacing.zero};
+    margin-top: ${({ theme: { spacing } }) => spacing.zero};
   }
 `;
 
@@ -49,33 +45,33 @@ export const InputImage = styled.input`
 export const AvatarImage = styled.img`
   width: 100px;
   height: 100px;
-  border-radius: ${BORDER_RADIUS.circle};
+  border-radius: ${({ theme: { radius } }) => radius.circle};
   cursor: pointer;
 `;
 
 export const AvatarContainer = styled.div`
   display: flex;
   text-align: center;
-  gap: ${SPACING.md};
-  margin-bottom: ${SPACING.xs};
+  gap: ${({ theme: { spacing } }) => spacing.md};
+  margin-bottom: ${({ theme: { spacing } }) => spacing.xs};
 `;
 
 export const GenderSelectorContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: ${SPACING.md};
+  margin-bottom: ${({ theme: { spacing } }) => spacing.md};
 `;
 
 export const GenderOption = styled.label`
   cursor: pointer;
-  margin-right: ${SPACING.md};
+  margin-right: ${({ theme: { spacing } }) => spacing.md};
   
   &:last-child {
-    margin-right: ${SPACING.zero};
+    margin-right: ${({ theme: { spacing } }) => spacing.zero};
   }
 `;
 
 export const GenderRadio = styled.input`
-  margin-right: ${SPACING.xxxs};
+  margin-right: ${({ theme: { spacing } }) => spacing.xxxs};
 `;

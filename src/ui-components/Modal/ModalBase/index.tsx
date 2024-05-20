@@ -27,7 +27,7 @@ export const ModalBase: React.FC<ModalProps> = memo(
       <ModalOverlay onClick={onCloseModal}>
         <ModalContainer
           ref={modalRef}
-          theme={themes}
+          themeApp={themes}
           onClick={handleModalClick}
         >
           <CloseButton onClick={onCloseModal}>X</CloseButton>

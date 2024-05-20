@@ -6,5 +6,6 @@ export type IconProps = {
     width?: string;
     margin?: string;
     theme?: string;
+    themeApp?: string
     onClick?: ((e?: unknown) => void) | undefined,
 };

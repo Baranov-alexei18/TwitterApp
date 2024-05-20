@@ -62,3 +62,13 @@ export const Z_INDEX = {
   xl: 1000,
   xxl: 10000,
 };
+
+export const themes = {
+  colors: { ...COLOR },
+  fontSizes: { ...FONT_SIZE },
+  fontWeights: { ...WEIGHT },
+  spacing: { ...SPACING },
+  radius: { ...BORDER_RADIUS },
+  breakpoints: { ...BREAKPOINTS },
+  zIndex: { ...Z_INDEX },
+};
