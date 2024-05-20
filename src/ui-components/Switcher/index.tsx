@@ -16,8 +16,8 @@ export const SwitchTheme: React.FC<{ dataTestId: string }> = ({ dataTestId }) =>
   };
 
   return (
-    <SwitchWrapper data-testid={dataTestId} onClick={changeTheme} theme={themes}>
-      <SwitchButton theme={themes} />
+    <SwitchWrapper data-testid={dataTestId} onClick={changeTheme} themeApp={themes}>
+      <SwitchButton themeApp={themes} />
     </SwitchWrapper>
   );
 };

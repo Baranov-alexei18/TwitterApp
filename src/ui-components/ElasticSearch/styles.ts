@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 
 import { THEME } from '@/constants/theme';
-import { BORDER_RADIUS, COLOR, SPACING } from '@/theme/variables';
 
-export const Container = styled.div<{theme: string}>`
+export const Container = styled.div<{themeApp: string}>`
   display: flex;
   align-items: center;
   height: 26px;
-  padding: ${SPACING.xxs};
-  border-radius: ${BORDER_RADIUS.xl};
-  background-color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.lightGrey1 : COLOR.darkGrey)};
-  border: 1px solid ${({ theme }) => (theme === THEME.LIGHT ? COLOR.lightGrey1 : COLOR.darkGrey)};
+  padding: ${({ theme: { spacing } }) => spacing.xxs};
+  border-radius: ${({ theme: { radius } }) => radius.xl};
+  background-color: ${({ themeApp, theme: { colors } }) => (themeApp === THEME.LIGHT ? colors.lightGrey1 : colors.darkGrey)};
+  border: 1px solid ${({ themeApp, theme: { colors } }) => (themeApp === THEME.LIGHT ? colors.lightGrey1 : colors.darkGrey)};
 `;
 
 export const Input = styled.input`
@@ -19,5 +18,5 @@ export const Input = styled.input`
   background-color: inherit;
   border: none;
   outline: none;
-  padding: ${SPACING.xxxs};
+  padding: ${({ theme: { spacing } }) => spacing.xxxs};
 `;

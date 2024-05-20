@@ -1,31 +1,27 @@
 import styled from 'styled-components';
 
-import {
-  BREAKPOINTS, COLOR, FONT_SIZE, SPACING,
-} from '@/theme/variables';
-
 export const StyledSignUpForm = styled.form`
   width: 700px;
-  padding: ${SPACING.zero} ${SPACING.xs};
+  padding: ${({ theme: { spacing } }) => spacing.zero} ${({ theme: { spacing } }) => spacing.xs};
   box-sizing: border-box;
-  margin: ${SPACING.xs} auto;
+  margin: ${({ theme: { spacing } }) => spacing.xs} auto;
 
-  @media (max-width: ${BREAKPOINTS.sm}px) {
+  @media (max-width: ${({ theme: { breakpoints } }) => breakpoints.sm}px) {
     text-align: center;
     width: calc(100% - 20px);
-    padding: ${SPACING.xs};
+    padding: ${({ theme: { spacing } }) => spacing.xs};
   }
 `;
 
 export const SelectWrapper = styled.div`
   display: flex;
   flex: 2;
-  gap: ${SPACING.md};
-  margin-bottom: ${SPACING.md};
+  gap: ${({ theme: { spacing } }) => spacing.md};
+  margin-bottom: ${({ theme: { spacing } }) => spacing.md};
 `;
 
 export const ContentDescription = styled.div`
-  font-size: ${FONT_SIZE.sm};
-  color: ${COLOR.darkGrey};
-  margin-bottom: ${SPACING.sm};
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.sm};
+  color: ${({ theme: { colors } }) => colors.darkGrey};
+  margin-bottom: ${({ theme: { spacing } }) => spacing.sm};
 `;

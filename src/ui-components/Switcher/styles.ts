@@ -1,26 +1,25 @@
 import styled from 'styled-components';
 
 import { THEME } from '@/constants/theme';
-import { BORDER_RADIUS, COLOR } from '@/theme/variables';
 
-export const SwitchWrapper = styled.div<{theme: string}>`
+export const SwitchWrapper = styled.div<{themeApp: string}>`
   position: relative;
   cursor: pointer;
   width: 55px;
   height: 30px;
-  background-color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.lightGrey : COLOR.dark)};
-  border: 1px solid ${({ theme }) => (theme === THEME.LIGHT ? COLOR.light : COLOR.light)};
-  border-radius: ${BORDER_RADIUS.md};
+  background-color: ${({ themeApp, theme: { colors } }) => (themeApp === THEME.LIGHT ? colors.lightGrey : colors.dark)};
+  border: 1px solid ${({ themeApp, theme: { colors } }) => (themeApp === THEME.LIGHT ? colors.light : colors.light)};
+  border-radius: ${({ theme: { radius } }) => radius.md};
 `;
 
-export const SwitchButton = styled.div<{theme: string}>`
+export const SwitchButton = styled.div<{themeApp: string}>`
   position: absolute;
   top: 50%;
-  left: ${({ theme }) => (theme === THEME.LIGHT ? '3px' : '28px')};
+  left: ${({ themeApp }) => (themeApp === THEME.LIGHT ? '3px' : '28px')};
   width: 24px; 
   height: 24px;
   transform: translateY(-50%);
-  background-color: ${COLOR.light};
-  border-radius: ${BORDER_RADIUS.circle};
+  background-color: ${({ theme: { colors } }) => colors.light};
+  border-radius: ${({ theme: { radius } }) => radius.circle};
   transition: left 0.3s ease-in-out;
 `;

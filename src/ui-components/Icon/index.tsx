@@ -14,7 +14,7 @@ export const Icon: React.FC<IconProps> = ({
     width={width}
     radius={radius}
     margin={margin}
-    theme={theme}
+    themeApp={theme}
     onClick={onClick}
   />
 );

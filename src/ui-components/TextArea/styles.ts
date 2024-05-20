@@ -1,15 +1,11 @@
 import styled from 'styled-components';
 
-import {
-  BORDER_RADIUS, BREAKPOINTS, COLOR, FONT_SIZE, SPACING,
-} from '@/theme/variables';
-
 export const TextAreaWrapper = styled.div`
   position: relative;
   width: 100%;
-  padding: ${SPACING.sm};
+  padding: ${({ theme: { spacing } }) => spacing.sm};
 
-  @media (max-width: ${BREAKPOINTS.md}px) {
+  @media (max-width: ${({ theme: { breakpoints } }) => breakpoints.md}px) {
     max-width: 95%;
   }
 `;
@@ -21,9 +17,9 @@ export const TextAreaStyle = styled.textarea<{overlimit: boolean | undefined}>`
   resize: none;
   color: inherit;
   background-color: inherit;
-  border-radius: ${BORDER_RADIUS.xxs};
-  border: ${(props) => (!props.overlimit ? 'none' : `1px solid ${COLOR.error}`)};
-  padding: ${SPACING.xxxs};
+  border-radius: ${({ theme: { radius } }) => radius.xxs};
+  border: ${({ overlimit, theme: { colors } }) => (!overlimit ? 'none' : `1px solid ${colors.error}`)};
+  padding: ${({ theme: { spacing } }) => spacing.xxxs};
 `;
 
 export const ButtonsWrapper = styled.div`
@@ -38,15 +34,15 @@ export const UploadButton = styled.input`
 `;
 
 export const ImageUploadButton = styled.label`
-  color: ${COLOR.darkGrey};
+  color: ${({ theme: { colors } }) => colors.darkGrey};
   cursor: pointer;
   border: none;
-  margin-left: ${SPACING.xxs};
+  margin-left: ${({ theme: { spacing } }) => spacing.xxs};
 `;
 
 export const MaxLengthText = styled.div<{overlimit: boolean | undefined}>`
-  font-size: ${FONT_SIZE.xs};
+  font-size: ${({ theme: { fontSizes } }) => fontSizes.xs};
   text-align: end;
-  color: ${(props) => (props.overlimit ? COLOR.error : 'inherit')};
-  margin-bottom: ${SPACING.xxxs};
+  color: ${({ overlimit, theme: { colors } }) => (overlimit ? colors.error : 'inherit')};
+  margin-bottom: ${({ theme: { spacing } }) => spacing.xxxs};
 `;

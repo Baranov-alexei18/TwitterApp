@@ -54,7 +54,7 @@ export const Sidebar = () => {
   };
 
   return (
-    <SidebarContainer theme={themes}>
+    <SidebarContainer themeApp={themes}>
       <Icon src={TwitterLogo} alt="twitter" {...StyledIcon40} />
       {SidebarLinks.map(({
         icon, title, alt, link,

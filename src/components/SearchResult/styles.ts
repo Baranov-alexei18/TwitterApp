@@ -1,25 +1,24 @@
 import styled from 'styled-components';
 
 import { THEME } from '@/constants/theme';
-import { BORDER_RADIUS, COLOR, SPACING } from '@/theme/variables';
 
-export const ResultsContainer = styled.div<{ theme: string }>`
-  border-radius: ${BORDER_RADIUS.xxs};
-  padding: ${SPACING.xxxs} ${SPACING.xxs};
-  margin-top: ${SPACING.xxs};
-  color: ${COLOR.dark};
-  background-color: ${({ theme }) => (theme === THEME.LIGHT ? COLOR.lightGrey1 : COLOR.darkGrey)};
+export const ResultsContainer = styled.div<{ themeApp: string }>`
+  border-radius: ${({ theme: { radius } }) => radius.xxs};
+  padding: ${({ theme: { spacing } }) => `${spacing.xxxs} ${spacing.xxs}`};
+  margin-top: ${({ theme: { spacing } }) => spacing.xxs};
+  color: ${({ theme: { colors } }) => colors.dark};
+  background-color: ${({ themeApp, theme: { colors } }) => (themeApp === THEME.LIGHT ? colors.lightGrey1 : colors.darkGrey)};
 `;
 
 export const ResultGroup = styled.div`
-  margin-bottom: ${SPACING.md};
+  margin-bottom: ${({ theme: { spacing } }) => spacing.md};
 `;
 
 export const ResultHeader = styled.h3`
-  margin: ${SPACING.xs} ${SPACING.zero};
-  border-bottom: 1px solid ${COLOR.darkGrey};
+  margin: ${({ theme: { spacing } }) => `${spacing.xs} ${spacing.zero}`};
+  border-bottom: 1px solid ${({ theme: { colors } }) => colors.darkGrey};
 `;
 
 export const ResultItem = styled.div`
-  padding: ${SPACING.xxxs} ${SPACING.zero};
+  padding: ${({ theme: { spacing } }) => `${spacing.xxxs} ${spacing.zero}`};
 `;

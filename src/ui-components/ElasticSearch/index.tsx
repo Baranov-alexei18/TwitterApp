@@ -47,7 +47,7 @@ export const ElasticSearch = ({ onChange }:
   };
 
   return (
-    <Container theme={themes}>
+    <Container themeApp={themes}>
       <Icon src={Search} alt="search" />
       <Input
         type="text"

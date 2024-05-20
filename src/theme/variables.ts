@@ -68,7 +68,7 @@ export const themes = {
   fontSizes: { ...FONT_SIZE },
   fontWeights: { ...WEIGHT },
   spacing: { ...SPACING },
-  radius: { BORDER_RADIUS },
-  breakpoints: { BREAKPOINTS },
-  zIndex: { Z_INDEX },
+  radius: { ...BORDER_RADIUS },
+  breakpoints: { ...BREAKPOINTS },
+  zIndex: { ...Z_INDEX },
 };

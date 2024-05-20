@@ -52,7 +52,7 @@ export const Input: FC<Partial<InputType>> = ({
       <StyledInput
         {...inputProps}
         error={invalid}
-        theme={themes}
+        themeApp={themes}
         placeholder={placeholder}
         type={showPassword && type === 'password' ? 'text' : type}
         ref={ref}
